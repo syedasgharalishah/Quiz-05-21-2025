@@ -1,662 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title id="pageTitle">Quiz for CSS Aspirants</title>
-  <style>
-    /* Overall styling */
-    body { background: linear-gradient(135deg, #f0f9ff, #e0f7fa); color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; user-select: none; }
-    /* Header styling - changed to black with white text */
-    .header { background: linear-gradient(135deg, #000000, #333333); color: #fff; text-align: center; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
-    .header h1 { margin: 0; font-size: 36px; text-transform: uppercase; letter-spacing: 2px; }
-    .header p, #currentDate { margin: 5px 0; font-size: 16px; }
-    /* Footer styling - changed to black with white text */
-    .footer { background: linear-gradient(135deg, #000000, #333333); color: #fff; text-align: center; padding: 12px; margin-top: 20px; font-size: 14px; }
-    /* Container */
-    .container { max-width: 1200px; margin: 20px auto; padding: 10px; }
-    /* Sections */
-    #loginSection, #quizSection, #results { margin: 20px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.1); }
-    #quizSection, #results { display: none; }
-    #timer { text-align: right; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
-    .quiz-table { width: 100%; border-collapse: collapse; }
-    .quiz-table th, .quiz-table td { border: 1px solid #ccc; padding: 10px; text-align: left; font-size: 14px; }
-    .quiz-table th { background-color: #002244; color: #ffffff; }
-    button { cursor: pointer; background: #1e88e5; border: none; color: #fff; padding: 10px 20px; border-radius: 4px; transition: background 0.3s ease; font-size: 16px; }
-    button:hover { background: #1565c0; }
-    input, select { margin: 8px 0; padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    .error { color: red; font-size: 14px; }
-    .table-container { overflow-x: auto; }
-    .admin-panel-section { background: #fafafa; border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
-    .admin-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-    .admin-table th, .admin-table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    .admin-table th { background-color: #f2f2f2; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ FOR CSS ASPIRANTS - 21 APRIL 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Disable text selection */
+        body {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Ensure radio buttons and labels are aligned */
+        .quiz-option label {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px; /* Space between radio and text */
+        }
+        .quiz-option input[type="radio"] {
+            vertical-align: middle;
+        }
+         /* Add some subtle animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+         /* Style for sentence rearrangement options */
+        .rearrangement-option {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            transition: background-color 0.2s;
+        }
+        .rearrangement-option:hover {
+            background-color: #e0e0e0;
+        }
+        .selected-rearrangement {
+            background-color: #d1e7fd;
+            border-color: #0d6efd;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body oncontextmenu="return false;">
-  <!-- Header -->
-  <div class="header" id="headerSection">
-    <h1 id="headerTitle">QUIZ FOR CSS ASPIRANTS BY SYED ASGHAR ALI SHAH</h1>
-    <p id="headerSubtitle">Contact: 03265762698</p>
-    <p id="currentDate"></p>
-  </div>
-  <div class="container">
-    <!-- Login -->
-    <div id="loginSection">
-      <h2>Login</h2>
-      <input id="loginUser" placeholder="Username">
-      <input id="loginPass" type="password" placeholder="Password">
-      <button id="loginBtn">Login</button>
-      <p id="loginError" class="error"></p>
-    </div>
-    <!-- Quiz -->
-    <div id="quizSection">
-      <div id="timer">Time Remaining: 25:00</div>
-      <div id="quizContainer"></div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <div class="footer" id="footerSection">
-    <p id="footerText"></p>
-  </div>
-  <script>
-    // Utility
-    function updateCurrentDate() { 
-      const now = new Date(); 
-      const opt = {weekday:'long', year:'numeric', month:'long', day:'numeric'}; 
-      document.getElementById('currentDate').textContent = now.toLocaleDateString(undefined, opt); 
-    }
-    updateCurrentDate();
-    
-    document.onkeydown = e => { 
-      if(e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) 
-        return false; 
-    };
-    
-    // Storage - improved with persistent storage
-    function getUsers() {
-      try {
-        return JSON.parse(localStorage.getItem('quizUsers') || '[]');
-      } catch (e) {
-        console.error("Error parsing users:", e);
-        return [];
-      }
-    }
-    
-    function saveUsers(users) {
-      try {
-        localStorage.setItem('quizUsers', JSON.stringify(users));
-        return true;
-      } catch (e) {
-        console.error("Error saving users:", e);
-        return false;
-      }
-    }
-    
-    // Initialize default user if none exists
-    if(!getUsers().length) {
-      saveUsers([{
-        u: 'testUser',
-        p: 'test123',
-        mode: 'single',
-        added: Date.now(),
-        expiry: Date.now() + 365 * 24 * 60 * 60 * 1000
-      }]);
-    }
-    
-    function getResults() {
-      try {
-        return JSON.parse(localStorage.getItem('quizResults') || '[]');
-      } catch (e) {
-        console.error("Error parsing results:", e);
-        return [];
-      }
-    }
-    
-    function saveResults(results) {
-      try {
-        localStorage.setItem('quizResults', JSON.stringify(results));
-        return true;
-      } catch (e) {
-        console.error("Error saving results:", e);
-        return false;
-      }
-    }
-    
-    function loadHeaderFooter() { 
-      const t = localStorage.getItem('headerTitle') || 'QUIZ FOR CSS ASPIRANTS BY SYED ASGHAR ALI SHAH'; 
-      const s = localStorage.getItem('headerSubtitle') || 'Contact: 03265762698'; 
-      const f = localStorage.getItem('footerText') || ''; 
-      document.getElementById('headerTitle').textContent = t; 
-      document.getElementById('headerSubtitle').textContent = s; 
-      document.getElementById('footerText').textContent = f; 
-      document.getElementById('pageTitle').textContent = t; 
-    }
-    
-    loadHeaderFooter();
-    
-    // State
-    let currentUser = '', quizStart = 0, timerId; 
-    const QUIZ_DURATION = 25 * 60;
-    
-    // Default quiz
-    const quizData = [
-      {
-        question: 'Which of the following is an example of a compound sentence?',
-        options: [
-          'The government passed the bill, and the opposition applauded.',
-          'When the government passed the bill, the opposition applauded.',
-          'The government passed the bill because the opposition applauded.',
-          'Although the government passed the bill, the opposition applauded.'
-        ],
-        correct: 0
-      },
-      {
-        question: "Identify the subordinate clause in the sentence: 'Before debating these issues, several questions arise.'",
-        options: [
-          'several questions arise',
-          'Before debating these issues',
-          'debating these issues',
-          'questions arise'
-        ],
-        correct: 1
-      }
-    ]; 
-    
-    while(quizData.length < 50) quizData.push(...quizData.slice(0, 50 - quizData.length)); 
-    quizData.forEach(q => q.options.sort(() => Math.random() - 0.5));
-    
-    // Login - fixed to properly verify credentials
-    document.getElementById('loginBtn').onclick = () => {
-      const u = document.getElementById('loginUser').value.trim();
-      const p = document.getElementById('loginPass').value.trim();
-      const err = document.getElementById('loginError');
-      
-      err.textContent = '';
-      
-      if(!u || !p) {
-        err.textContent = 'Enter both fields.';
-        return;
-      }
-      
-      // Admin login
-      if(u === 'SYED ASGHAR ALI SHAH' && p === 'IHTI795358') {
-        document.getElementById('loginSection').style.display = 'none';
-        loadAdminPanel();
-        return;
-      }
-      
-      // Regular user login - fixed to properly check credentials
-      const users = getUsers();
-      const usr = users.find(x => x.u === u && x.p === p);
-      
-      if(!usr) {
-        err.textContent = 'Invalid credentials.';
-        return;
-      }
-      
-      if(Date.now() > usr.expiry) {
-        err.textContent = 'Membership expired.';
-        return;
-      }
-      
-      currentUser = u;
-      document.getElementById('loginSection').style.display = 'none';
-      document.getElementById('quizSection').style.display = 'block';
-      renderQuiz();
-      quizStart = Date.now();
-      startTimer();
-    };
-    
-    // Render Quiz
-    function renderQuiz() {
-      const c = document.getElementById('quizContainer');
-      const uq = localStorage.getItem('uploadedQuizHTML');
-      
-      if(uq) {
-        if(currentUser !== 'SYED ASGHAR ALI SHAH') {
-          document.getElementById('headerSection').style.display = 'none';
-          document.getElementById('footerSection').style.display = 'none';
-        }
-        document.getElementById('quizSection').style.margin = '0';
-        c.innerHTML = '';
-        
-        const iframe = document.createElement('iframe');
-        iframe.style.position = 'fixed';
-        iframe.style.top = '0';
-        iframe.style.left = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
-        iframe.srcdoc = uq;
-        c.appendChild(iframe);
-        return;
-      }
-      
-      c.innerHTML = '';
-      const tc = document.createElement('div');
-      tc.className = 'table-container';
-      const table = document.createElement('table');
-      table.className = 'quiz-table';
-      
-      const thead = document.createElement('thead');
-      thead.innerHTML = '<tr><th>#</th><th>Question</th><th>Options</th></tr>';
-      table.appendChild(thead);
-      
-      const tbody = document.createElement('tbody');
-      quizData.forEach((q, i) => {
-        const tr = document.createElement('tr');
-        const td1 = document.createElement('td');
-        td1.textContent = i + 1;
-        
-        const td2 = document.createElement('td');
-        td2.textContent = q.question;
-        
-        const td3 = document.createElement('td');
-        q.options.forEach((opt, j) => {
-          const lbl = document.createElement('label');
-          lbl.style.display = 'block';
-          
-          const r = document.createElement('input');
-          r.type = 'radio';
-          r.name = 'question' + i;
-          r.value = j;
-          
-          lbl.appendChild(r);
-          lbl.appendChild(document.createTextNode(' ' + opt));
-          td3.appendChild(lbl);
-        });
-        
-        tr.append(td1, td2, td3);
-        tbody.appendChild(tr);
-      });
-      
-      table.appendChild(tbody);
-      tc.appendChild(table);
-      
-      const submitBtn = document.createElement('button');
-      submitBtn.textContent = 'Submit Quiz';
-      submitBtn.style.marginTop = '20px';
-      submitBtn.onclick = submitQuiz;
-      
-      c.appendChild(tc);
-      c.appendChild(submitBtn);
-    }
-    
-    // Timer
-    function startTimer() {
-      const end = quizStart + QUIZ_DURATION * 1000;
-      
-      timerId = setInterval(() => {
-        const diff = Math.max(0, Math.floor((end - Date.now()) / 1000));
-        const m = String(Math.floor(diff / 60)).padStart(2, '0');
-        const s = String(diff % 60).padStart(2, '0');
-        
-        document.getElementById('timer').textContent = `Time Remaining: ${m}:${s}`;
-        
-        if(diff <= 0) {
-          clearInterval(timerId);
-          submitQuiz();
-        }
-      }, 1000);
-    }
-    
-    // Submit quiz implementation
-    function submitQuiz() {
-      clearInterval(timerId);
-      
-      // Basic quiz submission logic - can be expanded
-      const answers = [];
-      let score = 0;
-      let attempted = 0;
-      
-      for(let i = 0; i < quizData.length; i++) {
-        const radios = document.querySelectorAll(`input[name="question${i}"]`);
-        let answered = false;
-        
-        for(let j = 0; j < radios.length; j++) {
-          if(radios[j].checked) {
-            answers.push(parseInt(radios[j].value));
-            answered = true;
-            attempted++;
-            
-            if(parseInt(radios[j].value) === quizData[i].correct) {
-              score++;
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen flex flex-col" oncontextmenu="return false;">
+
+    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+             <div class="flex items-center space-x-3">
+                 <img
+                    src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
+                    alt="User Logo"
+                    class="h-12 w-12 rounded-full border-2 border-blue-300 object-cover"
+                    onerror="this.onerror=null; this.src='https://placehold.co/60x60/e2e8f0/64748b?text=Logo';"
+                 >
+                 <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight">QUIZ FOR CSS ASPIRANTS</h1>
+                    <p class="text-sm text-blue-300">SYED ASGHAR ALI SHAH - April 21, 2025</p>
+                 </div>
+             </div>
+             <div id="timer-display" class="text-lg font-semibold bg-red-600 px-3 py-1 rounded-md shadow-md hidden">
+                Time Left: <span id="time">25:00</span>
+             </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+
+        <section id="name-section" class="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-lg mx-auto fade-in">
+            <h2 class="text-2xl font-semibold mb-6 text-center text-gray-700">Welcome to the Quiz</h2>
+            <p class="text-gray-600 mb-6 text-center">Please enter your full name to begin.</p>
+            <div class="mb-4">
+                <label for="student-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name:</label>
+                <input type="text" id="student-name" name="student-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" placeholder="e.g., Affan Qayum" autocomplete="off">
+                <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Please enter your name.</p>
+            </div>
+            <button id="start-quiz-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-150 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Start Quiz
+            </button>
+        </section>
+
+        <section id="quiz-section" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-xl fade-in">
+            <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">English Grammar & Vocabulary Quiz</h2>
+            <form id="quiz-form">
+                <div id="questions-container" class="space-y-8"></div>
+
+                <button type="submit" id="submit-quiz-btn" class="mt-8 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition duration-150 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Submit Quiz
+                </button>
+            </form>
+        </section>
+
+        <section id="results-section" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-lg mx-auto text-center fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Quiz Results</h2>
+            <div class="space-y-3 text-left border border-gray-200 p-4 rounded-md bg-gray-50">
+                <p class="text-lg"><strong class="font-semibold text-gray-700">Name:</strong> <span id="result-name" class="text-blue-600"></span></p>
+                <p class="text-lg"><strong class="font-semibold text-gray-700">Questions Attempted:</strong> <span id="result-attempted" class="text-blue-600"></span> / 50</p>
+                <p class="text-lg"><strong class="font-semibold text-gray-700">Correct Answers:</strong> <span id="result-score" class="text-green-600 font-bold"></span> / 50</p>
+                <p class="text-lg"><strong class="font-semibold text-gray-700">Time Taken:</strong> <span id="result-time" class="text-blue-600"></span></p>
+                <p class="text-lg"><strong class="font-semibold text-gray-700">Percentage:</strong> <span id="result-percentage" class="text-green-600 font-bold"></span>%</p>
+            </div>
+             <p class="mt-6 text-gray-600">Your results have been recorded. Thank you for participating!</p>
+        </section>
+
+        <form id="hidden-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+            <input type="text" name="name" id="form-name">
+            <input type="text" name="attempted" id="form-attempted">
+            <input type="text" name="score" id="form-score">
+            <input type="text" name="time_taken" id="form-time">
+            <input type="text" name="percentage" id="form-percentage">
+        </form>
+
+    </main>
+
+    <footer class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-4 mt-12 shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">Need Assistance? Contact us at: <strong class="text-blue-300">03265762698</strong></p>
+            <p class="text-xs mt-1 text-gray-400">&copy; 2025 SYED ASGHAR ALI SHAH - CSS Aspirant Resources. All rights reserved.</p>
+             <p class="text-sm mt-2">Ready to test your knowledge?</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Quiz Data ---
+        // Questions derived from the provided PDFs (IDIOMS Notes and Grammar Analysis)
+        // Focus on Grammar, Parts of Speech, Prepositions, Idioms, Synonyms, Antonyms, Sentence Rearrangement
+        const quizData = [
+            // Grammar: Parts of Speech & Sentence Structure
+            {
+                question: "Identify the part of speech for the word 'fundamental' in the sentence: 'There are fundamental problems with the system.'",
+                options: ["Noun", "Adjective", "Adverb", "Verb"],
+                answer: "Adjective",
+                type: "mcq"
+            },
+            {
+                question: "Which sentence structure best describes: 'Pakistan's problems seem to multiply by the day and contribute to the country's deepening polarisation and instability.'?",
+                options: ["Simple", "Compound", "Complex", "Compound-Complex"],
+                answer: "Compound-Complex",
+                type: "mcq"
+            },
+            {
+                question: "In 'Appreciation is earned by performance', what is the voice of the verb 'is earned'?",
+                options: ["Active Voice", "Passive Voice", "Middle Voice", "Reflexive Voice"],
+                answer: "Passive Voice",
+                type: "mcq"
+            },
+            {
+                question: "What type of noun is 'governance'?",
+                options: ["Proper Noun", "Concrete Noun", "Abstract Noun", "Collective Noun"],
+                answer: "Abstract Noun",
+                type: "mcq"
+            },
+             {
+                question: "Identify the function of 'to tackle' in the phrase 'a serious effort to tackle structural problems'.",
+                options: ["Gerund (acting as noun)", "Infinitive (acting as adjective)", "Participle (acting as adjective)", "Infinitive (acting as adverb)", "Infinitive (acting as noun)"],
+                answer: "Infinitive (acting as adjective)", // Modifies 'effort'
+                type: "mcq"
+            },
+             {
+                question: "Which word acts as a coordinating conjunction in the sentence: 'Leadership means setting a clear direction...and forging national consensus...'?",
+                options: ["means", "setting", "and", "forging", "clear"],
+                answer: "and",
+                type: "mcq"
+            },
+             {
+                question: "What is the grammatical function of 'multiplying' in 'Pakistan's problems seem to multiply...'?",
+                options: ["Present Participle", "Gerund", "Main Verb (Infinitive form)", "Adjective"],
+                answer: "Main Verb (Infinitive form)", // Part of the infinitive 'to multiply' after 'seem'
+                type: "mcq"
+            },
+            {
+                question: "Identify the prepositional phrase indicating location in 'Billboards across Punjab...'?",
+                options: ["Billboards across", "across Punjab", "Billboards", "Punjab"],
+                answer: "across Punjab",
+                type: "mcq"
+            },
+             {
+                question: "What type of clause is 'when they transcend the circumstances they inherit'?",
+                options: ["Independent Clause", "Noun Clause", "Adjectival Clause", "Adverbial Clause"],
+                answer: "Adverbial Clause", // Modifies the main clause, indicating time
+                type: "mcq"
+            },
+            {
+                question: "Which word is the adverb modifying 'short' in 'governance remains way short of public expectations'?",
+                options: ["remains", "public", "expectations", "way"],
+                answer: "way", // Adverb of degree
+                type: "mcq"
+            },
+
+            // Idioms
+            {
+                question: "What is the meaning of the idiom 'No stone unturned'?",
+                options: ["To give up easily", "To make every possible effort", "To look only in obvious places", "To be lazy in searching"],
+                answer: "To make every possible effort",
+                type: "mcq"
+            },
+            {
+                question: "The idiom 'Law of the jungle' refers to a situation where:",
+                options: ["Legal principles are strictly followed", "Animals dictate the rules", "People act without regard for law or rights", "Judges preside over nature"],
+                answer: "People act without regard for law or rights",
+                type: "mcq"
+            },
+            {
+                question: "What does 'Turn a new page' mean?",
+                options: ["To read a different book", "To continue in the same old way", "To start a new and better chapter", "To tear a page out"],
+                answer: "To start a new and better chapter",
+                type: "mcq"
+            },
+            {
+                question: "If news is 'splashed all over' the front page, it means the news is:",
+                options: ["Hidden in a small corner", "Displayed very prominently", "Written unclearly", "Only mentioned briefly"],
+                answer: "Displayed very prominently",
+                type: "mcq"
+            },
+             {
+                question: "The phrase 'add up to' in 'His arguments don't add up to a convincing case' means:",
+                options: ["Subtract from", "Mathematically calculate", "Amount to or result in", "Contradict"],
+                answer: "Amount to or result in",
+                type: "mcq"
+            },
+
+            // Synonyms
+            {
+                question: "Which word is a synonym for 'Rigorous'?",
+                options: ["Lax", "Careless", "Superficial", "Thorough", "Gentle"],
+                answer: "Thorough",
+                type: "mcq"
+            },
+            {
+                question: "A synonym for 'Fragile' is:",
+                options: ["Robust", "Strong", "Durable", "Delicate"],
+                answer: "Delicate",
+                type: "mcq"
+            },
+            {
+                question: "Choose the best synonym for 'Capability'.",
+                options: ["Weakness", "Inability", "Incompetence", "Ability"],
+                answer: "Ability",
+                type: "mcq"
+            },
+            {
+                question: "What is a synonym for 'Elicit'?",
+                options: ["Suppress", "Hide", "Conceal", "Obtain", "Ignore"],
+                answer: "Obtain",
+                type: "mcq"
+            },
+             {
+                question: "Find the synonym for 'Seminal'.",
+                options: ["Unimportant", "Influential", "Minor", "Insignificant", "Trivial"],
+                answer: "Influential",
+                type: "mcq"
+            },
+             {
+                question: "Which word is closest in meaning to 'Oversight' when it means supervision?",
+                options: ["Neglect", "Inattention", "Management", "Mistake"],
+                answer: "Management", // Oversight has dual meanings, this focuses on the supervision aspect mentioned.
+                type: "mcq"
+            },
+             {
+                question: "A synonym for 'Sustainable' is:",
+                options: ["Temporary", "Viable", "Fleeting", "Unsustainable"],
+                answer: "Viable",
+                type: "mcq"
+            },
+             {
+                question: "What is a synonym for 'Commitment'?",
+                options: ["Indifference", "Apathy", "Dedication", "Hesitation"],
+                answer: "Dedication",
+                type: "mcq"
+            },
+             {
+                question: "Choose the synonym for 'Affirmation'.",
+                options: ["Denial", "Rejection", "Negation", "Endorsement"],
+                answer: "Endorsement",
+                type: "mcq"
+            },
+             {
+                question: "Which word means the same as 'Ascended'?",
+                options: ["Descended", "Fell", "Declined", "Rose"],
+                answer: "Rose",
+                type: "mcq"
+            },
+
+            // Antonyms
+            {
+                question: "What is the antonym of 'Polarisation'?",
+                options: ["Division", "Separation", "Conflict", "Unity", "Disagreement"],
+                answer: "Unity",
+                type: "mcq"
+            },
+            {
+                question: "The antonym for 'Premature' is:",
+                options: ["Early", "Untimely", "Hasty", "Timely"],
+                answer: "Timely",
+                type: "mcq"
+            },
+            {
+                question: "Find the antonym of 'Empowered'.",
+                options: ["Authorized", "Enabled", "Permitted", "Disempowered"],
+                answer: "Disempowered",
+                type: "mcq"
+            },
+            {
+                question: "What is the opposite of 'Hesitant'?",
+                options: ["Reluctant", "Uncertain", "Unwilling", "Eager"],
+                answer: "Eager",
+                type: "mcq"
+            },
+             {
+                question: "Choose the antonym for 'Friction'.",
+                options: ["Conflict", "Tension", "Disagreement", "Harmony"],
+                answer: "Harmony",
+                type: "mcq"
+            },
+             {
+                question: "What is the opposite of 'Inflated'?",
+                options: ["Exaggerated", "Increased", "Augmented", "Understated"],
+                answer: "Understated",
+                type: "mcq"
+            },
+             {
+                question: "Find the antonym for 'Unabated'.",
+                options: ["Relentless", "Persistent", "Constant", "Decreased"],
+                answer: "Decreased",
+                type: "mcq"
+            },
+             {
+                question: "The antonym of 'Fundamental' is:",
+                options: ["Basic", "Essential", "Primary", "Inessential"],
+                answer: "Inessential",
+                type: "mcq"
+            },
+             {
+                question: "What is the opposite of 'Convening'?",
+                options: ["Assembling", "Gathering", "Meeting", "Dispersing"],
+                answer: "Dispersing",
+                type: "mcq"
+            },
+             {
+                question: "Choose the antonym for 'Revive'.",
+                options: ["Restore", "Resuscitate", "Rejuvenate", "Kill"],
+                answer: "Kill",
+                type: "mcq"
+            },
+
+             // Prepositions
+            {
+                question: "Choose the correct preposition: 'The two companies are ___ a legal dispute.'",
+                options: ["on", "at", "in", "over"],
+                answer: "in",
+                type: "mcq"
+            },
+            {
+                question: "Fill in the blank: 'He showed great spirit ___ the face of adversity.'",
+                options: ["on", "in", "at", "with"],
+                answer: "in",
+                type: "mcq"
+            },
+            {
+                question: "Select the appropriate preposition: 'Measures were taken ___ the stabilisation of the currency.'",
+                options: ["to", "for", "with", "about"],
+                answer: "for",
+                type: "mcq"
+            },
+            {
+                question: "Complete the sentence: 'There is friction ___ the two departments.'",
+                options: ["among", "between", "within", "across"],
+                answer: "between",
+                type: "mcq"
+            },
+             {
+                question: "Choose the correct preposition: 'The country maintained a policy ___ non-alignment.'",
+                options: ["of", "for", "about", "with"],
+                answer: "of",
+                type: "mcq"
+            },
+
+             // Sentence Rearrangement
+            {
+                question: "Rearrange the following parts to form a meaningful sentence: (A) seem to multiply / (B) and instability / (C) Pakistan's problems / (D) by the day and contribute to the country's deepening polarisation",
+                options: ["CADB", "ACDB", "CABD", "CDAB"],
+                answer: "CADB", // Pakistan's problems seem to multiply by the day and contribute to the country's deepening polarisation and instability.
+                type: "rearrangement",
+                 parts: {
+                    A: "seem to multiply",
+                    B: "and instability",
+                    C: "Pakistan's problems",
+                    D: "by the day and contribute to the country's deepening polarisation"
+                }
+            },
+            {
+                question: "Arrange the segments into a coherent sentence: (P) has not produced governance / (Q) and the gap between challenge / (R) That is why rule / (S) and response has grown larger",
+                options: ["RQPS", "RPSQ", "SPRQ", "QPSR"],
+                answer: "RPSQ", // That is why rule has not produced governance and the gap between challenge and response has grown larger.
+                type: "rearrangement",
+                 parts: {
+                    P: "has not produced governance",
+                    Q: "and the gap between challenge",
+                    R: "That is why rule",
+                    S: "and response has grown larger"
+                }
+            },
+             {
+                question: "Form a logical sentence: (1) leadership matters / (2) even more because / (3) of the enormity and complexity / (4) today / (5) of the problems",
+                options: ["41235", "12345", "41325", "14235"],
+                answer: "41235", // today leadership matters even more because of the enormity and complexity of the problems
+                type: "rearrangement",
+                parts: {
+                    1: "leadership matters",
+                    2: "even more because",
+                    3: "of the enormity and complexity",
+                    4: "today",
+                    5: "of the problems"
+                }
+            },
+            {
+                question: "Rearrange to make a correct sentence: (X) the bold reforms needed / (Y) shying away from / (Z) to unlock the country's potential / (W) involves prioritising short-term fixes over",
+                options: ["WYZX", "WXYZ", "YWZX", "WYXZ"],
+                answer: "WYXZ", // involves prioritising short-term fixes over shying away from the bold reforms needed to unlock the country's potential
+                type: "rearrangement",
+                parts: {
+                    W: "involves prioritising short-term fixes over",
+                    X: "the bold reforms needed",
+                    Y: "shying away from",
+                    Z: "to unlock the country's potential"
+                }
+            },
+
+            // Mixed Tough Questions
+            {
+                question: "Which phrase implies a lack of genuine substance or expertise, often used skeptically?",
+                options: ["Textbook case", "Rule of law", "So-called", "Landmark decision"],
+                answer: "So-called",
+                type: "mcq"
+            },
+            {
+                question: "The term 'Endemic', when referring to a disease, means it is:",
+                options: ["Universally present", "Recently introduced", "Regularly found in a specific area or population", "Completely eradicated"],
+                answer: "Regularly found in a specific area or population",
+                type: "mcq"
+            },
+             {
+                question: "Identify the most accurate description of 'Self-congratulatory'.",
+                options: ["Humble and modest", "Expressing excessive satisfaction with oneself", "Critical of others' achievements", "Seeking validation from others"],
+                answer: "Expressing excessive satisfaction with oneself",
+                type: "mcq"
+            },
+             {
+                question: "What concept is contrasted with 'Rule of law' in the provided texts?",
+                options: ["Freedom of navigation", "Law of the jungle", "Bloodbath", "Textbook case"],
+                answer: "Law of the jungle",
+                type: "mcq"
+            },
+            {
+                question: "Which term describes a split or division between strongly opposed groups due to differences in belief?",
+                options: ["Polarisation", "Schism", "Friction", "Dispute"],
+                answer: "Schism",
+                type: "mcq"
+            },
+             {
+                question: "What does 'Wielding power' specifically refer to in the context of leadership?",
+                options: ["Holding and using authority or influence", "Sharing power equally", "Abdicating responsibility", "Following orders"],
+                answer: "Holding and using authority or influence",
+                type: "mcq"
             }
-            break;
-          }
+
+
+        ];
+
+        // --- DOM Elements ---
+        const nameSection = document.getElementById('name-section');
+        const quizSection = document.getElementById('quiz-section');
+        const resultsSection = document.getElementById('results-section');
+        const nameInput = document.getElementById('student-name');
+        const nameError = document.getElementById('name-error');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const quizForm = document.getElementById('quiz-form');
+        const questionsContainer = document.getElementById('questions-container');
+        const timerDisplay = document.getElementById('timer-display');
+        const timeEl = document.getElementById('time');
+        const resultName = document.getElementById('result-name');
+        const resultAttempted = document.getElementById('result-attempted');
+        const resultScore = document.getElementById('result-score');
+        const resultTime = document.getElementById('result-time');
+        const resultPercentage = document.getElementById('result-percentage');
+        const hiddenForm = document.getElementById('hidden-form');
+        const formName = document.getElementById('form-name');
+        const formAttempted = document.getElementById('form-attempted');
+        const formScore = document.getElementById('form-score');
+        const formTime = document.getElementById('form-time');
+        const formPercentage = document.getElementById('form-percentage');
+
+        // --- Quiz State ---
+        let currentQuestionIndex = 0; // Not used for displaying all at once, but useful conceptually
+        let timerInterval;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let timeTaken = 0;
+        let studentName = '';
+        let quizSubmitted = false; // Flag to prevent double submission
+
+        // --- Functions ---
+
+        // Shuffle array elements (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
-        
-        if(!answered) {
-          answers.push(null);
+
+        // Function to create and display questions
+        function displayQuestions() {
+            questionsContainer.innerHTML = ''; // Clear previous questions
+             // Shuffle the quiz data itself to randomize question order
+            shuffleArray(quizData);
+
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question-block', 'border', 'border-gray-200', 'p-4', 'rounded-md', 'bg-gray-50');
+                questionDiv.setAttribute('data-question-index', index); // Store original index if needed
+
+                const questionText = document.createElement('p');
+                questionText.classList.add('text-lg', 'font-medium', 'mb-4', 'text-gray-800');
+                questionText.innerHTML = `<strong>Q ${index + 1}:</strong> ${q.question}`; // Use innerHTML for bold tag
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('options', 'space-y-2');
+
+                // Shuffle options for MCQ questions
+                let options = [...q.options]; // Create a copy
+                if (q.type === 'mcq') {
+                    shuffleArray(options); // Shuffle the copied options
+                }
+
+                if (q.type === 'mcq') {
+                     options.forEach(option => {
+                        const optionLabel = document.createElement('label');
+                        optionLabel.classList.add('block', 'quiz-option', 'p-2', 'border', 'border-gray-300', 'rounded-md', 'hover:bg-gray-100', 'cursor-pointer', 'transition', 'duration-150');
+
+                        const radioInput = document.createElement('input');
+                        radioInput.type = 'radio';
+                        radioInput.name = `question-${index}`;
+                        radioInput.value = option;
+                        radioInput.classList.add('mr-2', 'accent-blue-600');
+
+                        optionLabel.appendChild(radioInput);
+                        optionLabel.appendChild(document.createTextNode(option)); // Use createTextNode for safety
+                        optionsDiv.appendChild(optionLabel);
+                    });
+                } else if (q.type === 'rearrangement') {
+                     const partsContainer = document.createElement('div');
+                     partsContainer.classList.add('mb-2', 'text-sm', 'text-gray-600');
+                     partsContainer.innerHTML = '<strong>Parts:</strong> ' + Object.entries(q.parts).map(([key, value]) => `${key}: ${value}`).join('; ');
+                     questionDiv.appendChild(partsContainer);
+
+                     options.forEach(option => {
+                        const optionLabel = document.createElement('label');
+                        optionLabel.classList.add('block', 'quiz-option', 'p-2', 'border', 'border-gray-300', 'rounded-md', 'hover:bg-gray-100', 'cursor-pointer', 'transition', 'duration-150');
+
+                        const radioInput = document.createElement('input');
+                        radioInput.type = 'radio';
+                        radioInput.name = `question-${index}`;
+                        radioInput.value = option;
+                        radioInput.classList.add('mr-2', 'accent-blue-600');
+
+                        optionLabel.appendChild(radioInput);
+                        // Display the sequence corresponding to the option letters
+                        const sequenceText = option.split('').map(letter => q.parts[letter] || `Part ${letter}`).join(' / ');
+                        optionLabel.appendChild(document.createTextNode(`${option}: ${sequenceText}`));
+                        optionsDiv.appendChild(optionLabel);
+                    });
+                }
+
+
+                questionDiv.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionDiv);
+            });
         }
-      }
-      
-      const timeTaken = Math.floor((Date.now() - quizStart) / 1000);
-      const minutes = Math.floor(timeTaken / 60);
-      const seconds = timeTaken % 60;
-      
-      // Save results
-      const results = getResults();
-      results.push({
-        username: currentUser,
-        fullName: currentUser, // Can be enhanced to collect full name
-        score: `${score}/${quizData.length}`,
-        attempted: `${attempted}/${quizData.length}`,
-        timeTaken: `${minutes}m ${seconds}s`,
-        date: new Date().toLocaleString()
-      });
-      saveResults(results);
-      
-      // Show results
-      document.getElementById('quizSection').innerHTML = `
-        <h2>Quiz Completed</h2>
-        <p>Score: ${score}/${quizData.length}</p>
-        <p>Questions Attempted: ${attempted}/${quizData.length}</p>
-        <p>Time Taken: ${minutes}m ${seconds}s</p>
-        <button onclick="location.reload()">Return to Login</button>
-      `;
-    }
-    
-    // Admin - improved user management
-    function loadAdminPanel() {
-      const ap = document.createElement('div');
-      ap.id = 'adminPanel';
-      ap.style.padding = '20px';
-      ap.style.background = '#fff';
-      
-      ap.innerHTML = `
-        <h2>Admin Panel</h2>
-        <div class="admin-panel-section">
-          <h3>Manage User Credentials</h3>
-          <div class="table-container">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Password</th>
-                  <th>Mode</th>
-                  <th>Expires On</th>
-                  <th>Added On</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="userTable"></tbody>
-            </table>
-          </div>
-          <h4>Add New User</h4>
-          <input id="newUser" placeholder="Username">
-          <input id="newPass" type="password" placeholder="Password">
-          <select id="newMode">
-            <option value="single">Single-Device</option>
-            <option value="multi">Multi-Device</option>
-          </select>
-          <select id="newMembership">
-            <option value="1h">1 Hour</option>
-            <option value="1d">1 Day</option>
-            <option value="2d">2 Days</option>
-            <option value="3d">3 Days</option>
-            <option value="7d">7 Days</option>
-            <option value="1m">1 Month</option>
-            <option value="3m">3 Months</option>
-            <option value="6m">6 Months</option>
-            <option value="1y">1 Year</option>
-          </select>
-          <button id="addUserBtn">Add User</button>
-          <p id="addUserStatus"></p>
-        </div>
-        <div class="admin-panel-section">
-          <h3>Customize Header & Footer</h3>
-          <input id="newHeaderTitle" placeholder="Header Title">
-          <input id="newHeaderSubtitle" placeholder="Header Subtitle">
-          <input id="newFooterText" placeholder="Footer Text">
-          <button id="updateHeaderFooter">Update Header & Footer</button>
-        </div>
-        <div class="admin-panel-section">
-          <h3>Quiz Schedule Settings</h3>
-          <label>Quiz Start (datetime-local):</label>
-          <input id="quizStartTime" type="datetime-local">
-          <label>Quiz End (datetime-local):</label>
-          <input id="quizEndTime" type="datetime-local">
-          <button id="updateQuizSchedule">Update Quiz Schedule</button>
-        </div>
-        <div class="admin-panel-section">
-          <h3>Upload Quiz HTML File</h3>
-          <input type="file" id="quizFile" accept=".html">
-          <button id="uploadQuizBtn">Upload and Activate Quiz</button>
-        </div>
-        <div class="admin-panel-section">
-          <h3>Quiz Results</h3>
-          <div class="table-container">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Full Name</th>
-                  <th>Username</th>
-                  <th>Attempted</th>
-                  <th>Score</th>
-                  <th>Time Taken</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="resultsTable"></tbody>
-            </table>
-          </div>
-          <button id="refreshResultsBtn">Refresh Results</button>
-          <button id="exportResultsBtn">Export Results</button>
-        </div>
-      `;
-      
-      document.body.insertBefore(ap, document.getElementById('footerSection'));
-      refreshAdminTable();
-      refreshResultsTable();
-      
-      // Improved add user functionality with proper duration calculation
-      document.getElementById('addUserBtn').onclick = () => {
-        const u = document.getElementById('newUser').value.trim();
-        const p = document.getElementById('newPass').value.trim();
-        const m = document.getElementById('newMode').value;
-        const mem = document.getElementById('newMembership').value;
-        const statusEl = document.getElementById('addUserStatus');
-        
-        statusEl.textContent = '';
-        
-        if(!u || !p) {
-          statusEl.textContent = 'Enter both username and password.';
-          statusEl.style.color = 'red';
-          return;
+
+        // Function to start the timer
+        function startTimer() {
+            timerDisplay.classList.remove('hidden');
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timeTaken++;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timeEl.textContent = "0:00";
+                    submitQuiz(true); // Auto-submit
+                }
+                 // Visual cue when time is low
+                if (timeLeft <= 60) { // Last minute
+                    timerDisplay.classList.remove('bg-red-600');
+                    timerDisplay.classList.add('bg-yellow-500', 'text-black', 'animate-pulse');
+                }
+
+            }, 1000);
         }
-        
-        // Calculate expiration based on membership selection
-        let ms = 0;
-        switch(mem) {
-          case '1h': ms = 60 * 60 * 1000; break;
-          case '1d': ms = 24 * 60 * 60 * 1000; break;
-          case '2d': ms = 2 * 24 * 60 * 60 * 1000; break;
-          case '3d': ms = 3 * 24 * 60 * 60 * 1000; break;
-          case '7d': ms = 7 * 24 * 60 * 60 * 1000; break;
-          case '1m': ms = 30 * 24 * 60 * 60 * 1000; break;
-          case '3m': ms = 90 * 24 * 60 * 60 * 1000; break;
-          case '6m': ms = 180 * 24 * 60 * 60 * 1000; break;
-          case '1y': ms = 365 * 24 * 60 * 60 * 1000; break;
+
+        // Function to calculate results
+        function calculateResults() {
+            let score = 0;
+            let attempted = 0;
+            const formData = new FormData(quizForm);
+
+             quizData.forEach((q, index) => {
+                const userAnswer = formData.get(`question-${index}`);
+                if (userAnswer !== null) { // Check if the question was answered
+                    attempted++;
+                    if (userAnswer === q.answer) {
+                        score++;
+                    }
+                }
+            });
+
+
+            return { score, attempted };
         }
-        
-        const now = Date.now();
-        const userArr = getUsers();
-        
-        // Check for existing user
-        if(userArr.some(user => user.u === u)) {
-          statusEl.textContent = 'Username already exists!';
-          statusEl.style.color = 'red';
-          return;
+
+        // Function to format time taken
+        function formatTime(totalSeconds) {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes} minute${minutes !== 1 ? 's' : ''}, ${seconds} second${seconds !== 1 ? 's' : ''}`;
         }
-        
-        // Add new user
-        userArr.push({
-          u,
-          p,
-          mode: m,
-          added: now,
-          expiry: now + ms
+
+
+        // Function to handle quiz submission
+        function submitQuiz(isAutoSubmit = false) {
+            if (quizSubmitted) return; // Prevent multiple submissions
+            quizSubmitted = true;
+
+            clearInterval(timerInterval); // Stop the timer
+
+            const results = calculateResults();
+            const finalTimeTaken = formatTime(timeTaken);
+            const percentage = ((results.score / quizData.length) * 100).toFixed(1);
+
+            // Display results
+            resultName.textContent = studentName;
+            resultAttempted.textContent = results.attempted;
+            resultScore.textContent = results.score;
+            resultTime.textContent = finalTimeTaken;
+            resultPercentage.textContent = percentage;
+
+
+            quizSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            timerDisplay.classList.add('hidden'); // Hide timer on results page
+
+            // Populate and submit hidden form
+            formName.value = studentName;
+            formAttempted.value = results.attempted;
+            formScore.value = results.score;
+            formTime.value = finalTimeTaken;
+            formPercentage.value = percentage;
+
+
+            // Optional: Add a small delay before submitting Formspree
+             setTimeout(() => {
+                hiddenForm.submit();
+            }, 500); // 0.5 second delay
+
+
+            if (isAutoSubmit) {
+                 // Optionally show a message indicating auto-submission
+                 const autoSubmitMsg = document.createElement('p');
+                 autoSubmitMsg.textContent = "Time ran out! Your quiz was submitted automatically.";
+                 autoSubmitMsg.classList.add('text-red-600', 'font-semibold', 'mt-4');
+                 resultsSection.insertBefore(autoSubmitMsg, resultsSection.firstChild.nextSibling); // Insert after the heading
+            }
+        }
+
+        // --- Event Listeners ---
+
+        // Start Quiz Button
+        startQuizBtn.addEventListener('click', () => {
+            studentName = nameInput.value.trim();
+            if (studentName === '') {
+                nameError.classList.remove('hidden');
+                nameInput.classList.add('border-red-500');
+            } else {
+                nameError.classList.add('hidden');
+                nameInput.classList.remove('border-red-500');
+                nameSection.classList.add('hidden');
+                quizSection.classList.remove('hidden');
+                displayQuestions();
+                startTimer();
+            }
         });
-        
-        if(saveUsers(userArr)) {
-          statusEl.textContent = 'User added successfully!';
-          statusEl.style.color = 'green';
-          document.getElementById('newUser').value = '';
-          document.getElementById('newPass').value = '';
-          refreshAdminTable();
-        } else {
-          statusEl.textContent = 'Error saving user. Try again.';
-          statusEl.style.color = 'red';
-        }
-      };
-      
-      // Update header/footer
-      document.getElementById('updateHeaderFooter').onclick = () => {
-        const t = document.getElementById('newHeaderTitle').value.trim();
-        const s = document.getElementById('newHeaderSubtitle').value.trim();
-        const f = document.getElementById('newFooterText').value.trim();
-        
-        if(t) localStorage.setItem('headerTitle', t);
-        if(s) localStorage.setItem('headerSubtitle', s);
-        if(f) localStorage.setItem('footerText', f);
-        
-        loadHeaderFooter();
-        alert('Header and footer updated.');
-      };
-      
-      // Update quiz schedule
-      document.getElementById('updateQuizSchedule').onclick = () => {
-        const st = document.getElementById('quizStartTime').value;
-        const et = document.getElementById('quizEndTime').value;
-        
-        if(st && et) {
-          localStorage.setItem('quizStartTime', st);
-          localStorage.setItem('quizEndTime', et);
-          alert('Quiz schedule updated.');
-        } else {
-          alert('Please set both start and end times.');
-        }
-      };
-      
-      // Upload quiz HTML
-      document.getElementById('uploadQuizBtn').onclick = () => {
-        const fi = document.getElementById('quizFile');
-        
-        if(!fi.files.length) {
-          alert('Please select an HTML file to upload.');
-          return;
-        }
-        
-        const r = new FileReader();
-        r.onload = e => {
-          let c = e.target.result;
-          if(!c.toLowerCase().includes('<!doctype html>') && !c.toLowerCase().includes('<html')) {
-            c = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uploaded Quiz</title></head><body>${c}</body></html>`;
-          }
-          localStorage.setItem('uploadedQuizHTML', c);
-          alert('Quiz HTML uploaded, fixed (if necessary), and activated!');
-        };
-        r.onerror = e => alert('Error reading file: ' + e);
-        r.readAsText(fi.files[0]);
-      };
-      
-      // Refresh results
-      document.getElementById('refreshResultsBtn').onclick = refreshResultsTable;
-      
-      // Export results
-      document.getElementById('exportResultsBtn').onclick = () => {
-        const results = getResults();
-        
-        if(results.length === 0) {
-          alert('No results to export!');
-          return;
-        }
-        
-        let csv = 'Full Name,Username,Attempted,Score,Time Taken,Date\n';
-        
-        results.forEach(r => {
-          csv += `"${r.fullName}","${r.username}","${r.attempted}","${r.score}","${r.timeTaken}","${r.date}"\n`;
+
+         // Allow starting quiz by pressing Enter in the name field
+         nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                 startQuizBtn.click(); // Trigger the button click
+            }
         });
-        
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'quiz_results.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      };
-    }
-    
-    // Refresh admin tables
-    function refreshAdminTable() {
-      const tb = document.getElementById('userTable');
-      tb.innerHTML = '';
-      
-      getUsers().forEach((u, i) => {
-        const tr = document.createElement('tr');
-        
-        tr.insertCell().innerText = u.u;
-        tr.insertCell().innerText = u.p;
-        tr.insertCell().innerText = u.mode === 'single' ? 'Single-Device' : 'Multi-Device';
-        
-        const expiryDate = new Date(u.expiry);
-        tr.insertCell().innerText = expiryDate.toLocaleString();
-        
-        const addedDate = new Date(u.added);
-        tr.insertCell().innerText = addedDate.toLocaleString();
-        
-        const ac = tr.insertCell();
-        const btn = document.createElement('button');
-        btn.textContent = 'Remove';
-        btn.onclick = () => {
-          if(confirm(`Are you sure you want to remove user "${u.u}"?`)) {
-            const arr = getUsers();
-            arr.splice(i, 1);
-            saveUsers(arr);
-            refreshAdminTable();
-          }
-        };
-        ac.appendChild(btn);
-        
-        tb.appendChild(tr);
-      });
-    }
-    
-    function refreshResultsTable() {
-      const tb = document.getElementById('resultsTable');
-      tb.innerHTML = '';
-      
-      getResults().forEach((r, i) => {
-        const tr = document.createElement('tr');
-        
-        tr.insertCell().innerText = r.fullName;
-        tr.insertCell().innerText = r.username;
-        tr.insertCell().innerText = r.attempted;
-        tr.insertCell().innerText = r.score;
-        tr.insertCell().innerText = r.timeTaken;
-        tr.insertCell().innerText = r.date;
-        
-        const ac = tr.insertCell();
-        const btn = document.createElement('button');
-        btn.textContent = 'Remove';
-        btn.onclick = () => {
-          if(confirm('Are you sure you want to remove this result?')) {
-            const res = getResults();
-            res.splice(i, 1);
-            saveResults(res);
-            refreshResultsTable();
-          }
-        };
-        ac.appendChild(btn);
-        
-        tb.appendChild(tr);
-      });
-    }
-  </script>
+
+
+        // Quiz Form Submission
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            submitQuiz();
+        });
+
+         // Add listener to radio buttons to visually indicate selection
+         questionsContainer.addEventListener('change', (event) => {
+            if (event.target.type === 'radio') {
+                const questionBlock = event.target.closest('.question-block');
+                // Remove highlight from previously selected option in the same question
+                questionBlock.querySelectorAll('.quiz-option').forEach(label => {
+                    label.classList.remove('bg-blue-100', 'border-blue-400');
+                });
+                // Add highlight to the currently selected option's label
+                const selectedLabel = event.target.closest('.quiz-option');
+                if (selectedLabel) {
+                    selectedLabel.classList.add('bg-blue-100', 'border-blue-400');
+                }
+            }
+        });
+
+
+    </script>
+
 </body>
 </html>
