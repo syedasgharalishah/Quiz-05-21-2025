@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS - 22 APRIL 2025</title>
+    <title>QUIZ FOR CSS ASPIRANTS 25 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,503 +13,457 @@
         body {
             font-family: 'Inter', sans-serif;
             /* Disable text selection */
-            user-select: none;
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE/Edge */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            /* Prevent image dragging */
+            -webkit-user-drag: none;
         }
-
-        /* Basic protection against right-click */
-        html {
-            cursor: default; /* Indicate non-interactive background */
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
         /* Style for radio buttons */
         input[type="radio"] {
-            margin-right: 0.5rem;
-            accent-color: #4f46e5; /* Indigo */
+            accent-color: #3b82f6; /* Blue-500 */
         }
-
-        /* Style for selected radio label */
-        input[type="radio"]:checked + label {
-            font-weight: 600;
-            color: #4f46e5; /* Indigo */
-        }
-
-        /* Hide scrollbar for cleaner look if needed */
-        /* body::-webkit-scrollbar { display: none; }
-        body { -ms-overflow-style: none; scrollbar-width: none; } */
-
-        /* Ensure header image fits well */
-        .header-image {
-            max-height: 80px; /* Adjust as needed */
-            width: auto;
-            object-fit: contain;
-        }
-
         /* Add some spacing between questions */
-        .question-card {
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        .question-block {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb; /* Gray-200 */
         }
-
-        /* Style for buttons */
-        .quiz-button {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            color: white;
-            background-color: #4f46e5; /* Indigo-600 */
-            transition: background-color 0.2s ease-in-out;
+        .question-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        /* Styling for options */
+        .option-label {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db; /* Gray-300 */
+            border-radius: 0.375rem; /* Rounded-md */
             cursor: pointer;
-            border: none;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         }
-        .quiz-button:hover {
-            background-color: #4338ca; /* Indigo-700 */
+        .option-label:hover {
+            background-color: #f3f4f6; /* Gray-100 */
         }
-        .quiz-button:disabled {
-            background-color: #a5b4fc; /* Indigo-300 */
-            cursor: not-allowed;
+        .option-label input[type="radio"] {
+            margin-right: 0.75rem;
         }
-
-        /* Result display styling */
-        .result-card {
-             margin-top: 2rem;
-             padding: 2rem;
-             background-color: #eef2ff; /* Indigo-50 */
-             border: 1px solid #c7d2fe; /* Indigo-200 */
-             border-radius: 0.5rem;
-             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        /* Hide sections initially */
+        #quiz-section, #results-section {
+            display: none;
         }
-        .result-card h3 {
-            color: #3730a3; /* Indigo-800 */
+        /* Style for the timer */
+        #timer {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #dc2626; /* Red-600 */
         }
-         .result-card p {
-            color: #4338ca; /* Indigo-700 */
-         }
-
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800" oncontextmenu="return false;">
+<body class="bg-gray-100 text-gray-800 antialiased">
 
-    <header class="bg-gradient-to-r from-indigo-700 to-purple-800 text-white p-4 shadow-md sticky top-0 z-10">
-        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <div class="flex items-center space-x-4 mb-2 sm:mb-0">
-                 <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
-                      alt="CSS Aspirants Logo"
-                      class="header-image rounded"
-                      onerror="this.onerror=null; this.src='https://placehold.co/80x80/indigo/white?text=Logo';">
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-4 mb-3 md:mb-0">
+                <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
+                     alt="SYED ASGHAR ALI SHAH"
+                     class="h-16 w-16 rounded-full border-2 border-white object-cover shadow-lg"
+                     onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/64748b?text=SAAS';">
                 <div>
-                    <h1 class="text-xl sm:text-2xl font-bold">QUIZ FOR CSS ASPIRANTS</h1>
-                    <p class="text-sm sm:text-base">22 APRIL 2025 - English Proficiency Test</p>
-                    <p class="text-xs sm:text-sm font-semibold"> SYED ASGHAR ALI SHAH</p>
+                    <h2 class="text-lg font-semibold">SYED ASGHAR ALI SHAH</h2>
+                    <p class="text-sm text-indigo-200">CSS Aspirant</p>
                 </div>
             </div>
-            <div id="timer-display" class="text-lg font-semibold bg-white text-indigo-700 px-4 py-1 rounded-full shadow hidden">
-                Time Left: <span id="time">25:00</span>
-            </div>
+            <h1 class="text-xl md:text-2xl font-bold text-center md:text-right">ADVANCED ENGLISH QUIZ <br class="md:hidden"> (25 APRIL 2025)</h1>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <main class="container mx-auto px-4 py-8">
 
-        <section id="name-entry" class="text-center bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-indigo-700">Welcome!</h2>
-            <p class="mb-4 text-gray-600">Please enter your full name to begin the quiz.</p>
-            <input type="text" id="student-name" placeholder="Enter your full name" class="w-full max-w-md p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4" required>
-            <button id="start-quiz-btn" class="quiz-button">Start Quiz</button>
-            <p id="name-error" class="text-red-500 text-sm mt-2 hidden">Please enter your name.</p>
+        <section id="name-entry-section" class="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-lg mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-6 text-indigo-700">Welcome to the Quiz</h2>
+            <p class="mb-6 text-gray-600">Please enter your full name to begin the assessment.</p>
+            <div class="mb-6">
+                <label for="student-name" class="block text-sm font-medium text-gray-700 mb-2 text-left">Full Name:</label>
+                <input type="text" id="student-name" name="student-name" placeholder="e.g., Syed Asghar Ali Shah" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out">
+            </div>
+            <button id="start-quiz-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Start Quiz
+            </button>
+            <p id="name-error" class="text-red-500 text-sm mt-3" style="display: none;">Please enter your name.</p>
         </section>
 
-        <section id="quiz-section" class="hidden">
-            <h2 class="text-2xl font-bold mb-6 text-center text-indigo-800">English Grammar & Idioms Challenge</h2>
-            <form id="quiz-form">
-                <div id="questions-container">
-                    </div>
-                <div class="text-center mt-8">
-                    <button type="button" id="submit-quiz-btn" class="quiz-button text-lg px-8 py-3">Submit Quiz</button>
+        <section id="quiz-section" class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 class="text-2xl font-semibold text-indigo-700">Quiz Questions</h2>
+                <div class="text-right">
+                    <p class="text-sm text-gray-500">Time Remaining:</p>
+                    <div id="timer" class="font-bold text-xl text-red-600">25:00</div>
                 </div>
+            </div>
+
+            <form id="quiz-form">
+                <div id="questions-container"></div>
+
+                <button type="submit" id="submit-quiz-btn" class="mt-8 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    Submit Quiz
+                </button>
             </form>
         </section>
 
-        <section id="results-section" class="hidden">
-             <div class="result-card text-center">
-                <h3 class="text-2xl font-bold mb-4">Quiz Results</h3>
-                <p class="mb-2 text-lg"><strong>Name:</strong> <span id="result-name"></span></p>
-                <p class="mb-2 text-lg"><strong>Questions Attempted:</strong> <span id="result-attempted"></span> / 50</p>
-                <p class="mb-2 text-lg"><strong>Score:</strong> <span id="result-score"></span> / 50</p>
-                <p class="mb-4 text-lg"><strong>Time Taken:</strong> <span id="result-time"></span></p>
-                <p class="text-gray-600 mt-4">Your results have been recorded. Thank you for participating!</p>
-             </div>
-        </section>
+        <section id="results-section" class="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6 text-indigo-700">Quiz Results</h2>
+            <div class="space-y-4 text-lg text-left border border-gray-200 p-6 rounded-md bg-gray-50">
+                <p><strong class="font-semibold text-gray-700">Name:</strong> <span id="result-name" class="text-indigo-600"></span></p>
+                <p><strong class="font-semibold text-gray-700">Questions Attempted:</strong> <span id="result-attempted" class="text-indigo-600"></span> / 50</p>
+                <p><strong class="font-semibold text-gray-700">Correct Answers:</strong> <span id="result-score" class="text-green-600 font-bold"></span> / 50</p>
+                <p><strong class="font-semibold text-gray-700">Percentage:</strong> <span id="result-percentage" class="text-blue-600 font-bold"></span>%</p>
+                <p><strong class="font-semibold text-gray-700">Time Taken:</strong> <span id="result-time" class="text-indigo-600"></span></p>
+            </div>
+            <p id="submission-status" class="mt-6 text-gray-600">Your results have been recorded. Thank you for participating!</p> </section>
 
-        <form id="hidden-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-            <input type="text" name="name" id="form-name">
-            <input type="text" name="attempted" id="form-attempted">
-            <input type="text" name="score" id="form-score">
-            <input type="text" name="time_taken" id="form-time">
+        <form id="results-formspree" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
+            <input type="text" name="student_name" id="formspree-name">
+            <input type="number" name="attempted_questions" id="formspree-attempted">
+            <input type="number" name="score" id="formspree-score">
+            <input type="text" name="percentage" id="formspree-percentage">
+            <input type="text" name="time_taken" id="formspree-time">
+            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirant">
         </form>
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 p-6 mt-12">
-        <div class="container mx-auto text-center">
-            <p class="mb-2">Need assistance or have questions about your preparation?</p>
-            <p class="mb-2 font-semibold">Contact us: <a href="tel:03265762698" class="hover:text-indigo-400">03265762698</a></p>
-            <p class="text-sm">&copy; 2025 CSS Aspirant Resources. All rights reserved.</p>
-            <p class="text-xs mt-2">Designed for dedicated CSS aspirants.</p>
+    <footer class="bg-gray-800 text-gray-300 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Need assistance or have questions?</p>
+            <p class="mb-4 font-semibold text-lg text-white">Contact: 03265762698</p>
+            <p class="text-sm">&copy; 2025 SYED ASGHAR ALI SHAH - CSS Preparation Resources. All rights reserved.</p>
+            <p class="text-xs mt-2 text-gray-500">Designed for dedicated CSS Aspirants.</p>
         </div>
     </footer>
 
     <script>
-        // --- Quiz Data (Generated based on provided PDFs) ---
-        // Note: These are example questions designed to be challenging and cover the requested topics.
-        // In a real scenario, these would be meticulously crafted directly from the PDF content.
-        const quizData = [
-            // --- Grammar Analysis Questions ---
+        // --- Quiz Data ---
+        const quizQuestions = [
+            // Grammar: Parts of Speech Identification (Based on Grammar Analysis PDF)
             {
-                question: "In the sentence 'The EU has long been an economic giant but comparatively lightweight in military terms', what part of speech is 'comparatively'?",
-                options: ["Adjective", "Preposition", "Adverb", "Conjunction"],
-                answer: "Adverb",
-                topic: "Parts of Speech"
+                question: "In the sentence 'India, however, continues to insist that the incident was orchestrated...', what part of speech is 'however'?",
+                options: { a: "Adjective", b: "Conjunction (Coordinating)", c: "Adverb (Conjunctive/Transitional)", d: "Preposition" },
+                correct: "c"
             },
             {
-                question: "Identify the function of the phrase 'to scale up defence spending' in 'the EU has been compelled to scale up defence spending'.",
-                options: ["Adjective Phrase", "Noun Phrase (Object of Compelled)", "Adverbial Phrase of Purpose", "Infinitive Phrase acting as Noun"],
-                answer: "Infinitive Phrase acting as Noun", // More specific than just Noun Phrase
-                topic: "Phrases"
+                question: "Identify the function of 'holding' in the phrase 'holding the Indus Waters Treaty (IWT) in abeyance'.",
+                options: { a: "Main Verb", b: "Gerund (acting as a noun/subject)", c: "Present Participle (acting as an adjective)", d: "Infinitive" },
+                correct: "b" // It's the subject of the implied clause 'Holding the IWT... is a violation'.
             },
             {
-                question: "Which sentence type best describes: 'As Europe tries to strengthen its regional and global role, it is well placed to emerge as a trusted broker of peace, and its engagement on both sides can help ease Pakistan-India tensions.'?",
-                options: ["Simple", "Compound", "Complex", "Compound-Complex"],
-                answer: "Compound-Complex",
-                topic: "Sentence Structure"
+                question: "What type of noun is 'faith' in the phrase 'in good faith'?",
+                options: { a: "Proper Noun", b: "Concrete Noun", c: "Collective Noun", d: "Abstract Noun" },
+                correct: "d"
             },
             {
-                question: "What is the tense and voice of the verb phrase 'has been compelled'?",
-                options: ["Present Perfect Active", "Past Perfect Passive", "Present Perfect Passive", "Simple Past Passive"],
-                answer: "Present Perfect Passive",
-                topic: "Verb Tense & Voice"
+                question: "In '...a step that is destructive to its vital national interests.', what is the function of the clause 'that is destructive to its vital national interests'?",
+                options: { a: "Noun Clause", b: "Adverb Clause", c: "Independent Clause", d: "Adjective (Relative) Clause" },
+                correct: "d" // It modifies 'step'.
             },
             {
-                question: "Which modal verb in the text expresses the *strongest* necessity or obligation?",
-                options: ["may", "should", "could", "must"],
-                answer: "must",
-                topic: "Modal Verbs"
+                question: "Which word in the following sentence is a preposition? 'The operation of a treaty may be suspended in conformity with its provisions.'",
+                options: { a: "operation", b: "suspended", c: "conformity", d: "with" },
+                correct: "d"
+            },
+             // Grammar: Verb Tense/Form/Voice
+            {
+                question: "What is the tense and voice of the verb phrase 'has been made' in '...no shred of evidence... has been made public...'?",
+                options: { a: "Present Perfect Active", b: "Past Perfect Passive", c: "Present Perfect Passive", d: "Simple Past Passive" },
+                correct: "c"
             },
             {
-                question: "The word 'waning' in 'the waning of the nearly eight-decade-old North Atlantic security architecture' primarily functions as a(n):",
-                options: ["Adjective modifying 'architecture'", "Main Verb", "Gerund (Noun)", "Present Participle acting as Adjective"],
-                answer: "Gerund (Noun)", // It's the object of the preposition 'of'
-                topic: "Verb Forms/Phrases"
+                question: "The sentence 'Pakistan immediately distanced itself...' uses which verb voice?",
+                options: { a: "Passive Voice", b: "Active Voice", c: "Subjunctive Mood", d: "Imperative Mood" },
+                correct: "b"
             },
             {
-                question: "Identify the *subordinating* conjunction in: 'This means Islamabad will face less scrutiny... at a time when Europe’s attention is firmly on its defence...'",
-                options: ["means", "less", "at", "when"],
-                answer: "when",
-                topic: "Conjunctions"
+                question: "Which modal verb in the text expresses obligation or necessity?",
+                options: { a: "may (in 'may be suspended')", b: "will (in 'will be treated')", c: "must (in 'must be performed')", d: "can (not explicitly used this way in text)" },
+                correct: "c"
+            },
+             // Grammar: Prepositions & Complex Sentences
+            {
+                question: "Choose the most appropriate preposition: 'Pakistan is heavily dependent ___ the Indus river system.'",
+                options: { a: "with", b: "on", c: "at", d: "from" },
+                correct: "b"
             },
             {
-                question: "Which of the following is a *compound noun* found in the grammar notes?",
-                options: ["European Commission", "security guarantees", "assertive Europe", "military terms"],
-                answer: "security guarantees",
-                topic: "Nouns"
+                question: "Identify the type of sentence: 'Under Chapter VII of the UN Charter, the UN Security Council is authorised to examine cases which may be a threat to international peace and to take appropriate action.'",
+                options: { a: "Simple", b: "Compound", c: "Complex", d: "Compound-Complex" },
+                correct: "c" // Independent clause + dependent adjective clause.
+            },
+            // Vocabulary: Synonyms (Based on Idioms/Synonyms PDF)
+            {
+                question: "Which word is a synonym for 'abeyance' as used in 'held in abeyance'?",
+                options: { a: "Activation", b: "Continuation", c: "Suspension", d: "Conclusion" },
+                correct: "c"
             },
             {
-                question: "The punctuation mark used to set off 'one that seeks to act in its own strategic interests' in the sentence 'A more confident and assertive Europe is beginning to emerge — one that seeks...' is a(n):",
-                options: ["Hyphen", "Comma", "Semicolon", "Em Dash"],
-                answer: "Em Dash",
-                topic: "Punctuation"
+                question: "What is a synonym for 'escalatory'?",
+                options: { a: "Decreasing", b: "Stabilizing", c: "Increasing / Intensifying", d: "Calming" },
+                correct: "c"
             },
             {
-                question: "Rearrange the following parts into a grammatically correct and logical sentence based on the text's style: (A) rather than climbing onto the US bandwagon / (B) a more confident and assertive Europe / (C) in its own strategic interests / (D) seeks to act",
-                options: ["B, D, A, C", "B, D, C, A", "D, C, A, B", "A, B, D, C"],
-                answer: "B, D, C, A", // A more confident and assertive Europe seeks to act in its own strategic interests rather than climbing onto the US bandwagon.
-                topic: "Sentence Rearrangement"
+                question: "The word 'unequivocally' means:",
+                options: { a: "Ambiguously", b: "Hesitantly", c: "Clearly / Without doubt", d: "Quietly" },
+                correct: "c"
             },
             {
-                question: "What is the primary function of the prepositional phrase 'in global affairs' in 'Europe largely aligned itself with the US leadership in global affairs'?",
-                options: ["Adjectival (modifying leadership)", "Adverbial (modifying aligned)", "Noun Phrase", "Object of the verb"],
-                answer: "Adverbial (modifying aligned)", // Answers 'where' or 'in what context' the alignment occurred
-                topic: "Prepositional Phrases"
-            },
-             {
-                question: "Which word is an *abstract noun* representing a quality or state?",
-                options: ["project", "architecture", "leadership", "associates"],
-                answer: "leadership",
-                topic: "Nouns"
+                question: "Which word best replaces 'landmark' in 'landmark accord'?",
+                options: { a: "Insignificant", b: "Temporary", c: "Historic / Significant", d: "Secret" },
+                correct: "c"
             },
             {
-                question: "Identify the *relative pronoun* in '...issues that long remained major irritants between Pakistan and EU...'",
-                options: ["issues", "that", "long", "between"],
-                answer: "that",
-                topic: "Pronouns"
+                question: "A synonym for 'hurdle' is:",
+                options: { a: "Advantage", b: "Assistance", c: "Obstacle", d: "Path" },
+                correct: "c"
             },
-             {
-                question: "The verb 'tries' in 'As Europe tries to strengthen...' is in which tense?",
-                options: ["Simple Past", "Present Perfect", "Simple Present", "Present Continuous"],
-                answer: "Simple Present",
-                topic: "Verb Tenses"
+             // Vocabulary: Antonyms (Based on Idioms/Synonyms PDF)
+            {
+                question: "What is an antonym for 'provocations'?",
+                options: { a: "Incitements", b: "Aggressions", c: "Appeasements / Conciliations", d: "Challenges" },
+                correct: "c"
             },
             {
-                question: "Which of these is NOT typically capitalized according to standard English rules mentioned in the notes?",
-                options: ["Nato", "March", "President (when used alone)", "European"],
-                answer: "President (when used alone)",
-                topic: "Capitalization"
-            },
-             {
-                question: "The phrase 'Rules governing conduct during armed conflict' is the meaning of which IHL term?",
-                options: ["Hors de combat", "Jus ad bellum", "Law of war", "Adverse distinction"],
-                answer: "Law of war",
-                topic: "Idioms/IHL Terms"
+                question: "Choose the antonym for 'hostility' (related to 'Act of War').",
+                options: { a: "Aggression", b: "Conflict", c: "Belligerence", d: "Peace / Amity" },
+                correct: "d"
             },
             {
-                question: "What is a synonym for 'Hors de combat'?",
-                options: ["Combatant", "Incapacitated", "Active fighter", "Military necessity"],
-                answer: "Incapacitated",
-                topic: "Idioms/Synonyms"
+                question: "An antonym for 'fiscally unsustainable' would be:",
+                options: { a: "Bankrupt", b: "Unprofitable", c: "Financially Viable / Profitable", d: "Expensive" },
+                correct: "c"
             },
             {
-                question: "Which principle requires parties to distinguish between combatants and civilians?",
-                options: ["Principle of proportionality", "Principle of precaution", "Principle of distinction", "Military necessity"],
-                answer: "Principle of distinction",
-                topic: "Idioms/IHL Principles"
+                question: "What is the opposite of 'neglected'?",
+                options: { a: "Ignored", b: "Overlooked", c: "Attended to / Cared for", d: "Forgotten" },
+                correct: "c"
             },
             {
-                question: "The idiom 'Denying quarter' means:",
-                options: ["Providing medical aid", "Accepting surrender", "Refusing to take survivors", "Seizing property"],
-                answer: "Refusing to take survivors",
-                topic: "Idioms/Meanings"
+                question: "The antonym of 'stagnation' (related to 'poor growth') is:",
+                options: { a: "Decline", b: "Recession", c: "Inactivity", d: "Expansion / Prosperity" },
+                correct: "d"
+            },
+            // Idioms (Based on Idioms/Synonyms PDF)
+            {
+                question: "What does the idiom 'jumped the gun' mean?",
+                options: { a: "Acted patiently", b: "Fired a weapon", c: "Acted too quickly or prematurely", d: "Won a race" },
+                correct: "c"
             },
             {
-                question: "What is an antonym for 'Perfidy'?",
-                options: ["Treachery", "Deceit", "Good faith", "Betrayal"],
-                answer: "Good faith",
-                topic: "Idioms/Antonyms"
+                question: "If 'the ball is in India's court', it means:",
+                options: { a: "India has lost the game", b: "It is India's turn to act or respond", c: "India is hosting a sports event", d: "Pakistan is responsible" },
+                correct: "b"
             },
             {
-                question: "'Jus ad bellum' refers to:",
-                options: ["Law governing conduct within conflict", "Law governing the right to resort to force", "Rules for prisoners of war", "Prohibition of pillaging"],
-                answer: "Law governing the right to resort to force",
-                topic: "Idioms/IHL Terms"
+                question: "'Sabre-rattling' refers to:",
+                options: { a: "Polishing weapons", b: "Peace negotiations", c: "Making threats of war or military action", d: "A type of sword fight" },
+                correct: "c"
             },
             {
-                question: "The phrase 'Carte blanche' means:",
-                options: ["Strict limitations", "Complete freedom or authority", "Military objective", "Humanitarian concern"],
-                answer: "Complete freedom or authority",
-                topic: "Idioms/Meanings"
+                question: "The phrase 'at the mercy of' implies:",
+                options: { a: "Being in control", b: "Being kind to someone", c: "Being completely subject to someone's power", d: "Showing forgiveness" },
+                correct: "c"
             },
             {
-                question: "Which term refers to items essential for life, like food and water sources, that are protected under IHL?",
-                options: ["Military objectives", "Cultural property", "Works containing dangerous forces", "Objects indispensable to the survival of the civilian population"],
-                answer: "Objects indispensable to the survival of the civilian population",
-                topic: "Idioms/IHL Terms"
+                question: "What does 'wake up and smell the coffee' urge someone to do?",
+                options: { a: "Have breakfast", b: "Become alert to reality / Face the facts", c: "Go back to sleep", d: "Buy coffee" },
+                correct: "b"
+            },
+             // Sentence Rearrangement (Based on sentences from PDFs)
+            {
+                question: "Arrange the following parts into a coherent sentence: (1) must be performed / (2) treaties / (3) in good faith / (4) lays down that",
+                options: { a: "4, 2, 1, 3", b: "2, 4, 1, 3", c: "4, 1, 3, 2", d: "2, 1, 3, 4" },
+                correct: "a" // "lays down that treaties must be performed in good faith" (From Vienna Convention reference)
             },
             {
-                question: "The 'Principle of non-reciprocity' in IHL means:",
-                options: ["Violations by one side justify violations by the other", "Rules apply equally to all parties", "One party's violation does not release the other from obligations", "Specific laws override general laws"],
-                answer: "One party's violation does not release the other from obligations",
-                topic: "Idioms/IHL Principles"
+                question: "Arrange the following: (1) is heavily dependent / (2) on the Indus river system / (3) Pakistan / (4) for its agricultural sector",
+                options: { a: "3, 1, 2, 4", b: "1, 3, 2, 4", c: "3, 2, 1, 4", d: "4, 1, 3, 2" },
+                correct: "a" // "Pakistan is heavily dependent on the Indus river system for its agricultural sector."
             },
             {
-                question: "What does 'Opinio juris' refer to in the context of customary international law?",
-                options: ["Consistent state practice", "A binding treaty", "The belief that a state practice is legally required", "Non-binding guidelines"],
-                answer: "The belief that a state practice is legally required",
-                topic: "Idioms/Legal Terms"
+                question: "Arrange the following: (1) of lack of civic sense / (2) are all examples / (3) vandalism, hoarding, intolerance / (4) in society",
+                options: { a: "1, 2, 3, 4", b: "3, 2, 1, 4", c: "3, 1, 2, 4", d: "2, 1, 4, 3" },
+                correct: "b" // "vandalism, hoarding, intolerance are all examples of lack of civic sense in society."
             },
             {
-                question: "The 'Martens Clause' ensures that:",
-                options: ["Specific laws prevail over general ones", "States can prosecute war crimes universally", "Basic principles of humanity apply even if treaties are silent", "Acts cannot be punished if not illegal at the time"],
-                answer: "Basic principles of humanity apply even if treaties are silent",
-                topic: "Idioms/Legal Terms"
-            },
-             {
-                question: "'Lex specialis' is the principle that:",
-                options: ["A general law overrides a specific law", "A specific law overrides a general law", "All laws apply equally", "Laws cannot be applied retroactively"],
-                answer: "A specific law overrides a general law",
-                topic: "Idioms/Legal Terms"
+                question: "Arrange the following: (1) the high and mighty / (2) decided to focus / (3) on graduate programs / (4) ignoring basic education needs",
+                // This requires slight adaptation for flow, implying the ignoring part.
+                options: { a: "1, 2, 3, 4", b: "2, 1, 3, 4", c: "1, 4, 2, 3", d: "4, 1, 2, 3" },
+                correct: "a" // "The high and mighty decided to focus on graduate programs, ignoring basic education needs." (Implied context from PDF)
             },
             {
-                question: "What is a synonym for 'Pillaging'?",
-                options: ["Protecting property", "Requisitioning", "Looting", "Humane treatment"],
-                answer: "Looting",
-                topic: "Idioms/Synonyms"
+                question: "Arrange the following: (1) a competent tribunal / (2) to be decided by / (3) it is a question of law / (4) as a matter of first impression",
+                options: { a: "3, 2, 1, 4", b: "1, 2, 3, 4", c: "3, 4, 2, 1", d: "2, 1, 4, 3" },
+                correct: "a" // "it is a question of law to be decided by a competent tribunal as a matter of first impression."
+            },
+             // Conceptual/Tricky Grammar & Vocabulary
+            {
+                question: "In 'Pakistan immediately distanced itself...', the word 'itself' is a:",
+                options: { a: "Possessive Pronoun", b: "Demonstrative Pronoun", c: "Reflexive Pronoun", d: "Relative Pronoun" },
+                correct: "c"
             },
             {
-                question: "'Common Article 3' applies specifically to:",
-                options: ["International armed conflicts only", "Non-international armed conflicts", "Neutral states", "Cultural property protection"],
-                answer: "Non-international armed conflicts",
-                topic: "Idioms/IHL Terms"
+                question: "The phrase 'mala fide intent' suggests an action taken with:",
+                options: { a: "Good intentions", b: "Neutral purpose", c: "Bad faith or dishonest purpose", d: "Legal justification" },
+                correct: "c"
             },
             {
-                question: "The term 'Nexus to the conflict' is required to classify an act as:",
-                options: ["A purely criminal act", "A grave breach", "An act of perfidy", "A war crime (generally)"],
-                answer: "A war crime (generally)",
-                topic: "Idioms/Legal Terms"
-            },
-            // --- More Challenging Grammar/Sentence Structure ---
-            {
-                question: "Identify the grammatical structure used for emphasis in: 'Readiness 2030, *this* is the project announced by the EU.' (Assuming this stylistic change)",
-                options: ["Passive Voice", "Cleft Sentence", "Apposition", "Inversion"],
-                answer: "Cleft Sentence", // Example: It was Readiness 2030 that the EU announced. 'This is X that Y' is another form.
-                topic: "Advanced Sentence Structure"
+                question: "What is the primary function of the passive voice in sentences like 'The incident was orchestrated...' within the context of the provided text?",
+                options: { a: "To make the sentence shorter", b: "To emphasize the actor (who did it)", c: "To sound more subjective", d: "To emphasize the action or recipient, often sounding more formal or objective" },
+                correct: "d"
             },
             {
-                question: "Which sentence correctly uses a past participle as an adjective?",
-                options: ["The waning architecture required attention.", "Europe strengthening its military is key.", "The compelled EU scaled up spending.", "The announced plan has wide implications."],
-                answer: "The announced plan has wide implications.",
-                topic: "Verb Forms as Adjectives"
+                question: "Which of these terms from the text specifically refers to the *repeal or abolition* of an agreement?",
+                options: { a: "Suspension", b: "Abrogation", c: "Violation", d: "Arbitration" },
+                correct: "b"
             },
             {
-                question: "Choose the sentence with the most precise and appropriate preposition: 'The decision was made ______ the context of waning security guarantees.'",
-                options: ["on", "within", "about", "from"],
-                answer: "within",
-                topic: "Prepositions"
+                question: "The term 'casus belli' refers to:",
+                options: { a: "A peace treaty", b: "A diplomatic negotiation", c: "An act justifying war", d: "A legal document" },
+                correct: "c"
             },
-             {
-                question: "What is the function of 'that' in: 'It is important for Pakistan to recognise that the EU and the US are no longer a monolith'?",
-                options: ["Relative Pronoun", "Demonstrative Pronoun", "Subordinating Conjunction introducing a Noun Clause", "Adverb"],
-                answer: "Subordinating Conjunction introducing a Noun Clause", // The clause 'that the EU...' acts as the object of 'recognise'.
-                topic: "Clauses/Conjunctions"
+             // More challenging questions
+            {
+                question: "Identify the grammatical mood used in 'It is hoped that the UN secretary general's office will play a role...'",
+                options: { a: "Indicative", b: "Imperative", c: "Subjunctive", d: "Interrogative" },
+                correct: "c" // Expresses a hope/desire, fitting the subjunctive use.
             },
             {
-                question: "Rearrange into a coherent sentence: (A) is becoming a true pillar / (B) in this new multipolar world / (C) a more strategically independent Europe / (D) potentially",
-                options: ["C, D, A, B", "A, B, C, D", "C, A, D, B", "D, C, B, A"],
-                answer: "C, D, A, B", // A more strategically independent Europe potentially is becoming a true pillar in this new multipolar world. (Or 'is potentially becoming')
-                topic: "Sentence Rearrangement/Adverb Placement"
+                question: "What kind of phrase is 'pursuant to Article 40'?",
+                options: { a: "Noun Phrase", b: "Verb Phrase", c: "Adjectival Phrase", d: "Prepositional Phrase (acting adverbially)" },
+                correct: "d" // 'Pursuant to' acts as a compound preposition here.
             },
             {
-                question: "Which of the following best replaces 'rather than climbing onto' while maintaining a similar meaning and formality: '...act in its own strategic interests ______ the US bandwagon.'",
-                options: ["instead of climb on", "as opposed to jumping upon", "in preference to boarding", "as distinct from aligning with"], // 'as distinct from aligning with' is formal but slightly changes meaning. 'instead of climbing onto' is closest.
-                answer: "instead of climbing onto", // This is tricky as formality varies.
-                topic: "Phrases/Synonyms"
-            },
-             {
-                question: "Identify the type of phrase 'earning it credibility' is in '...maintained a neutral stance..., earning it credibility...'",
-                options: ["Prepositional Phrase", "Infinitive Phrase", "Present Participial Phrase", "Gerund Phrase"],
-                answer: "Present Participial Phrase", // Modifies the implied subject performing 'maintained'.
-                topic: "Phrases"
-            },
-             {
-                question: "Which sentence uses 'likely' as an *adjective*?",
-                options: ["The EU will likely expand its partnerships.", "Expansion is the likely outcome.", "Likely, the EU will expand.", "They expanded likely due to necessity."],
-                answer: "Expansion is the likely outcome.", // Modifies 'outcome'
-                topic: "Adjectives/Adverbs"
+                question: "The idiom 'close ranks' means:",
+                options: { a: "To stand farther apart", b: "To argue fiercely", c: "To unite and support each other", d: "To surrender" },
+                correct: "c"
             },
             {
-                question: "'Superfluous injury' is harm that is:",
-                options: ["Necessary for military objectives", "Directed at civilians", "Greater than needed for a legitimate military purpose", "Caused by perfidy"],
-                answer: "Greater than needed for a legitimate military purpose",
-                topic: "Idioms/Meanings"
+                question: "What is the difference between 'suspension' and 'termination' of a treaty, based on the text's context?",
+                options: { a: "They mean the same thing.", b: "Suspension is permanent; termination is temporary.", c: "Suspension is temporary; termination is permanent ending.", d: "Suspension requires agreement; termination does not." },
+                correct: "c"
             },
             {
-                question: "An antonym for 'Adverse distinction' in the context of IHL is:",
-                options: ["Bias", "Prejudice", "Impartiality", "Discrimination"],
-                answer: "Impartiality",
-                topic: "Idioms/Antonyms"
+                question: "Which word implies a state of being 'shockingly bad' or 'outstandingly bad'?",
+                options: { a: "Flimsy", b: "Provocative", c: "Egregious", d: "Unilateral" },
+                correct: "c"
+            },
+             // Final set of diverse questions
+            {
+                question: "Identify the part of speech of 'only' in '...suspended... only when it is breached...'",
+                options: { a: "Adjective", b: "Noun", c: "Adverb", d: "Conjunction" },
+                correct: "c" // Modifies the condition 'when it is breached'.
             },
             {
-                question: "The term 'Belligerent reprisals' refers to acts that are:",
-                options: ["Always legal responses to attacks", "Normally illegal acts taken to enforce IHL compliance (heavily restricted)", "Acts of collective punishment", "Methods of peacekeeping"],
-                answer: "Normally illegal acts taken to enforce IHL compliance (heavily restricted)",
-                topic: "Idioms/IHL Terms"
+                question: "What does 'civic sense' primarily relate to, according to the text?",
+                options: { a: "Political knowledge", b: "Personal hygiene", c: "Social ethics and responsibility towards society", d: "Driving skills" },
+                correct: "c"
             },
             {
-                question: "What does 'Nullum crimen sine lege' mean?",
-                options: ["No crime without intent", "No crime without law", "The law applies equally", "Guilty until proven innocent"],
-                answer: "No crime without law",
-                topic: "Idioms/Legal Terms"
+                question: "Choose the best synonym for 'dispossessed' in the context of 'peasantry is being dispossessed'.",
+                options: { a: "Empowered", b: "Enriched", c: "Deprived of land or property", d: "Organized" },
+                correct: "c"
             },
             {
-                question: "Choose the most appropriate idiom: 'The commander was given ______ to plan the defence as she saw fit.'",
-                options: ["carte blanche", "a grave breach", "adverse distinction", "soft law"],
-                answer: "carte blanche",
-                topic: "Idioms/Usage"
-            },
-             {
-                question: "Identify the core components (Subject-Verb-Object/Complement) of: 'This decision was a direct outcome of the waning of the nearly eight-decade-old North Atlantic security architecture.'",
-                options: ["Subject: decision, Verb: was, Object: outcome", "Subject: decision, Verb: was waning, Complement: architecture", "Subject: decision, Verb: was, Complement: outcome", "Subject: architecture, Verb: was, Complement: outcome"],
-                answer: "Subject: decision, Verb: was, Complement: outcome", // 'outcome' renames 'decision' after linking verb 'was'
-                topic: "Sentence Structure"
+                question: "The phrase 'fever pitch' indicates a state of:",
+                options: { a: "Illness", b: "Calmness", c: "Great excitement or intensity", d: "Low temperature" },
+                correct: "c"
             },
             {
-                question: "Which word functions as a preposition in the following: 'Europe largely aligned itself with the US leadership'?",
-                options: ["largely", "aligned", "with", "leadership"],
-                answer: "with",
-                topic: "Parts of Speech"
+                question: "Rearrange: (1) is bound to aggravate / (2) disruption of water supplies / (3) existing water scarcity / (4) further",
+                // Needs slight adjustment for perfect grammar flow if 'further' modifies aggravate.
+                options: { a: "2, 1, 3, 4", b: "3, 1, 2, 4", c: "2, 4, 1, 3", d: "1, 3, 2, 4" },
+                correct: "a" // "disruption of water supplies is bound to aggravate existing water scarcity further."
             },
             {
-                question: "Select the sentence that uses the Present Perfect tense correctly to indicate relevance to the present.",
-                options: ["The EU announced the plan last March.", "The EU was announcing the plan when the call came.", "The EU has announced a plan with significant implications.", "The EU announces plans frequently."],
-                answer: "The EU has announced a plan with significant implications.",
-                topic: "Verb Tenses"
+                question: "What type of verb is 'become' in '...sources of instability... have become threats...'?",
+                options: { a: "Action Verb", b: "Helping Verb", c: "Linking Verb", d: "Modal Verb" },
+                correct: "c"
             },
             {
-                question: "The concept of 'Universal jurisdiction' allows states to prosecute certain crimes based on:",
-                options: ["The location of the crime only", "The nationality of the perpetrator only", "The severity of the crime, regardless of location or nationality", "The consent of the state where the crime occurred"],
-                answer: "The severity of the crime, regardless of location or nationality",
-                topic: "Idioms/Legal Terms"
+                question: "An antonym for 'callous' (as in 'must not be a callous person') is:",
+                options: { a: "Insensitive", b: "Hardened", c: "Compassionate / Sympathetic", d: "Cruel" },
+                correct: "c"
             },
             {
-                question: "What type of noun is 'Asean'?",
-                options: ["Common Noun", "Abstract Noun", "Collective Noun", "Compound Noun"],
-                answer: "Collective Noun", // Also a Proper Noun, but Collective fits the group aspect.
-                topic: "Nouns"
+                question: "The idiom 'reaping the results' implies:",
+                options: { a: "Planting seeds", b: "Avoiding consequences", c: "Experiencing the consequences (often negative) of past actions", d: "Celebrating success" },
+                correct: "c"
             },
             {
-                question: "Rearrange into a logical sentence: (A) must proactively engage / (B) European capitals / (C) therefore, / (D) Islamabad",
-                options: ["C, D, A, B", "D, C, A, B", "A, B, C, D", "B, C, D, A"],
-                answer: "C, D, A, B", // Therefore, Islamabad must proactively engage European capitals.
-                topic: "Sentence Rearrangement"
+                question: "What does 'intolerance' mean in the context of lacking civic sense?",
+                options: { a: "Physical weakness", b: "Unwillingness to accept different views or behaviors", c: "Patience", d: "Agreement" },
+                correct: "b"
             },
-             {
-                question: "Which term means 'Out of combat' due to injury or surrender?",
-                options: ["Jus in bello", "Animus belligerendi", "Hors de combat", "Belligerent occupation"],
-                answer: "Hors de combat",
-                topic: "Idioms/Meanings"
+            {
+                question: "Identify the function of 'to maintain' in '...take appropriate action to maintain international peace...'",
+                options: { a: "Noun (Gerund)", b: "Adjective (Participle)", c: "Adverb (Infinitive of Purpose)", d: "Main Verb" },
+                correct: "c" // Explains the purpose of the action.
             }
         ];
 
+
         // --- DOM Elements ---
-        const nameEntrySection = document.getElementById('name-entry');
-        const studentNameInput = document.getElementById('student-name');
+        const nameEntrySection = document.getElementById('name-entry-section');
+        const quizSection = document.getElementById('quiz-section');
+        const resultsSection = document.getElementById('results-section');
+        const nameInput = document.getElementById('student-name');
         const startQuizBtn = document.getElementById('start-quiz-btn');
         const nameError = document.getElementById('name-error');
-        const quizSection = document.getElementById('quiz-section');
         const questionsContainer = document.getElementById('questions-container');
+        const quizForm = document.getElementById('quiz-form');
         const submitQuizBtn = document.getElementById('submit-quiz-btn');
-        const resultsSection = document.getElementById('results-section');
-        const timerDisplay = document.getElementById('timer-display');
-        const timeEl = document.getElementById('time');
+        const timerDisplay = document.getElementById('timer');
 
-        // Result display elements
         const resultName = document.getElementById('result-name');
         const resultAttempted = document.getElementById('result-attempted');
         const resultScore = document.getElementById('result-score');
+        const resultPercentage = document.getElementById('result-percentage');
         const resultTime = document.getElementById('result-time');
+        const submissionStatus = document.getElementById('submission-status'); // Get the status element
 
-        // Hidden form elements
-        const hiddenForm = document.getElementById('hidden-form');
-        const formName = document.getElementById('form-name');
-        const formAttempted = document.getElementById('form-attempted');
-        const formScore = document.getElementById('form-score');
-        const formTime = document.getElementById('form-time');
+        const formspreeForm = document.getElementById('results-formspree');
+        const formspreeName = document.getElementById('formspree-name');
+        const formspreeAttempted = document.getElementById('formspree-attempted');
+        const formspreeScore = document.getElementById('formspree-score');
+        const formspreePercentage = document.getElementById('formspree-percentage');
+        const formspreeTime = document.getElementById('formspree-time');
 
         // --- Quiz State ---
-        let currentQuestions = [];
-        let score = 0;
-        let attempted = 0;
         let timerInterval;
         let timeLeft = 25 * 60; // 25 minutes in seconds
-        let timeTaken = 0;
-        let quizSubmitted = false; // Flag to prevent double submission
+        let startTime;
+        let studentName = '';
+        let quizSubmitted = false; // Flag to prevent multiple submissions
 
         // --- Functions ---
 
-        // Shuffle array (Fisher-Yates algorithm)
+        // Function to shuffle options (Fisher-Yates Shuffle)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -518,177 +472,241 @@
             return array;
         }
 
-        // Select 50 random questions (or all if <= 50) and shuffle options
-        function setupQuestions() {
-             // Shuffle the main quizData array first
-            let shuffledQuizData = shuffleArray([...quizData]);
-             // Select the first 50 questions
-            currentQuestions = shuffledQuizData.slice(0, 50);
 
-            // Shuffle options within each selected question
-            currentQuestions.forEach(q => {
-                q.options = shuffleArray([...q.options]);
-            });
-        }
-
-
-        // Display questions on the page
+        // Function to display questions
         function displayQuestions() {
             questionsContainer.innerHTML = ''; // Clear previous questions
-            currentQuestions.forEach((q, index) => {
-                const questionCard = document.createElement('div');
-                questionCard.classList.add('question-card');
+            quizQuestions.forEach((q, index) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.classList.add('question-block');
 
                 const questionText = document.createElement('p');
                 questionText.classList.add('text-lg', 'font-semibold', 'mb-4');
                 questionText.textContent = `${index + 1}. ${q.question}`;
-                questionCard.appendChild(questionText);
+                questionBlock.appendChild(questionText);
 
                 const optionsDiv = document.createElement('div');
-                optionsDiv.classList.add('space-y-3');
+                optionsDiv.classList.add('space-y-2');
 
-                q.options.forEach(option => {
-                    const optionLabel = document.createElement('label');
-                    optionLabel.classList.add('flex', 'items-center', 'p-3', 'border', 'border-gray-200', 'rounded-md', 'hover:bg-indigo-50', 'cursor-pointer', 'transition-colors');
+                // Get options as an array of [key, value] pairs and shuffle them
+                let optionsArray = Object.entries(q.options);
+                optionsArray = shuffleArray(optionsArray); // Shuffle the options order
 
-                    const radioInput = document.createElement('input');
-                    radioInput.type = 'radio';
-                    radioInput.name = `question-${index}`;
-                    radioInput.value = option;
-                    radioInput.classList.add('mr-3', 'form-radio', 'h-5', 'w-5', 'text-indigo-600');
+                optionsArray.forEach(([key, value]) => {
+                    const label = document.createElement('label');
+                    label.classList.add('option-label', 'flex', 'items-center'); // Use flex for alignment
 
-                    const optionText = document.createElement('span');
-                    optionText.textContent = option;
-                    optionText.classList.add('text-gray-700');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${index}`;
+                    radio.value = key;
+                    radio.required = true; // Make selection required
 
-                    optionLabel.appendChild(radioInput);
-                    optionLabel.appendChild(optionText);
-                    optionsDiv.appendChild(optionLabel);
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(` ${value}`)); // Add space before text
+                    optionsDiv.appendChild(label);
                 });
 
-                questionCard.appendChild(optionsDiv);
-                questionsContainer.appendChild(questionCard);
+                questionBlock.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionBlock);
             });
         }
 
-        // Start the timer
+        // Function to start the timer
         function startTimer() {
-            timerDisplay.classList.remove('hidden');
+            startTime = Date.now();
+            timerDisplay.textContent = formatTime(timeLeft);
+
             timerInterval = setInterval(() => {
                 timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timerDisplay.textContent = formatTime(timeLeft);
 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    timeEl.textContent = "0:00";
-                    alert("Time's up! Submitting your quiz automatically.");
-                    submitQuiz();
+                    submitQuiz(true); // Auto-submit
                 }
             }, 1000);
         }
 
-        // Calculate results
+        // Function to format time (MM:SS)
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            // Handle cases where time might go slightly negative if submission takes time
+            if (minutes < 0 || remainingSeconds < 0) return "00:00";
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        // Function to calculate results
         function calculateResults() {
-            score = 0;
-            attempted = 0;
-            currentQuestions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
-                if (selectedOption) {
+            let score = 0;
+            let attempted = 0;
+            const formData = new FormData(quizForm); // Use the actual quiz form
+
+            quizQuestions.forEach((q, index) => {
+                const userAnswer = formData.get(`question-${index}`);
+                if (userAnswer) {
                     attempted++;
-                    if (selectedOption.value === q.answer) {
+                    if (userAnswer === q.correct) {
                         score++;
                     }
                 }
             });
-            timeTaken = (25 * 60) - timeLeft; // Calculate time spent
+
+            const endTime = Date.now();
+            // Calculate elapsed time correctly, even if auto-submitted
+            const timeElapsedSeconds = timeLeft <= 0 ? 25 * 60 : Math.floor((endTime - startTime) / 1000);
+            const timeTakenFormatted = formatTime(timeElapsedSeconds);
+
+            return { score, attempted, timeTakenFormatted, timeElapsedSeconds };
         }
 
-        // Display results
-        function displayResults() {
-            const totalTimeMinutes = Math.floor(timeTaken / 60);
-            const totalTimeSeconds = timeTaken % 60;
-            const timeTakenFormatted = `${totalTimeMinutes} min ${totalTimeSeconds < 10 ? '0' : ''}${totalTimeSeconds} sec`;
+        // Function to display results and handle submission
+        function displayResults(results) {
+            // Display results on the page
+            resultName.textContent = studentName;
+            resultAttempted.textContent = results.attempted;
+            resultScore.textContent = results.score;
+            const percentage = quizQuestions.length > 0 ? ((results.score / quizQuestions.length) * 100).toFixed(1) : 0;
+            resultPercentage.textContent = percentage;
+            resultTime.textContent = results.timeTakenFormatted;
 
-            resultName.textContent = studentNameInput.value.trim();
-            resultAttempted.textContent = attempted;
-            resultScore.textContent = score;
-            resultTime.textContent = timeTakenFormatted;
+            // Hide quiz, show results
+            quizSection.style.display = 'none';
+            resultsSection.style.display = 'block';
 
-            quizSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
+            // Populate hidden Formspree form fields
+            formspreeName.value = studentName;
+            formspreeAttempted.value = results.attempted;
+            formspreeScore.value = results.score;
+            formspreePercentage.value = percentage;
+            formspreeTime.value = results.timeTakenFormatted;
+
+            // Update submission status message
+            submissionStatus.textContent = "Submitting results...";
+            submissionStatus.classList.remove('text-red-500', 'text-green-600');
+            submissionStatus.classList.add('text-yellow-600');
+
+
+            // Submit the hidden form using Fetch API
+            const formSpreeData = new FormData(formspreeForm);
+
+            fetch(formspreeForm.action, {
+                method: 'POST',
+                body: formSpreeData,
+                headers: {
+                    'Accept': 'application/json' // Important for Formspree AJAX
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully to Formspree.');
+                    submissionStatus.textContent = "Results submitted successfully. Thank you for participating!";
+                    submissionStatus.classList.remove('text-yellow-600', 'text-red-500');
+                    submissionStatus.classList.add('text-green-600');
+                } else {
+                    // Try to parse the error response from Formspree
+                    response.json().then(data => {
+                        console.error('Formspree submission failed:', data);
+                        const errorMessage = data.errors ? data.errors.map(e => e.message).join(', ') : 'Unknown error.';
+                        submissionStatus.textContent = `Error submitting results: ${errorMessage} Please contact the administrator.`;
+                        submissionStatus.classList.remove('text-yellow-600', 'text-green-600');
+                        submissionStatus.classList.add('text-red-500');
+
+                    }).catch(() => {
+                        // Fallback if parsing JSON fails
+                        console.error('Formspree submission failed. Status:', response.status);
+                        submissionStatus.textContent = `Error submitting results (Status: ${response.status}). Please contact the administrator.`;
+                        submissionStatus.classList.remove('text-yellow-600', 'text-green-600');
+                        submissionStatus.classList.add('text-red-500');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Network error submitting form to Formspree:', error);
+                submissionStatus.textContent = `Network error submitting results: ${error.message}. Please check your connection and contact the administrator.`;
+                submissionStatus.classList.remove('text-yellow-600', 'text-green-600');
+                submissionStatus.classList.add('text-red-500');
+            });
         }
 
-        // Populate and submit the hidden form
-        function submitToFormspree() {
-            formName.value = studentNameInput.value.trim();
-            formAttempted.value = attempted;
-            formScore.value = score;
-            formTime.value = `${Math.floor(timeTaken / 60)}m ${timeTaken % 60}s`; // Format for form
-            hiddenForm.submit();
-        }
 
-
-        // Submit the quiz (manual or auto)
-        function submitQuiz() {
-             if (quizSubmitted) return; // Prevent multiple submissions
-             quizSubmitted = true;
+        // Function to handle quiz submission (triggered by button or timer)
+        function submitQuiz(isAutoSubmit = false) {
+            if (quizSubmitted) return; // Prevent multiple submissions
+            quizSubmitted = true;
 
             clearInterval(timerInterval); // Stop the timer
-            calculateResults();
-            displayResults();
-            submitToFormspree();
-            submitQuizBtn.disabled = true; // Disable button after submission
-            submitQuizBtn.textContent = "Submitted";
-        }
 
-
-        // Start the quiz
-        function startQuiz() {
-            const name = studentNameInput.value.trim();
-            if (name === "") {
-                nameError.classList.remove('hidden');
-                return;
+            // Check if all questions are answered (optional, but good practice)
+            const formData = new FormData(quizForm);
+            let allAnswered = true;
+            for (let i = 0; i < quizQuestions.length; i++) {
+                if (!formData.has(`question-${i}`)) {
+                    allAnswered = false;
+                    break;
+                }
             }
-            nameError.classList.add('hidden');
-            nameEntrySection.classList.add('hidden');
-            quizSection.classList.remove('hidden');
-            setupQuestions(); // Setup questions including shuffling options
-            displayQuestions();
-            startTimer();
+
+            // Only show alert if submitting manually and not all answered
+            if (!isAutoSubmit && !allAnswered) {
+                 // Using a simple confirm, replace with a styled modal if preferred
+                if (!confirm("You haven't answered all questions. Are you sure you want to submit?")) {
+                    quizSubmitted = false; // Allow resubmission if cancelled
+                    startTimer(); // Restart timer if they cancel (adjust timeLeft if needed)
+                    return; // Stop the submission process
+                }
+            }
+
+
+            const results = calculateResults();
+            displayResults(results); // This now handles displaying results AND submitting the form
+
+            if (isAutoSubmit) {
+                console.log("Quiz auto-submitted due to time out.");
+                // Add a message indicating auto-submission
+                const autoSubmitMsg = document.createElement('p');
+                autoSubmitMsg.textContent = "Time ran out! Your quiz was automatically submitted.";
+                autoSubmitMsg.classList.add('text-center', 'text-red-600', 'font-semibold', 'mt-4', 'mb-2'); // Added margin bottom
+                // Insert before the main status message
+                resultsSection.insertBefore(autoSubmitMsg, submissionStatus);
+            }
         }
 
         // --- Event Listeners ---
-        startQuizBtn.addEventListener('click', startQuiz);
-        submitQuizBtn.addEventListener('click', () => {
-             if (confirm('Are you sure you want to submit the quiz?')) {
-                 submitQuiz();
-             }
+
+        // Start Quiz Button
+        startQuizBtn.addEventListener('click', () => {
+            studentName = nameInput.value.trim();
+            if (studentName) {
+                nameError.style.display = 'none';
+                nameEntrySection.style.display = 'none';
+                quizSection.style.display = 'block';
+                displayQuestions();
+                startTimer();
+            } else {
+                nameError.style.display = 'block';
+            }
         });
 
-        // Basic protection against inspect element keys (very basic deterrent)
+        // Quiz Form Submission Button
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission which would navigate away
+            submitQuiz();
+        });
+
+        // Disable Right Click / Context Menu
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // Disable common inspect shortcuts
         document.addEventListener('keydown', function(e) {
-            // Disable F12
-            if (e.key === "F12" || e.keyCode === 123) {
-                e.preventDefault();
-            }
-            // Disable Ctrl+Shift+I
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-            }
-             // Disable Ctrl+Shift+C
-            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-                e.preventDefault();
-            }
-            // Disable Ctrl+U
-            if (e.ctrlKey && e.key === 'U') {
+            if (e.key === "F12" || e.keyCode === 123 ||
+                (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+                (e.ctrlKey && e.key === "U")) {
                  e.preventDefault();
             }
-             // Disable Ctrl+S
-             if (e.ctrlKey && e.key === 'S') {
-                 e.preventDefault();
-             }
         });
 
     </script>
