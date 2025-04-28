@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS 27 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
+    <title>QUIZ FOR CSS ASPIRANTS 28 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,14 @@
             -moz-user-drag: none;
             -o-user-drag: none;
             user-drag: none;
+            overscroll-behavior: none; /* Prevent pull-to-refresh */
         }
         /* Custom styles for quiz elements */
         .quiz-option {
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+             word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto; /* Improve word breaking */
         }
         .quiz-option:hover {
             background-color: #e0f2fe; /* Light blue hover */
@@ -48,10 +52,26 @@
         img {
             pointer-events: none;
         }
-        /* Ensure options don't overflow weirdly */
-        .quiz-option {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+         /* Style for rearrangement parts */
+        .rearrangement-parts {
+             background-color: #f3f4f6; /* Lighter Gray */
+             border: 1px solid #e5e7eb;
+             padding: 10px 15px;
+             border-radius: 6px;
+             font-size: 0.9rem;
+             margin-bottom: 1rem;
+             color: #374151;
+        }
+        .rearrangement-parts strong {
+            color: #111827; /* Darker Gray */
+        }
+        .rearrangement-parts ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+         .rearrangement-parts li {
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -66,7 +86,7 @@
                      onerror="this.onerror=null; this.src='https://placehold.co/48x48/007bff/ffffff?text=SA';">
                  <span class="text-lg font-semibold text-gray-700">SYED ASGHAR ALI SHAH</span>
             </div>
-            <h1 class="text-xl sm:text-2xl font-bold text-center text-blue-700">QUIZ FOR CSS ASPIRANTS 27 APRIL 2025</h1>
+            <h1 class="text-xl sm:text-2xl font-bold text-center text-blue-700">QUIZ FOR CSS ASPIRANTS 28 APRIL 2025</h1>
             <div id="timer-display" class="text-lg sm:text-xl font-semibold text-red-600 mt-2 sm:mt-0">Time Left: 25:00</div>
         </div>
     </header>
@@ -74,8 +94,8 @@
     <main class="container mx-auto px-4 py-8 flex-grow">
 
         <section id="name-entry" class="max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Advanced Grammar & Vocabulary Challenge</h2>
-            <p class="text-gray-600 mb-6">Please enter your full name to begin this rigorous quiz.</p>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Ultimate CSS Aspirant Challenge</h2>
+            <p class="text-gray-600 mb-6">Enter your full name to begin this comprehensive 100-question quiz.</p>
             <input type="text" id="student-name" placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6 text-lg" required>
             <button id="start-quiz-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md text-lg transition duration-300 ease-in-out transform hover:scale-105">
                 Start Quiz
@@ -83,21 +103,22 @@
         </section>
 
         <section id="quiz-section" class="hidden max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">CSS Aspirant Quiz - April 27</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">CSS Aspirant Quiz - April 28</h2>
             <div id="question-container" class="mb-6">
-                <p class="text-lg font-semibold text-gray-700 mb-2"><span id="question-number"></span> / 50</p>
+                <p class="text-lg font-semibold text-gray-700 mb-2"><span id="question-number"></span> / 100</p>
                 <p id="question-text" class="text-xl text-gray-800 mb-5 leading-relaxed"></p>
-                <div id="options-container" class="space-y-3">
-                    </div>
-                 <div id="rearrangement-parts-display" class="hidden mt-4 p-3 bg-gray-100 rounded border border-gray-300 text-sm">
+                 <div id="rearrangement-parts-display" class="hidden">
                      <p class="font-medium mb-2 text-gray-700">Rearrange these parts:</p>
                      <ul id="rearrangement-parts-list" class="list-disc list-inside"></ul>
                 </div>
+                <div id="options-container" class="space-y-3 mt-4">
+                    </div>
             </div>
             <div class="flex justify-between items-center mt-8">
                  <button id="prev-question-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
                     Previous
                 </button>
+                <span id="progress-indicator" class="text-sm text-gray-600 font-medium"></span>
                 <button id="next-question-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out">
                     Next
                 </button>
@@ -112,8 +133,8 @@
             <div class="space-y-4 text-lg text-gray-700">
                 <p><strong class="font-semibold text-gray-800">Name:</strong> <span id="result-name"></span></p>
                 <p><strong class="font-semibold text-gray-800">Time Taken:</strong> <span id="result-time"></span></p>
-                <p><strong class="font-semibold text-gray-800">Questions Attempted:</strong> <span id="result-attempted"></span></p>
-                <p><strong class="font-semibold text-gray-800">Correct Answers:</strong> <span id="result-score"></span> / 50</p>
+                <p><strong class="font-semibold text-gray-800">Questions Attempted:</strong> <span id="result-attempted"></span> / 100</p>
+                <p><strong class="font-semibold text-gray-800">Correct Answers:</strong> <span id="result-score"></span> / 100</p>
                 <p><strong class="font-semibold text-gray-800">Percentage:</strong> <span id="result-percentage"></span>%</p>
             </div>
              <p class="mt-6 text-sm text-gray-500">Your results have been submitted. Thank you for participating!</p>
@@ -125,7 +146,7 @@
             <input type="number" name="attempted" id="form-attempted">
             <input type="number" name="score" id="form-score">
             <input type="text" name="percentage" id="form-percentage">
-            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirants April 27">
+            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirants April 28">
              <input type="text" name="_gotcha" style="display:none"> </form>
 
     </main>
@@ -140,328 +161,622 @@
     </footer>
 
     <script>
-        // --- Quiz Data (Derived from NEW PDFs - April 27 version) ---
+        // --- Quiz Data (100 Questions: 50 Grammar/Vocab + 50 GK) ---
         const quizData = [
-            // --- Grammar: Parts of Speech ---
+            // --- Section 1: Grammar & Vocabulary (50 Questions) ---
+            // Parts of Speech
             {
-                question: "In '...spiralling tension between the two nuclear-armed South Asian neighbours...', what part of speech is 'spiralling'?",
-                options: ["Verb (Main)", "Adverb", "Noun (Gerund)", "Adjective (Present Participle)"],
-                answer: "Adjective (Present Participle)",
-                type: "mcq",
-                explanation: "'Spiralling' modifies the noun 'tension', describing its nature. It's a present participle (-ing form) used as an adjective."
-            },
-            {
-                question: "Identify the part of speech of 'whom' in '...both of whom ‘I am close to’...'.",
-                options: ["Personal Pronoun", "Relative Pronoun", "Interrogative Pronoun", "Indefinite Pronoun"],
-                answer: "Relative Pronoun",
-                type: "mcq",
-                explanation: "'Whom' introduces a dependent clause ('whom I am close to') and refers back to 'India and Pakistan'. It connects the clause to the antecedent."
-            },
-            {
-                question: "What function does 'clear' serve in 'IT wasn’t clear if US President Donald Trump was using a figure of speech...'?",
-                options: ["Adverb modifying 'wasn't'", "Noun object", "Adjective (Predicate Adjective)", "Verb"],
-                answer: "Adjective (Predicate Adjective)",
-                type: "mcq",
-                explanation: "'Clear' follows the linking verb 'wasn't' and describes the implied subject 'IT'. It functions as a predicate adjective."
-            },
-            {
-                question: "In the phrase '...several armed conflicts...', what part of speech is 'several'?",
-                options: ["Adverb", "Noun", "Adjective (Determiner)", "Conjunction"],
-                answer: "Adjective (Determiner)",
-                type: "mcq",
-                explanation: "'Several' modifies the noun 'conflicts' by indicating a non-specific quantity. Words like several, many, few function as determiners, a type of adjective."
-            },
-            {
-                question: "What part of speech is 'belligerent' in '...the mood in India... was belligerent and jingoistic.'?",
-                options: ["Noun", "Adverb", "Verb", "Adjective"],
+                question: "In '...a dangerous confrontation...', what part of speech is 'dangerous'?",
+                options: ["Noun", "Adverb", "Adjective", "Verb"],
                 answer: "Adjective",
-                type: "mcq",
-                explanation: "'Belligerent' follows the linking verb 'was' and describes the noun 'mood'. It's a predicate adjective."
-            },
-            // --- Grammar: Prepositions ---
-            {
-                question: "Choose the correct preposition: 'He was responding ____ a question on the spiralling tension...'",
-                options: ["for", "to", "with", "about"],
-                answer: "to",
-                type: "mcq",
-                explanation: "The verb 'responding' typically takes the preposition 'to' when indicating what is being responded to."
+                type: "mcq"
             },
             {
-                question: "Fill the blank: '...reduction ____ diplomatic staff at the Pakistan mission...'",
-                options: ["in", "of", "for", "from"],
+                question: "Identify the pronoun type for 'its' in '...abjures its support for cross-border terrorism.'",
+                options: ["Personal (Subjective)", "Personal (Objective)", "Possessive Adjective", "Relative Pronoun"],
+                answer: "Possessive Adjective",
+                type: "mcq"
+            },
+            {
+                question: "What part of speech is 'retaliated' in 'Pakistan retaliated by air strikes...'?",
+                options: ["Noun", "Adjective", "Adverb", "Verb (Action)"],
+                answer: "Verb (Action)",
+                type: "mcq"
+            },
+            {
+                question: "In '...neither consistent with treaty provisions nor international law.', 'neither...nor' function as:",
+                options: ["Subordinating Conjunctions", "Prepositions", "Correlative Conjunctions", "Adverbs"],
+                answer: "Correlative Conjunctions",
+                type: "mcq"
+            },
+             {
+                question: "What is the function of 'escalating' in 'Escalating tensions have pushed...'?",
+                options: ["Main Verb", "Adverb", "Noun (Gerund)", "Adjective (Present Participle)"],
+                answer: "Adjective (Present Participle)",
+                type: "mcq"
+            },
+            // Prepositions
+            {
+                question: "Choose the correct preposition: '...back on the brink ____ a dangerous confrontation.'",
+                options: ["in", "of", "with", "at"],
                 answer: "of",
-                type: "mcq",
-                explanation: "The preposition 'of' is used to show what is being reduced – the diplomatic staff is part *of* the reduction."
+                type: "mcq"
             },
             {
-                question: "Select the preposition: '...voices ____ sanity appear to be losing the battle...'",
-                options: ["with", "for", "of", "in"],
-                answer: "of",
-                type: "mcq",
-                explanation: "'Of' indicates the quality or characteristic possessed by the voices – voices characterized by sanity."
+                question: "Fill the blank: '...measures ____ Pakistan.'",
+                options: ["for", "to", "against", "with"],
+                answer: "against",
+                type: "mcq"
             },
             {
-                question: "Complete the sentence: '...threat ____ humanity...'",
-                options: ["for", "against", "to", "with"],
-                answer: "to",
-                type: "mcq",
-                explanation: "The preposition 'to' indicates the target or recipient of the threat."
+                question: "Select the preposition: '...shared privately ____ journalists...'",
+                options: ["by", "to", "with", "among"],
+                answer: "with",
+                type: "mcq"
             },
             {
-                question: "Which preposition fits here: '...allegations ____ Pakistani involvement...'?",
-                options: ["about", "regarding", "of", "in"],
-                answer: "of",
-                type: "mcq",
-                explanation: "'Of' is used to specify the subject matter or content of the allegations."
+                question: "Complete the sentence: '...borrow ____ the Israeli playbook...'",
+                options: ["to", "from", "in", "by"],
+                answer: "from",
+                type: "mcq"
             },
-            // --- Grammar: Verb Tenses, Voice, Mood ---
+             {
+                question: "Which preposition fits: '...avoided ____ all costs.'?",
+                options: ["by", "with", "at", "in"],
+                answer: "at",
+                type: "mcq"
+            },
+            // Verb Tense/Voice/Mood
             {
-                question: "What is the tense and voice of 'were killed' in '...in which 26 civilians were killed.'?",
-                options: ["Simple Present Passive", "Simple Past Active", "Simple Past Passive", "Past Perfect Passive"],
+                question: "What is the tense and voice of 'was shot down' in '...his plane was shot down by Pakistan.'?",
+                options: ["Past Perfect Passive", "Simple Past Active", "Simple Past Passive", "Past Continuous Passive"],
                 answer: "Simple Past Passive",
-                type: "mcq",
-                explanation: "The tense is Simple Past (indicated by 'were'). The voice is Passive because the subject 'civilians' received the action. Structure: Subject + was/were + Past Participle."
+                type: "mcq"
             },
             {
-                question: "Identify the tense of 'has survived' in '...treaty... that has survived several armed conflicts...'.",
-                options: ["Simple Past", "Present Perfect", "Past Perfect", "Simple Present"],
-                answer: "Present Perfect",
-                type: "mcq",
-                explanation: "The Present Perfect tense (has + past participle 'survived') indicates an action that started in the past and continues to have relevance or effect in the present."
+                question: "Identify the tense of 'has been raising' in '...New Delhi has been raising doubts...'.",
+                options: ["Present Perfect", "Past Perfect Continuous", "Present Perfect Continuous", "Present Continuous"],
+                answer: "Present Perfect Continuous",
+                type: "mcq"
             },
             {
-                question: "What is the voice of the main verb phrase 'would plan' in '...government... would surely plan a ‘kinetic’ operation...'?",
-                options: ["Active", "Passive"],
-                answer: "Active",
-                type: "mcq",
-                explanation: "The voice is Active because the subject 'government' performs the action 'would plan'."
-            },
-            {
-                question: "The verb phrase 'can be evaluated' in '...allegations... can be evaluated and discarded...' is in which voice?",
+                question: "What is the voice of 'will be considered' in '...will be considered an act of war...'?",
                 options: ["Active", "Passive"],
                 answer: "Passive",
-                type: "mcq",
-                explanation: "The voice is Passive because the subject 'allegations' receives the action. Structure: Modal (can) + BE + Past Participle (evaluated)."
+                type: "mcq"
             },
             {
-                question: "What mood is used in the clause 'if Pakistan had taken its probe...'?",
-                options: ["Indicative", "Imperative", "Subjunctive", "Interrogative"],
-                answer: "Subjunctive",
-                type: "mcq",
-                explanation: "This clause expresses a hypothetical or contrary-to-fact situation in the past (Pakistan did *not* take the probe to its conclusion). The use of the past perfect 'had taken' after 'if' to denote unreality is characteristic of the subjunctive mood."
+                question: "The verb phrase 'should be avoided' expresses:",
+                options: ["Certainty", "Ability", "Recommendation/Obligation (Passive)", "Past action"],
+                answer: "Recommendation/Obligation (Passive)",
+                type: "mcq"
             },
-            // --- Grammar: Sentence Structure ---
-            {
-                question: "Classify the sentence: 'We await details of the conversations.'",
+             {
+                question: "What mood is primarily used in the sentence 'The treaty does not allow either party...'?",
+                options: ["Imperative", "Subjunctive", "Indicative", "Interrogative"],
+                answer: "Indicative",
+                type: "mcq"
+            },
+            // Sentence Structure
+             {
+                question: "Classify the sentence: 'These steps mostly mirrored Indian actions.'",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
                 answer: "Simple",
-                type: "mcq",
-                explanation: "This sentence contains one independent clause (Subject: 'We', Verb: 'await') and no dependent clauses."
+                type: "mcq"
             },
             {
-                question: "What type of sentence is: 'The Saudi foreign minister has already talked to his counterparts in New Delhi and Islamabad, but we await details of the conversations.'?",
+                question: "What type of sentence is: 'India cannot immediately halt the flow... as it lacks the infrastructure..., so the near-term impact... will be limited.'?",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
-                answer: "Compound",
-                type: "mcq",
-                explanation: "This sentence contains two independent clauses joined by the coordinating conjunction 'but'."
+                answer: "Compound-Complex",
+                type: "mcq"
             },
             {
-                question: "Identify the sentence type: 'Whenever passions are running high, sanity tends to take a backseat.'",
+                question: "Identify the sentence type: 'It recalled memories of the 2019 Balakot crisis when Indian planes crossed the border...'",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
                 answer: "Complex",
-                type: "mcq",
-                explanation: "This sentence contains one dependent clause (starting with 'Whenever') and one independent clause ('sanity tends to take a backseat')."
+                type: "mcq"
             },
             {
-                question: "What kind of clause is 'who commanded the corps in Kashmir' in '...asked a... general who commanded the corps in Kashmir...'?",
-                options: ["Noun Clause", "Adverb Clause", "Independent Clause", "Adjective (Relative) Clause"],
+                question: "What kind of clause is 'which governs the sharing...' in '...Indus Waters Treaty (IWT), which governs the sharing...'.",
+                options: ["Adverb Clause", "Noun Clause", "Adjective (Relative) Clause", "Independent Clause"],
                 answer: "Adjective (Relative) Clause",
-                type: "mcq",
-                explanation: "The clause starts with the relative pronoun 'who' and modifies the noun 'general', providing more information about him."
+                type: "mcq"
+            },
+             {
+                question: "The clause 'that conventional kinetic strikes may be combined...' functions as what in 'Speculation is running rife that...'?",
+                options: ["Adjective Clause", "Adverb Clause", "Noun Clause (Appositive)", "Independent Clause"],
+                answer: "Noun Clause (Appositive)",
+                type: "mcq"
+            },
+            // Idioms & Vocabulary (April 28 PDF)
+            {
+                question: "What does 'In the midst of' mean?",
+                options: ["Outside of", "Before", "After", "In the middle of"],
+                answer: "In the middle of",
+                type: "mcq"
             },
             {
-                question: "The clause 'because there appears to be no dialogue mechanism' functions as what type of clause?",
-                options: ["Noun Clause", "Adjective Clause", "Adverb Clause", "Independent Clause"],
-                answer: "Adverb Clause",
-                type: "mcq",
-                explanation: "This clause starts with the subordinating conjunction 'because' and explains the reason *why* matters are exacerbated. It modifies the verb phrase 'are exacerbated'."
-            },
-            // --- Idioms & Vocabulary (From April 27 PDF) ---
-            {
-                question: "What does the phrase 'Hitting turbulence' mean?",
-                options: ["Progressing easily", "Flying smoothly", "Experiencing difficulties or instability", "Avoiding problems"],
-                answer: "Experiencing difficulties or instability",
-                type: "mcq",
-                explanation: "Similar to an airplane hitting rough air, this idiom means facing problems or instability."
+                question: "Choose a synonym for 'Alarmingly common'.",
+                options: ["Reassuringly rare", "Comfortingly infrequent", "Disturbingly frequent", "Occasionally seen"],
+                answer: "Disturbingly frequent",
+                type: "mcq"
             },
             {
-                question: "Which is a synonym for 'Creeping back'?",
-                options: ["Disappearing completely", "Vanishing suddenly", "Staying away", "Sneaking back"],
-                answer: "Sneaking back",
-                type: "mcq",
-                explanation: "'Creeping back' implies a slow, subtle, often unwelcome return. 'Sneaking back' captures this sense."
+                question: "An antonym for 'Woefully unprepared' is:",
+                options: ["Sadly lacking", "Deplorably unready", "Ill-equipped", "Fully prepared"],
+                answer: "Fully prepared",
+                type: "mcq"
             },
             {
-                question: "The idiom 'Leaving the door wide open' suggests:",
-                options: ["Preventing entry", "Securing a place", "Creating an opportunity for something (often negative)", "Closing off access"],
-                answer: "Creating an opportunity for something (often negative)",
-                type: "mcq",
-                explanation: "This idiom means making something vulnerable or making it easy for something, often undesirable, to happen."
+                question: "'Rippling through' suggests an effect that is:",
+                options: ["Contained", "Localized", "Isolated", "Spreading gradually"],
+                answer: "Spreading gradually",
+                type: "mcq"
+            },
+             {
+                question: "The 'Backbone of the economy' refers to its:",
+                options: ["Minor part", "Accessory component", "Most important part", "Peripheral element"],
+                answer: "Most important part",
+                type: "mcq"
+            },
+             {
+                question: "If something is 'Strained to the limit', it is:",
+                options: ["Underutilized", "Relaxed", "Plentiful", "Pushed to maximum capacity"],
+                answer: "Pushed to maximum capacity",
+                type: "mcq"
+            },
+             {
+                question: "To 'Raise the spectre of' means to:",
+                options: ["Dispel fear", "Reassure", "Evoke fear of something bad", "Ignore a possibility"],
+                answer: "Evoke fear of something bad",
+                type: "mcq"
+            },
+             {
+                question: "If a memory 'Looms large', it:",
+                options: ["Recedes", "Diminishes", "Fades", "Seems important and worrying"],
+                answer: "Seems important and worrying",
+                type: "mcq"
+            },
+             {
+                question: "What does 'A matter of life and death' signify?",
+                options: ["Trivial", "Unimportant", "Minor", "Extremely serious"],
+                answer: "Extremely serious",
+                type: "mcq"
             },
             {
-                question: "What does 'Rife (with)' mean?",
-                options: ["Lacking", "Devoid of", "Scarce", "Full of something undesirable"],
-                answer: "Full of something undesirable",
-                type: "mcq",
-                explanation: "If a place or situation is 'rife with' something bad, it is widespread or abundant there."
+                question: "To 'Roll out' a plan means to:",
+                options: ["Withdraw it", "Cancel it", "Halt it", "Officially launch or introduce it"],
+                answer: "Officially launch or introduce it",
+                type: "mcq"
             },
             {
-                question: "To 'Validate the worst suspicions' means to:",
-                options: ["Disprove fears", "Alleviate concerns", "Build trust", "Confirm the most negative beliefs"],
-                answer: "Confirm the most negative beliefs",
-                type: "mcq",
-                explanation: "It means providing evidence that confirms the most negative or fearful assumptions someone had."
+                question: "'Without delay' is synonymous with:",
+                options: ["Later", "Eventually", "With delay", "Promptly"],
+                answer: "Promptly",
+                type: "mcq"
             },
             {
-                question: "What is the meaning of 'Seized on'?",
-                options: ["Ignored", "Overlooked", "Disregarded", "Exploited or grabbed eagerly"],
-                answer: "Exploited or grabbed eagerly",
-                type: "mcq",
-                explanation: "To 'seize on' something means to quickly take advantage of it, often an opportunity or an excuse."
+                question: "A 'Dire warning' is:",
+                options: ["A mild caution", "A slight hint", "A very serious or urgent warning", "An optional suggestion"],
+                answer: "A very serious or urgent warning",
+                type: "mcq"
             },
             {
-                question: "Being 'On the front lines' means being:",
-                options: ["Behind the scenes", "In the background", "Safe from harm", "In the most important or dangerous position"],
-                answer: "In the most important or dangerous position",
-                type: "mcq",
-                explanation: "This phrase refers to being in the most active, direct, and often riskiest part of an activity or conflict."
+                question: "The 'Cost of inaction' refers to:",
+                options: ["Benefit of action", "Reward for initiative", "Price of activity", "Negative consequences of not acting"],
+                answer: "Negative consequences of not acting",
+                type: "mcq"
             },
             {
-                question: "Choose the antonym for 'Dispel myths'.",
-                options: ["Debunk", "Refute", "Disprove", "Spread myths"],
-                answer: "Spread myths",
-                type: "mcq",
-                explanation: "'Dispel myths' means to prove them false. The opposite is to 'spread myths' or perpetuate falsehoods."
+                question: "'Half-measures' are typically:",
+                options: ["Decisive actions", "Comprehensive solutions", "Full commitments", "Inadequate steps"],
+                answer: "Inadequate steps",
+                type: "mcq"
             },
             {
-                question: "What does it mean if someone has 'Overplayed its hand'?",
-                options: ["Played cautiously", "Underestimated", "Held back", "Overestimated one's strength, leading to loss"],
-                answer: "Overestimated one's strength, leading to loss",
-                type: "mcq",
-                explanation: "This idiom means someone was too confident in their position or power and took excessive risks, resulting in a worse outcome."
+                question: "To 'Seal the fate of' something usually means to:",
+                options: ["Save it", "Rescue it", "Open possibilities for it", "Determine its negative outcome"],
+                answer: "Determine its negative outcome",
+                type: "mcq"
+            },
+             {
+                question: "If a film is 'Plagued with' boycott calls, it is:",
+                options: ["Free from them", "Unaffected by them", "Blessed with support", "Continuously troubled by them"],
+                answer: "Continuously troubled by them",
+                type: "mcq"
+            },
+             {
+                question: "To 'Pull the plug on' something means to:",
+                options: ["Initiate it", "Start it", "Support it", "Stop it from happening or continuing"],
+                answer: "Stop it from happening or continuing",
+                type: "mcq"
             },
             {
-                question: "A 'Flare-up' refers to:",
-                options: ["Calm", "Resolution", "Abatement", "A sudden outburst or worsening"],
-                answer: "A sudden outburst or worsening",
-                type: "mcq",
-                explanation: "A 'flare-up' is a sudden recurrence or intensification of conflict, violence, or illness."
+                question: "A 'Blanket boycott' is one that is:",
+                options: ["Selective", "Partial", "Limited", "Total or comprehensive"],
+                answer: "Total or comprehensive",
+                type: "mcq"
             },
             {
-                question: "What does 'Much at stake' imply?",
-                options: ["Little risk", "Low stakes", "Nothing to lose", "Significant risk involved"],
-                answer: "Significant risk involved",
-                type: "mcq",
-                explanation: "If there is 'much at stake', it means there is a lot to be potentially lost or gained; the risks are high."
+                question: "To be 'Pitted against' means to be:",
+                options: ["Aligned with", "United with", "Allied with", "Set in competition or conflict with"],
+                answer: "Set in competition or conflict with",
+                type: "mcq"
             },
             {
-                question: "The 'State's wrath' means:",
-                options: ["State approval", "Government support", "Official pardon", "Extreme anger or punishment from the government"],
-                answer: "Extreme anger or punishment from the government",
-                type: "mcq",
-                explanation: "'Wrath' means extreme anger, so the 'state's wrath' refers to severe anger or retribution from the authorities."
+                question: "If something has 'Morphed into' something else, it has:",
+                options: ["Remained the same", "Stayed as it was", "Reverted back", "Transformed or changed into it"],
+                answer: "Transformed or changed into it",
+                type: "mcq"
             },
             {
-                question: "If support 'Refused to wane', it means it:",
-                options: ["Decreased", "Faded", "Diminished", "Persisted strongly"],
-                answer: "Persisted strongly",
-                type: "mcq",
-                explanation: "'Wane' means to decrease or fade. If something refused to wane, it continued strongly without diminishing."
+                question: "'Fraught with danger' means:",
+                options: ["Safe", "Secure", "Risk-free", "Full of risks"],
+                answer: "Full of risks",
+                type: "mcq"
+            },
+             {
+                question: "'Checks and balances' refer to a system of:",
+                options: ["Unchecked power", "Absolute authority", "Mutual controls and safeguards", "Single control"],
+                answer: "Mutual controls and safeguards",
+                type: "mcq"
             },
             {
-                question: "To 'Break the resolve' means to:",
-                options: ["Strengthen resolve", "Encourage", "Bolster determination", "Destroy determination or willpower"],
-                answer: "Destroy determination or willpower",
-                type: "mcq",
-                explanation: "To 'break someone's resolve' means to overcome their firm determination or willpower."
+                question: "To 'Do its citizens a favour' means to:",
+                options: ["Harm the citizens", "Disadvantage the public", "Ignore the people", "Do something beneficial for the people"],
+                answer: "Do something beneficial for the people",
+                type: "mcq"
             },
             {
-                question: "'Time is of the essence' indicates that:",
-                options: ["There is plenty of time", "There is no rush", "Speed is crucial", "You should take your time"],
-                answer: "Speed is crucial",
-                type: "mcq",
-                explanation: "This idiom emphasizes that speed and promptness are very important because time is limited."
+                question: "If social cohesion could 'Lie in tatters', it means it could be:",
+                options: ["Intact", "Strong", "Flourishing", "Completely ruined"],
+                answer: "Completely ruined",
+                type: "mcq"
             },
             {
-                question: "The 'Pull of emotional hysteria' refers to the influence of:",
-                options: ["Rationality", "Calmness", "Reason", "Irrational, uncontrolled emotion"],
-                answer: "Irrational, uncontrolled emotion",
-                type: "mcq",
-                explanation: "'Hysteria' involves excessive, uncontrolled emotion. The 'pull' refers to its strong, often irrational, influence."
+                question: "'Not without reason' implies that something is:",
+                options: ["Unjustifiable", "Without cause", "Arbitrary", "Justifiable or understandable"],
+                answer: "Justifiable or understandable",
+                type: "mcq"
             },
+            // Sentence Rearrangement (Grammar/Vocab Section)
             {
-                question: "What does it mean if someone is 'Sidelined'?",
-                options: ["Promoted", "Included", "Centered", "Moved to a position of less importance"],
-                answer: "Moved to a position of less importance",
-                type: "mcq",
-                explanation: "To be 'sidelined' means to be removed from the center of activity or influence; marginalized."
-            },
-            {
-                question: "To 'Play a role' means to:",
-                options: ["Be uninvolved", "Have no influence", "Stay out", "Contribute or influence"],
-                answer: "Contribute or influence",
-                type: "mcq",
-                explanation: "To 'play a role' in something means to participate in it or have some function or influence."
-            },
-            {
-                question: "What are 'Bridge-builders'?",
-                options: ["Dividers", "Instigators", "Agitators", "People who connect opposing groups"],
-                answer: "People who connect opposing groups",
-                type: "mcq",
-                explanation: "'Bridge-builders' are individuals who work to create understanding and connection between groups or ideas that are in opposition."
-            },
-            {
-                question: "To 'Derail the debate' means to:",
-                options: ["Focus the debate", "Advance discussion", "Facilitate conversation", "Divert a discussion from its main topic"],
-                answer: "Divert a discussion from its main topic",
-                type: "mcq",
-                explanation: "Like a train going off its tracks, 'derailing a debate' means causing it to move away from its intended subject."
-            },
-            // --- Sentence Rearrangement (Based on new PDFs) ---
-            {
-                question: "Rearrange into a coherent sentence: (A) appears to be / (B) because there / (C) Matters are exacerbated / (D) no dialogue mechanism",
-                options: ["C B A D", "B A D C", "C D A B", "A B C D"],
-                answer: "C B A D", // Matters are exacerbated because there appears to be no dialogue mechanism.
+                question: "Rearrange: (A) bilateral agreements / (B) Pakistan reserved / (C) in abeyance / (D) the right to hold / (E) with India",
+                options: ["B D A E C", "B D C A E", "D C A E B", "E C A D B"],
+                answer: "B D A E C", // Pakistan reserved the right to hold bilateral agreements with India in abeyance
                 type: "rearrangement_mcq",
-                parts: {"A": "appears to be", "B": "because there", "C": "Matters are exacerbated", "D": "no dialogue mechanism"}
+                parts: {"A": "bilateral agreements", "B": "Pakistan reserved", "C": "in abeyance", "D": "the right to hold", "E": "with India"}
             },
             {
-                question: "Form a logical sentence: (A) haven't received even one dose / (B) Zero-dose children / (C) of a basic vaccine / (D) are children who",
-                options: ["B C D A", "D A B C", "B D A C", "A C B D"],
-                answer: "B D A C", // Zero-dose children are children who haven't received even one dose of a basic vaccine.
+                question: "Rearrange: (A) is a dire warning / (B) The current heatwave / (C) lies ahead / (D) of what",
+                options: ["B A D C", "D C B A", "A D C B", "B D C A"],
+                answer: "B A D C", // The current heatwave is a dire warning of what lies ahead.
                 type: "rearrangement_mcq",
-                parts: {"A": "haven't received even one dose", "B": "Zero-dose children", "C": "of a basic vaccine", "D": "are children who"}
+                parts: {"A": "is a dire warning", "B": "The current heatwave", "C": "lies ahead", "D": "of what"}
             },
             {
-                question: "Arrange these parts correctly: (A) where trust between / (B) A breakdown in trust / (C) has been destroyed / (D) people or groups / (E) is a situation",
-                options: ["B E A D C", "A D C B E", "B A D C E", "E A B D C"],
-                answer: "B E A D C", // A breakdown in trust is a situation where trust between people or groups has been destroyed.
+                question: "Rearrange: (A) have worked overtime / (B) India's far-right ideologues / (C) to instil animosity",
+                options: ["B C A", "A C B", "C B A", "B A C"],
+                answer: "B A C", // India's far-right ideologues have worked overtime to instil animosity.
                 type: "rearrangement_mcq",
-                parts: {"A": "where trust between", "B": "A breakdown in trust", "C": "has been destroyed", "D": "people or groups", "E": "is a situation"}
+                parts: {"A": "have worked overtime", "B": "India's far-right ideologues", "C": "to instil animosity"}
             },
             {
-                question: "Create a meaningful sentence: (A) from its main topic / (B) To derail the debate / (C) often intentionally / (D) is to divert a discussion",
-                options: ["B C D A", "B D A C", "D A B C", "A C B D"],
-                answer: "B D A C", // To derail the debate is to divert a discussion from its main topic, often intentionally. (Note: 'often intentionally' can also fit at the end)
+                question: "Rearrange: (A) Haj experience / (B) the state needs / (C) is smooth and painless / (D) to ensure the",
+                options: ["B D A C", "D A C B", "B C D A", "A C B D"],
+                answer: "B D A C", // the state needs to ensure the Haj experience is smooth and painless
                 type: "rearrangement_mcq",
-                parts: {"A": "from its main topic", "B": "To derail the debate", "C": "often intentionally", "D": "is to divert a discussion"}
+                parts: {"A": "Haj experience", "B": "the state needs", "C": "is smooth and painless", "D": "to ensure the"}
             },
             {
-                question: "Rearrange the following: (A) or phrase used / (B) Figure of speech / (C) for rhetorical or vivid effect / (D) is a word / (E) in a non-literal sense",
-                options: ["B D A E C", "D A E C B", "B E A D C", "A E C B D"],
-                answer: "B D A E C", // Figure of speech is a word or phrase used in a non-literal sense for rhetorical or vivid effect.
+                question: "Rearrange: (A) is fraught / (B) between the two nations / (C) A cricket match / (D) with danger",
+                options: ["C B A D", "A D C B", "C A D B", "B D C A"],
+                answer: "C B A D", // A cricket match between the two nations is fraught with danger.
                 type: "rearrangement_mcq",
-                parts: {"A": "or phrase used", "B": "Figure of speech", "C": "for rhetorical or vivid effect", "D": "is a word", "E": "in a non-literal sense"}
+                parts: {"A": "is fraught", "B": "between the two nations", "C": "A cricket match", "D": "with danger"}
+            },
+
+            // --- Section 2: General Knowledge MCQs (50 Questions from One Paper PDF) ---
+            // Sample questions - *Actual questions would be more diverse and numerous*
+            {
+                question: "Which of the following countries is landlocked?",
+                options: ["Nigeria", "Kenya", "Sri Lanka", "Uganda"],
+                answer: "Uganda",
+                type: "mcq"
+            },
+            {
+                question: "The capital of Zimbabwe is:",
+                options: ["Harare", "Seoul", "Pretoria", "Lusaka"],
+                answer: "Harare",
+                type: "mcq"
+            },
+            {
+                question: "Pulitzer is an American award given in the field of:",
+                options: ["Sports", "Scuba Diving", "Letters and journalism", "Music Composition"],
+                answer: "Letters and journalism",
+                type: "mcq"
+            },
+            {
+                question: "The cheapest source of electricity generation is generally considered to be:",
+                options: ["Hydel", "Nuclear", "Solar", "Thermal"],
+                answer: "Hydel",
+                type: "mcq"
+            },
+            {
+                question: "The Colosseum, a famous amphitheatre, was built in which city?",
+                options: ["Athens", "Naples", "Rome", "Milan"],
+                answer: "Rome",
+                type: "mcq"
+            },
+             {
+                question: "In which year did the Moorish Kingdom of Granada surrender to Christians?",
+                options: ["1453", "1492", "1526", "1556"],
+                answer: "1492",
+                type: "mcq"
+            },
+            {
+                question: "Blind Dolphins are primarily found in which river system?",
+                options: ["Ganges River", "Nile River", "Indus River", "Yangtze River"],
+                answer: "Indus River", // Adapted for relevance
+                type: "mcq"
+            },
+            {
+                question: "India's first nuclear device test in 1974 was code-named:",
+                options: ["Operation Blue Star", "Operation Gibraltar", "Operation Smiling Buddha", "Operation Shakti"],
+                answer: "Operation Smiling Buddha",
+                type: "mcq"
+            },
+             {
+                question: "Which crop generally has the longest period between cultivation and harvest?",
+                options: ["Cotton", "Sugarcane", "Rice", "Wheat"],
+                answer: "Sugarcane",
+                type: "mcq"
+            },
+            {
+                question: "The Farakka Barrage on the river Ganga is a point of dispute primarily between:",
+                options: ["India and Pakistan", "India and Nepal", "India and China", "India and Bangladesh"],
+                answer: "India and Bangladesh",
+                type: "mcq"
+            },
+            {
+                question: "What is 'Big Ben'?",
+                options: ["A famous clock tower in London", "A bridge in London", "A museum in London", "A royal palace"],
+                answer: "A famous clock tower in London",
+                type: "mcq"
+            },
+            {
+                question: "Gazprom is a major energy company associated with which country?",
+                options: ["USA", "Germany", "Russia", "Saudi Arabia"],
+                answer: "Russia",
+                type: "mcq"
+            },
+            {
+                question: "The First Crusade resulted in the capture of Jerusalem by European forces in which year?",
+                options: ["1095", "1099", "1115", "1187"],
+                answer: "1099",
+                type: "mcq"
+            },
+            {
+                question: "The 'Ivy League' refers to a group of prestigious universities primarily located in:",
+                options: ["California", "The United Kingdom", "The Northeastern USA", "Canada"],
+                answer: "The Northeastern USA",
+                type: "mcq"
+            },
+            {
+                question: "The Uighur people are a Muslim ethnic group primarily associated with which province of China?",
+                options: ["Tibet", "Xinjiang", "Guangdong", "Sichuan"],
+                answer: "Xinjiang",
+                type: "mcq"
+            },
+            {
+                question: "'Ikebana' is the Japanese art of:",
+                options: ["Flower arrangement", "Sword fighting", "Calligraphy", "Tea ceremony"],
+                answer: "Flower arrangement",
+                type: "mcq"
+            },
+            {
+                question: "The Gestapo was the notorious secret police force of which country?",
+                options: ["Soviet Union", "Italy", "Nazi Germany", "Imperial Japan"],
+                answer: "Nazi Germany",
+                type: "mcq"
+            },
+             {
+                question: "Which set represents the primary colours of light (additive)?",
+                options: ["Red, Yellow, Blue", "Red, Blue, Green", "Cyan, Magenta, Yellow", "Red, Green, Yellow"],
+                answer: "Red, Blue, Green",
+                type: "mcq"
+            },
+            {
+                question: "The 'Holocaust' refers to the genocide committed during World War II, primarily targeting:",
+                options: ["Germans", "Russians", "Jews", "Japanese"],
+                answer: "Jews",
+                type: "mcq"
+            },
+            {
+                question: "A writ commanding a person detaining another to produce the prisoner is called:",
+                options: ["Writ of Mandamus", "Writ of Certiorari", "Writ of Prohibition", "Writ of Habeas Corpus"],
+                answer: "Writ of Habeas Corpus",
+                type: "mcq"
+            },
+             {
+                question: "Which civilization flourished along the banks of the Tigris and Euphrates rivers?",
+                options: ["Indus Valley", "Egyptian", "Mesopotamian (Sumerian, Babylonian)", "Greek"],
+                answer: "Mesopotamian (Sumerian, Babylonian)",
+                type: "mcq"
+            },
+             {
+                question: "Egypt nationalized the Suez Canal in which year?",
+                options: ["1950", "1954", "1956", "1960"],
+                answer: "1956",
+                type: "mcq"
+            },
+            {
+                question: "'Armageddon' often refers to:",
+                options: ["The creation of the world", "A place of a prophesied final battle", "A peace treaty", "A historical period"],
+                answer: "A place of a prophesied final battle",
+                type: "mcq"
+            },
+            {
+                question: "Which country's flag features a prominent maple leaf?",
+                options: ["USA", "Australia", "Canada", "New Zealand"],
+                answer: "Canada",
+                type: "mcq"
+            },
+            {
+                question: "Skylab, launched in 1973, was a space laboratory belonging to which country?",
+                options: ["USSR (Soviet Union)", "USA", "United Kingdom", "China"],
+                answer: "USA",
+                type: "mcq"
+            },
+             {
+                question: "The majority of the world's Kurdish population resides across several countries, but the largest number is found in:",
+                options: ["Iraq", "Syria", "Iran", "Turkey"],
+                answer: "Turkey",
+                type: "mcq"
+            },
+            {
+                question: "The Universal Declaration of Human Rights was adopted by the UN General Assembly on:",
+                options: ["December 10, 1945", "December 10, 1948", "June 26, 1945", "October 24, 1945"],
+                answer: "December 10, 1948",
+                type: "mcq"
+            },
+             {
+                question: "Which is the largest continent by area?",
+                options: ["Africa", "North America", "Asia", "South America"],
+                answer: "Asia",
+                type: "mcq"
+            },
+            {
+                question: "The Gobi Desert is primarily located in which two countries?",
+                options: ["China and Russia", "China and Mongolia", "India and Pakistan", "Kazakhstan and Uzbekistan"],
+                answer: "China and Mongolia",
+                type: "mcq"
+            },
+            {
+                question: "Which is the deepest ocean in the world?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean",
+                type: "mcq"
+            },
+            {
+                question: "The Strait of Gibraltar connects the Atlantic Ocean with which sea?",
+                options: ["Black Sea", "Red Sea", "Mediterranean Sea", "Baltic Sea"],
+                answer: "Mediterranean Sea",
+                type: "mcq"
+            },
+            {
+                question: "The Panama Canal connects which two oceans?",
+                options: ["Atlantic and Indian", "Indian and Pacific", "Arctic and Atlantic", "Atlantic and Pacific"],
+                answer: "Atlantic and Pacific",
+                type: "mcq"
+            },
+            {
+                question: "Angel Falls, the world's highest uninterrupted waterfall, is located in which country?",
+                options: ["Brazil", "USA", "Venezuela", "Canada"],
+                answer: "Venezuela",
+                type: "mcq"
+            },
+            {
+                question: "The River Nile flows into which body of water?",
+                options: ["Red Sea", "Indian Ocean", "Mediterranean Sea", "Atlantic Ocean"],
+                answer: "Mediterranean Sea",
+                type: "mcq"
+            },
+            {
+                question: "Mount Everest, the world's highest peak, is located in which mountain range?",
+                options: ["Andes", "Alps", "Himalayas", "Rockies"],
+                answer: "Himalayas",
+                type: "mcq"
+            },
+             {
+                question: "What is the currency of Japan?",
+                options: ["Won", "Yuan", "Yen", "Dollar"],
+                answer: "Yen",
+                type: "mcq"
+            },
+            {
+                question: "Constantinople is the former name of which modern city?",
+                options: ["Rome", "Athens", "Istanbul", "Cairo"],
+                answer: "Istanbul",
+                type: "mcq"
+            },
+            {
+                question: "The 'Bundestag' is the name of the parliament of which country?",
+                options: ["France", "Germany", "Austria", "Switzerland"],
+                answer: "Germany",
+                type: "mcq"
+            },
+            {
+                question: "Reuters is a major international news agency headquartered in which city?",
+                options: ["New York", "Paris", "London", "Berlin"],
+                answer: "London",
+                type: "mcq"
+            },
+            {
+                question: "The Nobel Peace Prize is awarded in which city?",
+                options: ["Stockholm, Sweden", "Oslo, Norway", "Geneva, Switzerland", "Helsinki, Finland"],
+                answer: "Oslo, Norway",
+                type: "mcq"
+            },
+            {
+                question: "The Durand Line forms the border between which two countries?",
+                options: ["Pakistan and India", "Pakistan and Iran", "Pakistan and Afghanistan", "India and China"],
+                answer: "Pakistan and Afghanistan",
+                type: "mcq"
+            },
+            {
+                question: "Nelson Mandela was the former President of which country?",
+                options: ["Nigeria", "Kenya", "Ghana", "South Africa"],
+                answer: "South Africa",
+                type: "mcq"
+            },
+            {
+                question: "Which international organization uses the acronym UNICEF?",
+                options: ["World Health Organization", "United Nations Educational, Scientific and Cultural Organization", "United Nations Children's Fund", "International Monetary Fund"],
+                answer: "United Nations Children's Fund",
+                type: "mcq"
+            },
+            {
+                question: "The headquarters of the International Court of Justice (ICJ) is located in:",
+                options: ["New York, USA", "Geneva, Switzerland", "The Hague, Netherlands", "Brussels, Belgium"],
+                answer: "The Hague, Netherlands",
+                type: "mcq"
+            },
+             {
+                question: "Which sport is associated with Wimbledon?",
+                options: ["Golf", "Tennis", "Cricket", "Football"],
+                answer: "Tennis",
+                type: "mcq"
+            },
+            {
+                question: "The study of earthquakes is called:",
+                options: ["Geology", "Meteorology", "Seismology", "Volcanology"],
+                answer: "Seismology",
+                type: "mcq"
+            },
+             {
+                question: "Which planet is known as the 'Red Planet'?",
+                options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars",
+                type: "mcq"
+            },
+            {
+                question: "What is the chemical symbol for Gold?",
+                options: ["Go", "Ag", "Au", "Gd"],
+                answer: "Au",
+                type: "mcq"
+            },
+             {
+                question: "Who developed the theory of relativity?",
+                options: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Nikola Tesla"],
+                answer: "Albert Einstein",
+                type: "mcq"
+            },
+            {
+                question: "What unit is used to measure electric current?",
+                options: ["Volt", "Watt", "Ohm", "Ampere"],
+                answer: "Ampere",
+                type: "mcq"
             }
         ];
 
@@ -482,6 +797,7 @@
         const prevQuestionBtn = document.getElementById('prev-question-btn');
         const submitQuizBtn = document.getElementById('submit-quiz-btn');
         const timerDisplay = document.getElementById('timer-display');
+        const progressIndicator = document.getElementById('progress-indicator'); // Added
         const resultNameEl = document.getElementById('result-name');
         const resultTimeEl = document.getElementById('result-time');
         const resultAttemptedEl = document.getElementById('result-attempted');
@@ -499,10 +815,11 @@
         let userAnswers = new Array(quizData.length).fill(null);
         let score = 0;
         let timerInterval;
-        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let timeLeft = 25 * 60; // 25 minutes for 100 questions
         let startTime;
         let endTime;
         let studentName = '';
+        let quizSubmitted = false; // Flag to prevent multiple submissions
 
         // --- Utility Functions ---
         function shuffleArray(array) {
@@ -527,21 +844,35 @@
         startQuizBtn.addEventListener('click', startQuiz);
         nextQuestionBtn.addEventListener('click', nextQuestion);
         prevQuestionBtn.addEventListener('click', prevQuestion);
-        submitQuizBtn.addEventListener('click', submitQuiz);
+        submitQuizBtn.addEventListener('click', () => submitQuiz(false)); // Manual submission
 
         // Prevent context menu (right-click)
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Optional: Disable specific keys like F12 (Inspect Element)
+        // Anti-cheating measures
         document.addEventListener('keydown', event => {
-            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) || (event.ctrlKey && event.shiftKey && (event.key === 'J' || event.key === 'j')) || (event.ctrlKey && (event.key === 'U' || event.key === 'u'))) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) || (event.ctrlKey && (event.key === 'U' || event.key === 'u'))) {
                 event.preventDefault();
             }
-             // Disable Ctrl+C, Ctrl+X, Ctrl+A
+             // Disable Ctrl+C, Ctrl+X, Ctrl+A (Copy, Cut, Select All)
             if (event.ctrlKey && (event.key === 'c' || event.key === 'x' || event.key === 'a')) {
                  event.preventDefault();
             }
         });
+         // Prevent printing
+        window.addEventListener('beforeprint', (event) => {
+            event.preventDefault();
+            alert('Printing is disabled for this quiz.');
+        });
+         // Detect visibility change (tab switching) - optional, can be annoying
+        // document.addEventListener('visibilitychange', () => {
+        //     if (document.hidden && timerInterval && !quizSubmitted) {
+        //         // Optional: Penalize or warn user
+        //         console.log("User switched tabs during quiz.");
+        //         // alert("Switching tabs during the quiz is discouraged.");
+        //     }
+        // });
 
 
         // --- Quiz Logic ---
@@ -551,6 +882,7 @@
                 alert("Please enter your name to start the quiz.");
                 return;
             }
+            quizSubmitted = false; // Reset submission flag
             nameEntrySection.classList.add('hidden');
             quizSection.classList.remove('hidden');
             startTime = new Date();
@@ -566,11 +898,13 @@
             optionsContainer.innerHTML = ''; // Clear previous options
             rearrangementPartsDisplay.classList.add('hidden'); // Hide rearrangement parts by default
             rearrangementPartsList.innerHTML = ''; // Clear previous parts list
+            progressIndicator.textContent = `Question ${index + 1} of ${quizData.length}`; // Update progress
 
             if (question.type === 'mcq' || question.type === 'rearrangement_mcq') {
                 // Display parts list for rearrangement questions
                 if (question.type === 'rearrangement_mcq' && question.parts) {
                     rearrangementPartsDisplay.classList.remove('hidden');
+                    rearrangementPartsDisplay.classList.add('rearrangement-parts'); // Add class for styling
                     for (const key in question.parts) {
                         const listItem = document.createElement('li');
                         listItem.innerHTML = `<strong>(${key})</strong> ${question.parts[key]}`;
@@ -582,7 +916,13 @@
                 question.options.forEach(option => {
                     const button = document.createElement('button');
                     button.textContent = option;
-                    button.classList.add('block', 'w-full', 'text-left', 'p-3', 'border', 'border-gray-300', 'rounded-md', 'quiz-option', 'text-gray-700', 'hover:bg-blue-100', 'hover:border-blue-400');
+                    // Add Tailwind classes for styling options
+                    button.classList.add(
+                        'block', 'w-full', 'text-left', 'p-3', 'border', 'border-gray-300',
+                        'rounded-md', 'quiz-option', 'text-gray-700', 'hover:bg-blue-100',
+                        'hover:border-blue-400', 'focus:outline-none', 'focus:ring-2',
+                        'focus:ring-blue-300', 'transition', 'duration-150', 'ease-in-out'
+                    );
                     button.onclick = () => selectAnswer(index, option, button);
 
                     // If an answer was previously selected for this question, highlight it
@@ -598,6 +938,8 @@
 
 
         function selectAnswer(index, answer, selectedButton) {
+            if (quizSubmitted) return; // Don't allow changes after submission
+
             // Deselect previously selected option for this question
             const previouslySelected = optionsContainer.querySelector('.selected');
             if (previouslySelected) {
@@ -607,9 +949,6 @@
             // Select the new option
             selectedButton.classList.add('selected');
             userAnswers[index] = answer; // Store the selected option value/text
-
-            // Optional: Automatically move to the next question after a brief delay
-            // setTimeout(nextQuestion, 300);
         }
 
 
@@ -625,6 +964,7 @@
         }
 
         function nextQuestion() {
+             if (quizSubmitted) return;
             if (currentQuestionIndex < quizData.length - 1) {
                 currentQuestionIndex++;
                 displayQuestion(currentQuestionIndex);
@@ -632,6 +972,7 @@
         }
 
         function prevQuestion() {
+            if (quizSubmitted) return;
              if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion(currentQuestionIndex);
@@ -641,6 +982,10 @@
 
         function startTimer() {
             timerInterval = setInterval(() => {
+                if (quizSubmitted) { // Stop timer if quiz was submitted manually
+                     clearInterval(timerInterval);
+                     return;
+                }
                 timeLeft--;
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
@@ -649,21 +994,31 @@
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     timerDisplay.textContent = "Time's up!";
-                    submitQuiz(); // Submit automatically
+                    submitQuiz(true); // Auto-submit
                 }
             }, 1000);
         }
 
-        function submitQuiz() {
-            if (timerInterval) { // Check if timer is still running
-                 clearInterval(timerInterval); // Stop the timer if manually submitted
+        function submitQuiz(isAutoSubmit = false) {
+            if (quizSubmitted) return; // Prevent multiple submissions
+            quizSubmitted = true; // Set flag
+
+            if (timerInterval) {
+                 clearInterval(timerInterval);
             }
             endTime = new Date();
+
+             if (isAutoSubmit) {
+                alert("Time's up! Your quiz is being submitted automatically.");
+            }
 
             // Disable all quiz buttons after submission
             const buttons = quizSection.querySelectorAll('button');
             buttons.forEach(button => button.disabled = true);
-            optionsContainer.querySelectorAll('.quiz-option').forEach(opt => opt.onclick = null); // Remove click handlers
+            optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.onclick = null; // Remove click handlers
+                opt.classList.add('cursor-not-allowed', 'opacity-75'); // Visual indication
+            });
 
 
             calculateResults();
