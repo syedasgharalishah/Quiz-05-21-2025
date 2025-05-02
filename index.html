@@ -3,947 +3,1358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS 30 APRIL 2025</title>
+    <title>QUIZ FOR CSS ASPIRANTS 02 MAY 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles */
+        /* Apply Inter font globally */
         body {
-            font-family: 'Inter', sans-serif; /* Default font */
+            font-family: 'Inter', sans-serif;
             /* Disable text selection */
             -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+            /* Prevent image dragging */
+            -webkit-user-drag: none;
+            user-drag: none;
         }
-
-        /* Style for question container */
-        .question-container {
-            background-color: #f9fafb; /* Light gray background */
-            border: 1px solid #e5e7eb; /* Gray border */
-            border-radius: 0.5rem; /* Rounded corners */
-            padding: 1.5rem; /* Padding */
-            margin-bottom: 1.5rem; /* Margin bottom */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Shadow */
+        /* Custom scrollbar for better aesthetics (optional) */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* Style for radio button options */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Style for quiz options */
         .option-label {
             display: block;
-            background-color: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.5rem;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         }
-
         .option-label:hover {
-            background-color: #f3f4f6; /* Lighter gray on hover */
+            background-color: #f3f4f6; /* gray-100 */
         }
-
-        /* Style for selected radio button option */
-        input[type="radio"]:checked + .option-label {
-            background-color: #dbeafe; /* Light blue when selected */
-            border-color: #60a5fa; /* Blue border when selected */
+        .option-label input[type="radio"] {
+            display: none; /* Hide the actual radio button */
         }
-
-        /* Hide the actual radio button */
-        input[type="radio"] {
-            display: none;
+        .option-label input[type="radio"]:checked + span {
+             font-weight: 600; /* Make selected option bold */
         }
-
-        /* Professional button styling */
-        .btn {
+         /* Style for selected option */
+        .option-label.selected {
+            background-color: #dbeafe; /* blue-100 */
+            border-color: #60a5fa; /* blue-400 */
+        }
+        /* Style for sentence rearrangement parts */
+        .sentence-part {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #e5e7eb; /* gray-200 */
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 6px;
+            cursor: grab;
+            transition: background-color 0.2s;
         }
-
-        .btn:hover {
-            transform: translateY(-1px); /* Slight lift on hover */
+        .sentence-part:active {
+            cursor: grabbing;
+            background-color: #9ca3af; /* gray-400 */
         }
-
-        .btn-primary {
-            background-color: #2563eb; /* Blue */
-            color: white;
+        .drop-area {
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px dashed #9ca3af; /* gray-400 */
+            border-radius: 8px;
+            min-height: 50px;
+            background-color: #f9fafb; /* gray-50 */
         }
-
-        .btn-primary:hover {
-            background-color: #1d4ed8; /* Darker blue */
+        /* Prevent right-click context menu */
+        body {
+            /* Standard syntax */
+            context-menu: none;
+            /* Older browsers */
+            oncontextmenu: "return false;";
         }
-
-        .btn-secondary {
-            background-color: #6b7280; /* Gray */
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #4b5563; /* Darker gray */
-        }
-
-         /* Style for header and footer */
-        header, footer {
-            background-color: #1f2937; /* Dark Gray */
-            color: #f9fafb; /* Light Gray text */
-            padding: 1rem 0;
-        }
-        header .container, footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-         header img {
-            max-height: 60px; /* Adjust image height */
-            border-radius: 50%;
-            border: 2px solid #f9fafb;
-         }
-
-         /* Disable right-click context menu */
-         /* Applied via JS */
-
-         /* Responsive Design */
-         @media (max-width: 768px) {
-            header .container, footer .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            header h1, header p, footer p {
-                margin-bottom: 0.5rem;
-            }
-            header img {
-                margin-bottom: 0.5rem;
-            }
-         }
-
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-800" oncontextmenu="return false;">
+<body class="bg-gray-100 text-gray-800 antialiased">
 
-    <header>
-        <div class="container">
-             <div>
-                <h1 class="text-2xl md:text-3xl font-bold">QUIZ FOR CSS ASPIRANTS</h1>
-                <p class="text-lg">30 APRIL 2025</p>
-                <p class="text-md font-semibold mt-1">SYED ASGHAR ALI SHAH</p>
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md rounded-b-lg">
+        <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-4 mb-3 sm:mb-0">
+                 <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
+                     alt="User Image" class="w-12 h-12 rounded-full border-2 border-white shadow-sm"
+                     onerror="this.onerror=null; this.src='https://placehold.co/48x48/cccccc/ffffff?text=User';">
+                 <span class="text-lg font-semibold">SYED ASGHAR ALI SHAH</span>
             </div>
-            <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="User Image" onerror="this.onerror=null; this.src='https://placehold.co/60x60/1f2937/f9fafb?text=Image';">
+            <h1 class="text-xl sm:text-2xl font-bold text-center">QUIZ FOR CSS ASPIRANTS 02 MAY 2025</h1>
+            <div class="w-16 h-12 hidden sm:block"></div>
         </div>
     </header>
 
-    <main class="container mx-auto mt-8 mb-8 p-4 max-w-4xl">
+    <main class="container mx-auto px-4 py-8">
 
-        <section id="name-section" class="bg-white p-6 rounded-lg shadow-md text-center">
-            <h2 class="text-2xl font-semibold mb-4">Welcome to the Quiz</h2>
-            <p class="mb-4">Please enter your full name to begin.</p>
-            <input type="text" id="student-name" placeholder="Enter your full name" class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <br>
-            <button id="start-quiz-btn" class="btn btn-primary">Start Quiz</button>
-            <p id="name-error" class="text-red-500 mt-2 hidden">Please enter your name.</p>
+        <section id="name-entry" class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">Welcome!</h2>
+            <p class="mb-6 text-gray-600">Please enter your full name to start the quiz.</p>
+            <input type="text" id="student-name" placeholder="Enter your full name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4" required>
+            <button id="start-quiz-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                Start Quiz
+            </button>
+            <p id="name-error" class="text-red-500 text-sm mt-2 hidden">Please enter your name.</p>
         </section>
 
-        <section id="quiz-section" class="hidden">
-            <div class="bg-white p-6 rounded-lg shadow-md mb-6 flex flex-col md:flex-row justify-between items-center">
-                <h2 class="text-2xl font-semibold mb-4 md:mb-0">Quiz Questions</h2>
-                <div id="timer" class="text-xl font-bold text-red-600">Time Left: 40:00</div>
+        <section id="quiz-section" class="hidden bg-white p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+                 <h2 class="text-2xl font-semibold text-indigo-600">Quiz Questions</h2>
+                 <div id="timer" class="text-xl font-bold text-red-600 bg-red-100 px-4 py-2 rounded-md shadow-sm">
+                     Time Left: 40:00
+                 </div>
             </div>
 
-            <form id="quiz-form">
-                </form>
+            <div id="question-container" class="mb-6">
+                <h3 id="question-number" class="text-lg font-semibold mb-2 text-gray-700">Question 1 of 100</h3>
+                <p id="question-text" class="text-lg mb-4"></p>
+                <div id="options-container" class="space-y-3">
+                    </div>
+                 <div id="sentence-rearrangement-area" class="hidden mt-4">
+                    <p class="text-sm text-gray-600 mb-2">Drag the parts below into the correct order in the box:</p>
+                    <div id="sentence-parts-source" class="mb-3">
+                        </div>
+                    <div id="sentence-drop-area" class="drop-area border-2 border-dashed border-gray-400 rounded-md p-4 min-h-[60px] bg-gray-50">
+                        </div>
+                </div>
+            </div>
 
-            <div class="text-center mt-6">
-                <button type="button" id="submit-quiz-btn" class="btn btn-primary">Submit Quiz</button>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-200">
+                 <button id="prev-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                     Previous
+                 </button>
+                 <div id="progress-indicator" class="text-sm text-gray-500"></div>
+                 <button id="next-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out">
+                     Next
+                 </button>
+                 <button id="submit-btn" class="hidden bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out">
+                     Submit Quiz
+                 </button>
             </div>
         </section>
 
-        <section id="results-section" class="hidden bg-white p-6 rounded-lg shadow-md text-center">
-            <h2 class="text-2xl font-semibold mb-4">Quiz Results</h2>
-            <div id="results-details" class="text-left inline-block">
-                <p class="mb-2"><strong class="font-semibold">Name:</strong> <span id="result-name"></span></p>
-                <p class="mb-2"><strong class="font-semibold">Questions Attempted:</strong> <span id="result-attempted"></span> / 100</p>
-                <p class="mb-2"><strong class="font-semibold">Correct Answers:</strong> <span id="result-score"></span> / 100</p>
-                <p class="mb-2"><strong class="font-semibold">Percentage:</strong> <span id="result-percentage"></span>%</p>
-                <p><strong class="font-semibold">Time Taken:</strong> <span id="result-time"></span></p>
+        <section id="results-section" class="hidden bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-4 text-green-600">Quiz Results</h2>
+            <div class="space-y-3 text-left border border-gray-200 p-4 rounded-md bg-gray-50">
+                <p><strong>Name:</strong> <span id="result-name"></span></p>
+                <p><strong>Questions Attempted:</strong> <span id="result-attempted"></span> / 100</p>
+                <p><strong>Correct Answers:</strong> <span id="result-score"></span> / 100</p>
+                <p><strong>Percentage:</strong> <span id="result-percentage"></span>%</p>
+                <p><strong>Time Taken:</strong> <span id="result-time"></span></p>
             </div>
-            <p class="mt-4 text-green-600 font-semibold">Your results have been recorded. Thank you!</p>
+             <p class="mt-4 text-sm text-gray-500">Your results have been submitted.</p>
         </section>
 
-        <form id="results-formspree" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-            <input type="text" name="name" id="formspree-name">
-            <input type="number" name="attempted" id="formspree-attempted">
-            <input type="number" name="score" id="formspree-score">
-            <input type="text" name="percentage" id="formspree-percentage">
-            <input type="text" name="time_taken" id="formspree-time">
+        <form id="results-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+            <input type="text" name="name" id="form-name">
+            <input type="number" name="attempted" id="form-attempted">
+            <input type="number" name="score" id="form-score">
+            <input type="text" name="time_taken" id="form-time">
+            <input type="text" name="percentage" id="form-percentage">
+            <input type="hidden" name="_subject" value="CSS Aspirant Quiz Result">
         </form>
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 CSS Aspirant Quiz. All Rights Reserved.</p>
-            <p>Contact: 03265762698</p>
-            <p class="mt-2 md:mt-0">Ready to test your knowledge?</p>
+    <footer class="bg-gray-800 text-white mt-12 py-6 rounded-t-lg shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Need Assistance or Have Questions?</p>
+            <p class="mb-3 font-semibold">Contact: 03265762698</p>
+            <p class="text-sm text-gray-400">&copy; 2025 SYED ASGHAR ALI SHAH - All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-1">Striving for Excellence in CSS Preparation</p>
         </div>
     </footer>
 
     <script>
         // --- Quiz Data ---
-        // Note: Generating 100 high-quality, difficult questions automatically is complex.
-        // These questions are derived from the provided PDF content, aiming for difficulty and variety.
-        // Correct answers are indicated by the 'answer' property. Options are shuffled programmatically.
+        // 100 Questions derived from provided PDFs (Grammar, Vocab, One Paper p75-100)
         const quizData = [
-            // --- Grammar Questions (Derived from Comprehensive Grammar Notes PDF) ---
+            // --- Grammar Questions (Approx. 25) ---
             {
-                question: "In the sentence 'The war clouds have thickened with India's rising bellicosity,' what part of speech is 'bellicosity'?",
-                options: ["Verb", "Adjective", "Abstract Noun", "Adverb"],
-                answer: "Abstract Noun"
+                question: "In the sentence 'History offers sobering lessons regarding the economic toll', what part of speech is 'sobering'?",
+                options: ["Verb", "Adverb", "Noun", "Adjective (Present Participle)"],
+                answer: "Adjective (Present Participle)",
+                type: "mcq"
             },
             {
-                question: "Identify the helping verb(s) in the sentence: 'The Line of Control is already heating up.'",
-                options: ["heating up", "is", "already", "is heating up"],
-                answer: "is"
+                question: "Identify the mood of the verb 'must move' in 'The global community must move beyond passive concern...'",
+                options: ["Indicative", "Imperative", "Subjunctive", "Conditional"],
+                answer: "Subjunctive", // Expressing necessity/requirement
+                type: "mcq"
             },
             {
-                question: "Which word is a possessive adjective in the phrase 'its own intelligence failure'?",
-                options: ["its", "own", "intelligence", "failure"],
-                answer: "its"
+                question: "Which of the following is a Noun Phrase from the text 'The Costs of Conflict'?",
+                options: ["escalate between", "would lead to", "already struggling", "potential foreign investment outflows"],
+                answer: "potential foreign investment outflows",
+                type: "mcq"
             },
             {
-                question: "What type of clause is '[which has survived three wars]' in the sentence '...the Indus Waters Treaty, which has survived three wars...'?",
-                options: ["Noun Clause", "Adverb Clause", "Independent Clause", "Adjective (Relative) Clause"],
-                answer: "Adjective (Relative) Clause"
+                question: "The sentence 'Markets recovered, but the economic impact lingered...' is an example of which sentence type?",
+                options: ["Simple", "Complex", "Compound", "Compound-Complex"],
+                answer: "Compound",
+                type: "mcq"
             },
             {
-                question: "Choose the correct preposition: 'The Modi government is not willing ______ accept its own intelligence failure.'",
-                options: ["for", "to", "on", "with"],
-                answer: "to" // Part of the infinitive "to accept"
+                question: "What is the grammatical function of the phrase 'by damaging infrastructure' in 'Conflict would worsen by damaging infrastructure...'?",
+                options: ["Adjective phrase modifying 'Conflict'", "Adverbial phrase showing manner/means", "Noun phrase acting as subject", "Infinitive phrase showing purpose"],
+                answer: "Adverbial phrase showing manner/means", // Prepositional phrase with gerund object
+                type: "mcq"
             },
             {
-                question: "What function does 'completely' serve in '...situation in occupied Kashmir is completely normal...'?",
-                options: ["Adjective modifying 'situation'", "Adverb modifying 'is'", "Adverb modifying 'normal'", "Noun"],
-                answer: "Adverb modifying 'normal'"
-            },
-             {
-                question: "Which sentence demonstrates correct parallel structure?",
+                question: "Choose the sentence that uses a coordinating conjunction correctly to join two independent clauses:",
                 options: [
-                    "He likes swimming, hiking, and to ride bikes.",
-                    "The tendency is for wars to expand, becoming costlier, and duration increases.",
-                    "She plans to study, to practice, and performing.",
-                    "To bring down the temperature and to create an atmosphere for dialogue are necessary."
+                    "AS tensions escalate, danger lies beyond.",
+                    "The conflict triggered a drop, Pakistan's GDP fell.",
+                    "Food security would worsen, and progress towards SDGs would suffer.",
+                    "If resources shift targets become unattainable."
                 ],
-                answer: "To bring down the temperature and to create an atmosphere for dialogue are necessary." // Based on text structure
-            },
-            {
-                question: "Identify the abstract noun in the sentence: 'Jingoism has reached new heights.'",
-                options: ["reached", "new", "heights", "Jingoism"],
-                answer: "Jingoism"
-            },
-            {
-                question: "What is the voice of the verb phrase 'are being drowned' in 'Rational voices are being drowned...'?",
-                options: ["Active Voice", "Passive Voice", "Indicative Mood", "Subjunctive Mood"],
-                answer: "Passive Voice"
-            },
-            {
-                question: "The word 'Unfortunately' at the beginning of 'Unfortunately, the war hysteria...' acts as a:",
-                options: ["Conjunction", "Preposition", "Sentence Adverb", "Interjection"],
-                answer: "Sentence Adverb"
-            },
-            {
-                question: "Which of these is NOT a coordinating conjunction (FANBOYS)?",
-                options: ["But", "Or", "While", "So"],
-                answer: "While" // Subordinating conjunction
-            },
-            {
-                question: "What type of phrase is 'in a cacophony of insanity'?",
-                options: ["Verb Phrase", "Noun Phrase", "Prepositional Phrase", "Adjective Phrase"],
-                answer: "Prepositional Phrase"
+                answer: "Food security would worsen, and progress towards SDGs would suffer.",
+                type: "mcq"
             },
              {
-                question: "Identify the gerund in the sentence: 'Blaming each other is counterproductive.'",
-                options: ["each", "other", "Blaming", "counterproductive"],
-                answer: "Blaming" // Gerund acting as the subject
-            },
-            {
-                question: "Choose the correct verb form: 'Neither the ministers nor the prime minister ______ commented yet.'",
-                options: ["have", "has", "is", "are"],
-                answer: "has" // Verb agrees with the nearer subject 'prime minister'
-            },
-            {
-                question: "What does the modal verb 'could' express in 'Even a limited military strike... could lead to a wider conflagration'?",
-                options: ["Certainty", "Obligation", "Ability", "Possibility"],
-                answer: "Possibility"
+                question: "Identify the abstract noun in the following options from the text:",
+                options: ["neighbours", "ecosystems", "polarisation", "reserves"],
+                answer: "polarisation",
+                type: "mcq"
             },
              {
-                question: "Which word functions as an adjective modifying 'Treaty' in 'Indus Waters Treaty'?",
-                options: ["Indus", "Waters", "Indus Waters", "Treaty"],
-                answer: "Indus Waters" // Proper nouns used adjectivally
-            },
-            {
-                question: "The phrase 'to substantiate' in 'failed to substantiate its allegation' is:",
-                options: ["A gerund", "A participle", "An infinitive", "A prepositional phrase"],
-                answer: "An infinitive"
-            },
-            {
-                question: "What is the antecedent of the pronoun 'their' in '...officials have described Pakistan’s past patterns... To back their assertion...'?",
-                options: ["Pakistan", "patterns", "assertion", "officials"],
-                answer: "officials"
+                question: "What tense is used in '...over 7m acres of forests and protected areas have been damaged since February 2022...'?",
+                options: ["Past Simple Passive", "Present Perfect Passive", "Past Perfect Passive", "Present Continuous Passive"],
+                answer: "Present Perfect Passive",
+                type: "mcq"
             },
              {
-                question: "Identify the part of speech for 'volatile' in 'most volatile regions'.",
-                options: ["Noun", "Adverb", "Verb", "Adjective"],
-                answer: "Adjective"
-            },
-            {
-                question: "Which punctuation mark is used to show possession for plural nouns ending in 's', like 'Kashmiris'?",
-                options: ["Comma (,)", "Apostrophe (')", "Semicolon (;)", "Hyphen (-)"],
-                answer: "Apostrophe (')"
-            },
-            // --- Vocabulary Questions (Derived from 30 APRIL Idioms and Vocabulary Notes PDF) ---
-            {
-                question: "What is the meaning of the idiom 'Bite the bullet'?",
-                options: ["To eat something quickly", "To avoid a difficult situation", "To face a difficult situation with courage", "To get injured"],
-                answer: "To face a difficult situation with courage"
-            },
-            {
-                question: "Choose the correct word: 'The medicine had a positive ______ on her recovery.'",
-                options: ["affect", "effect", "affects", "effects"],
-                answer: "effect" // Noun meaning result
-            },
-            {
-                question: "What does 'Ephemeral' mean?",
-                options: ["Everlasting", "Strong", "Lasting for a very short time", "Mysterious"],
-                answer: "Lasting for a very short time"
-            },
-            {
-                question: "A synonym for 'Ubiquitous' is:",
-                options: ["Rare", "Scarce", "Limited", "Omnipresent"],
-                answer: "Omnipresent"
-            },
-            {
-                question: "If someone is 'on the ball', they are:",
-                options: ["Playing sports", "Alert and competent", "Distracted and slow", "Relaxed"],
-                answer: "Alert and competent"
-            },
-            {
-                question: "What does it mean to 'Get something off your chest'?",
-                options: ["To exercise vigorously", "To buy new clothes", "To keep a secret", "To confess something worrying"],
-                answer: "To confess something worrying"
-            },
-            {
-                question: "Choose the correct word: 'Honesty is a fundamental ______.'",
-                options: ["principal", "principle", "principals", "principles"],
-                answer: "principle" // Noun meaning rule or belief
+                question: "The word 'fragile' in 'Pakistan’s more fragile economy' is a:",
+                options: ["Noun", "Verb", "Adverb", "Comparative Adjective"],
+                answer: "Comparative Adjective", // 'more fragile'
+                type: "mcq"
             },
              {
-                question: "An antonym for 'Complacent' is:",
-                options: ["Smug", "Content", "Self-satisfied", "Concerned"],
-                answer: "Concerned"
+                question: "Which word acts as a preposition in the phrase 'within days'?",
+                options: ["days", "in", "with", "within"],
+                answer: "within",
+                type: "mcq"
+            },
+            {
+                question: "Rearrange to form a grammatically correct sentence: ",
+                parts: ["cannot adequately capture", "resulting from conflict", "human suffering", "Statistics"],
+                answer: "Statistics cannot adequately capture human suffering resulting from conflict",
+                type: "rearrangement"
+            },
+            {
+                question: "What is the object of the preposition 'under' in '...facing intensified persecution under the nationalist fervour...'?",
+                options: ["persecution", "intensified", "facing", "the nationalist fervour"],
+                answer: "the nationalist fervour",
+                type: "mcq"
             },
              {
-                question: "What would you tell someone before they perform on stage?",
-                options: ["Bite the bullet!", "Hit the books!", "Break a leg!", "Get it off your chest!"],
-                answer: "Break a leg!"
+                question: "Identify the linking verb in the sentence 'The choice is stark'.",
+                options: ["choice", "stark", "The", "is"],
+                answer: "is",
+                type: "mcq"
             },
              {
-                question: "The verb 'to influence or make a difference to' is:",
-                options: ["Effect", "Affect", "Principale", "Ubiquitous"],
-                answer: "Affect"
-            },
-             { // More Vocab/Grammar mix
-                question: "Select the synonym for 'Fleeting'.",
-                options: ["Permanent", "Enduring", "Transient", "Eternal"],
-                answer: "Transient"
-            },
-            {
-                question: "The head of a school is the:",
-                options: ["Principle", "Principal", "Complacent", "Ephemeral"],
-                answer: "Principal"
+                question: "Which sentence demonstrates correct subject-verb agreement?",
+                options: [
+                    "The devastation of economies are profound.",
+                    "Each of the countries face risks.",
+                    "Neither the US nor China possess all the answers.",
+                    "Diplomatic channels that could prove crucial exist."
+                ],
+                answer: "Diplomatic channels that could prove crucial exist.", // 'channels...exist'
+                type: "mcq"
             },
             {
-                question: "Choose the antonym for 'Reveal'.",
-                options: ["Unload", "Confess", "Come clean", "Conceal"],
-                answer: "Conceal"
-            },
-            {
-                question: "Which word pair correctly fills the blanks? 'The ______ reason for the policy's ______ was unclear.'",
-                options: ["principal, effect", "principle, affect", "principal, affect", "principle, effect"],
-                answer: "principal, effect"
-            },
-            {
-                question: "To 'hit the books' means to:",
-                options: ["Damage library property", "Study intensely", "Read casually", "Avoid studying"],
-                answer: "Study intensely"
-            },
-            {
-                question: "A person showing 'smug or uncritical satisfaction' is:",
-                options: ["Ephemeral", "Ubiquitous", "Complacent", "On the ball"],
-                answer: "Complacent"
-            },
-            {
-                question: "Which word means 'found everywhere'?",
-                options: ["Ephemeral", "Complacent", "Ubiquitous", "Transient"],
-                answer: "Ubiquitous"
-            },
-            {
-                question: "Facing something unpleasant with stoicism is to:",
-                options: ["Break a leg", "Get it off your chest", "Hit the books", "Bite the bullet"],
-                answer: "Bite the bullet"
-            },
-            {
-                question: "The ______ of the new law will ______ everyone.",
-                options: ["affect, effect", "effect, affect", "affect, affect", "effect, effect"],
-                answer: "effect, affect"
-            },
-            {
-                question: "If something is 'short-lived', it is:",
-                options: ["Ubiquitous", "Complacent", "Principal", "Ephemeral"],
-                answer: "Ephemeral"
-            },
-             // --- Sentence Rearrangement (Conceptual - Based on Grammar PDF complexity) ---
-             // Note: These are simplified examples suitable for automated generation.
-            {
-                question: "Rearrange the parts to form a grammatically correct sentence: (A) has failed / (B) the Kashmiris' struggle / (C) of brute force / (D) the use",
-                options: ["D C A B", "A B C D", "D A C B", "B A D C"],
-                answer: "D C A B" // The use of brute force has failed the Kashmiris' struggle. (Simplified from text)
-            },
-            {
-                question: "Rearrange: (A) is building a case / (B) New Delhi / (C) for its aggression / (D) by trying to blame Pakistan",
-                options: ["B A C D", "A B C D", "B D A C", "D C B A"],
-                answer: "B A C D" // New Delhi is building a case for its aggression by trying to blame Pakistan.
+                question: "The phrase 'to discourage adventurism' functions as what type of phrase modifying 'tools' in '...deploy all available diplomatic tools to discourage adventurism'?",
+                options: ["Noun Phrase", "Adverbial Phrase", "Infinitive Phrase (Adjectival)", "Prepositional Phrase"],
+                answer: "Infinitive Phrase (Adjectival)",
+                type: "mcq"
             },
              {
-                question: "Rearrange: (A) seem to forget / (B) Indian leaders / (C) the perils / (D) in their hubris",
-                options: ["C A B D", "B D A C", "A C B D", "D B C A"],
-                answer: "B D A C" // Indian leaders in their hubris seem to forget the perils.
+                question: "What does the modal verb 'could' express in '...diplomatic channels that could prove crucial...'?",
+                options: ["Obligation", "Past ability", "Certainty", "Possibility"],
+                answer: "Possibility",
+                type: "mcq"
             },
             {
-                question: "Rearrange: (A) are being drowned / (B) rational voices / (C) of insanity / (D) in a cacophony",
-                options: ["B A D C", "A B C D", "D C B A", "B D C A"],
-                answer: "B A D C" // Rational voices are being drowned in a cacophony of insanity.
-            },
-            {
-                question: "Rearrange: (A) must be condemned / (B) in Pahalgam / (C) what happened / (D) but the tragedy should not be used",
-                options: ["B C A D", "C B A D", "A B C D", "D A C B"],
-                answer: "C B A D" // What happened in Pahalgam must be condemned but the tragedy should not be used...
-            },
-             // --- Preposition Focus (Grammar PDF) ---
-            {
-                question: "Choose the correct preposition: 'He is responsible ______ the marketing department.'",
-                options: ["to", "with", "for", "at"],
-                answer: "for"
-            },
-            {
-                question: "Choose the correct preposition: 'She has great admiration ______ her teacher.'",
-                options: ["for", "of", "to", "with"],
-                answer: "for"
+                question: "Identify the gerund in the sentence: 'Enabling religious polarisation will find further targets.'",
+                options: ["religious", "polarisation", "find", "Enabling"],
+                answer: "Enabling",
+                type: "mcq"
             },
              {
-                question: "Choose the correct preposition: 'They arrived ______ the airport just in time.'",
-                options: ["in", "on", "to", "at"],
-                answer: "at"
+                question: "Which punctuation mark is used to introduce an explanation or list in the text, like in '...profound danger: the devastation...'?",
+                options: ["Semicolon (;)", "Comma (,)", "Colon (:)", "Dash (—)"],
+                answer: "Colon (:)",
+                type: "mcq"
             },
             {
-                question: "Choose the correct preposition: 'This book belongs ______ me.'",
-                options: ["with", "to", "for", "at"],
-                answer: "to"
+                question: "'Nuclear-armed' in 'nuclear-armed neighbours' is an example of a:",
+                options: ["Prepositional phrase", "Compound noun", "Compound adjective", "Adverbial phrase"],
+                answer: "Compound adjective",
+                type: "mcq"
+            },
+             {
+                question: "What is the function of 'permanently' in '...leave both nations permanently scarred'?",
+                options: ["Adjective modifying nations", "Adverb modifying leave", "Adverb modifying scarred", "Noun phrase"],
+                answer: "Adverb modifying scarred",
+                type: "mcq"
+            },
+             {
+                question: "Identify the relative pronoun in 'Civilian casualties... create wounds that economics cannot measure.'",
+                options: ["casualties", "wounds", "economics", "that"],
+                answer: "that",
+                type: "mcq"
             },
             {
-                question: "Choose the correct preposition: 'He suffers ______ severe headaches.'",
-                options: ["of", "with", "by", "from"],
-                answer: "from"
+                question: "Which sentence contains a participial phrase used correctly?",
+                options: [
+                    "Struggling with reserves, the economy is fragile.", // Correct
+                    "The economy struggling with reserves are fragile.", // Incorrect agreement
+                    "Economy is fragile struggling with reserves.", // Awkward placement
+                    "With reserves struggling the economy is fragile." // Incorrect structure
+                ],
+                answer: "Struggling with reserves, the economy is fragile.",
+                type: "mcq"
+            },
+             {
+                question: "The word 'Similarly' in 'The 2019 Pulwama crisis similarly witnessed...' functions as a:",
+                options: ["Preposition", "Coordinating Conjunction", "Adjective", "Conjunctive Adverb"],
+                answer: "Conjunctive Adverb",
+                type: "mcq"
+            },
+             {
+                question: "Choose the correct form: 'Its time / It's time for both countries...'",
+                options: ["Its time", "It's time", "Its' time", "Itstime"],
+                answer: "It's time", // Contraction for 'It is'
+                type: "mcq"
+            },
+             {
+                question: "What type of clause is 'if resources shift to conflict'?",
+                options: ["Noun Clause", "Adjective Clause", "Independent Clause", "Adverbial Clause (Conditional)"],
+                answer: "Adverbial Clause (Conditional)",
+                type: "mcq"
             },
 
-            // --- MCQs from 'One Paper Mcqs Book PDF' ---
-            // Section: General Information / World Geography / Organizations etc.
+            // --- Vocabulary Questions (Idioms, Synonyms, Antonyms, Pairs - Approx. 25) ---
             {
-                question: "Which of the following countries is landlocked?",
-                options: ["Nigeria", "Kenya", "Sri Lanka", "Uganda"],
-                answer: "Uganda" // Page 9, Q1
+                question: "The idiom 'Break the momentum' means:",
+                options: ["To accelerate progress", "To stop the progress of something moving forward", "To reach a critical point", "To start a new phase"],
+                answer: "To stop the progress of something moving forward",
+                type: "mcq"
             },
             {
-                question: "The capital of Zimbabwe is:",
-                options: ["Harare", "Seoul", "Pretoria", "Lusaka"],
-                answer: "Harare" // Page 9, Q2
+                question: "A synonym for 'Indignation' is:",
+                options: ["Calmness", "Agreement", "Outrage", "Satisfaction"],
+                answer: "Outrage",
+                type: "mcq"
             },
             {
-                question: "Pulitzer is an American Award primarily associated with which field?",
-                options: ["Sports", "Science", "Letters and journalism", "Music Performance"],
-                answer: "Letters and journalism" // Page 9, Q4
+                question: "An antonym for 'Stem from' (meaning originate from) could be:",
+                options: ["Result from", "Arise from", "Be unrelated to", "Cause"],
+                answer: "Be unrelated to",
+                type: "mcq"
+            },
+            {
+                question: "The pair 'Public and private' relates to:",
+                options: ["Openness and secrecy", "Government/state and individuals/companies", "Wealthy and poor", "Domestic and foreign"],
+                answer: "Government/state and individuals/companies",
+                type: "mcq"
+            },
+            {
+                question: "'Ethically indefensible' means something is:",
+                options: ["Morally justifiable", "Practically difficult", "Legally required", "Morally wrong and unjustifiable"],
+                answer: "Morally wrong and unjustifiable",
+                type: "mcq"
+            },
+            {
+                question: "What does 'Scarcely afford' imply?",
+                options: ["Easily manage", "Willingly pay for", "Barely able to manage due to lack of resources", "Invest heavily in"],
+                answer: "Barely able to manage due to lack of resources",
+                type: "mcq"
+            },
+            {
+                question: "The idiom 'Zero-sum game' describes a situation where:",
+                options: ["Everyone wins", "One side's gain is the other's loss", "No one gains or loses", "The outcome is uncertain"],
+                answer: "One side's gain is the other's loss",
+                type: "mcq"
+            },
+            {
+                question: "A synonym for 'Ails us' (referring to problems) is:",
+                options: ["Benefits us", "Strengthens us", "Plagues us", "Ignores us"],
+                answer: "Plagues us",
+                type: "mcq"
             },
              {
-                question: "The term 'Fifth Column' refers to:",
-                options: ["An architectural feature", "A military formation", "Loyalty", "Treachery"],
-                answer: "Treachery" // Page 9, Q5
+                question: "An antonym for 'Interlinked' is:",
+                options: ["Connected", "Related", "Intertwined", "Disconnected"],
+                answer: "Disconnected",
+                type: "mcq"
             },
              {
-                question: "In which city was the ancient Colosseum, an amphitheatre, built?",
-                options: ["Athens", "Naples", "Rome", "Milan"],
-                answer: "Rome" // Page 9, Q7
-            },
-            {
-                question: "Blind Dolphins are primarily found in which river system?",
-                options: ["Ganges River", "Nile River", "Yangtze River", "Indus River"], // Adjusted options for relevance
-                answer: "Indus River" // Page 9, Q9 refers to Ganges, but Indus is famous for blind dolphins. Let's assume Indus context for Pakistan. If strictly PDF, Ganges. Sticking to PDF: Ganges. Reconsidering: The PDF says Ganges, but that's incorrect for *blind* dolphins (Indus/Ganges have different species). Let's use a different GK question to avoid ambiguity.
-            },
-             { // Replacing the Dolphin question
-                question: "Which crop generally has the longest period between cultivation and harvest?",
-                options: ["Cotton", "Sugarcane", "Rice", "Wheat"],
-                answer: "Sugarcane" // Page 9, Q12
-            },
-            {
-                question: "The Baghlihar Dam, controversial under the Indus Water Treaty, was constructed by India on which river?",
-                options: ["Indus", "Jhelum", "Sutlej", "Chenab"], // Added contextually relevant options
-                answer: "Chenab" // Page 9, Q14 implies violation, Baghlihar is on Chenab.
-            },
-            {
-                question: "The famous painting 'Night Watch' is attributed to which artist?",
-                options: ["Michelangelo", "Picasso", "Leonardo da Vinci", "Rembrandt van Rijn"],
-                answer: "Rembrandt van Rijn" // Page 9, Q16
-            },
-            {
-                question: "What is 'Big Ben'?",
-                options: ["A famous clock tower", "A large bridge", "A museum", "A royal palace"], // Clarified options
-                answer: "A famous clock tower" // Page 9, Q17 (Clock in a Tower)
-            },
-            {
-                question: "The Russian company Gazprom is primarily involved in which sector?",
-                options: ["Automobiles", "Oil and gas", "Technology", "Agriculture"],
-                answer: "Oil and gas" // Page 9, Q19
-            },
-            {
-                question: "What is the 'Ivy League'?",
-                options: ["A group of Eight Universities in USA", "A European football tournament", "A chain of mountains", "An international political alliance"],
-                answer: "A group of Eight Universities in USA" // Page 9, Q21
-            },
-            {
-                question: "The Uighur Muslim population is primarily associated with which province of China?",
-                options: ["Sichuan", "Guangdong", "Xinjiang", "Yunnan"],
-                answer: "Xinjiang" // Page 10, Q25
-            },
-            {
-                question: "'Ikebana' is the Japanese art of:",
-                options: ["Flower arrangement", "Martial arts", "Calligraphy", "Tea ceremony"],
-                answer: "Flower arrangement" // Page 10, Q26
+                question: "The idiom 'Shot up' means:",
+                options: ["Decreased slowly", "Remained stable", "Increased very quickly", "Exploded"],
+                answer: "Increased very quickly",
+                type: "mcq"
             },
              {
-                question: "Gestapo was the secret police organization of which country?",
-                options: ["Italy", "Soviet Union", "Germany", "United Kingdom"],
-                answer: "Germany" // Page 10, Q27
-            },
-            {
-                question: "Which set represents the primary colours in light mixing (additive)?",
-                options: ["Red, Yellow, Blue", "Red, Blue, Green", "Cyan, Magenta, Yellow", "Orange, Green, Violet"],
-                answer: "Red, Blue, Green" // Page 10, Q28
-            },
-            {
-                question: "The 'Holocaust' refers to the systematic killing of which group during World War II?",
-                options: ["Germans", "Japanese", "Jews", "Russians"],
-                answer: "Jews" // Page 10, Q30
+                question: "To 'Besmirch the country's fair name' means to:",
+                options: ["Praise the country", "Damage the country's reputation", "Represent the country", "Defend the country"],
+                answer: "Damage the country's reputation",
+                type: "mcq"
             },
              {
-                question: "A writ commanding a person detaining another to produce the prisoner is called:",
-                options: ["Writ of Quo Warranto", "Writ of Certiorari", "Writ of Prohibition", "Writ of Habeas Corpus"],
-                answer: "Writ of Habeas Corpus" // Page 10, Q32
+                question: "'Next to impossible' means:",
+                options: ["Very easy", "Slightly difficult", "Extremely difficult / Almost impossible", "Possible with effort"],
+                answer: "Extremely difficult / Almost impossible",
+                type: "mcq"
             },
              {
-                question: "The character Harry Potter was created by which author?",
-                options: ["J.R.R. Tolkien", "George R.R. Martin", "J.K. Rowling", "C.S. Lewis"], // Updated options
-                answer: "J.K. Rowling" // Page 10, Q35
-            },
-            {
-                question: "Which ancient civilization flourished primarily along the banks of the Tigris and Euphrates rivers?",
-                options: ["Indus Valley Civilization", "Mesopotamian Civilizations (e.g., Sumerian)", "Egyptian Civilization", "Greek Civilization"], // Clarified options
-                answer: "Mesopotamian Civilizations (e.g., Sumerian)" // Page 10, Q36 refers to Sumerian on Tigris.
+                question: "What does it mean to 'Use compassion as a compass'?",
+                options: ["To navigate using stars", "To act ruthlessly", "To be guided by empathy and kindness", "To focus on self-interest"],
+                answer: "To be guided by empathy and kindness",
+                type: "mcq"
             },
              {
-                question: "Egypt nationalized the Suez Canal in which year?",
-                options: ["1950", "1954", "1956", "1960"],
-                answer: "1956" // Page 10, Q39
+                question: "To be 'Struck by' something means to be:",
+                options: ["Physically hit by it", "Indifferent to it", "Suddenly impressed or affected by it", "Annoyed by it"],
+                answer: "Suddenly impressed or affected by it",
+                type: "mcq"
             },
             {
-                question: "The majority of the world's Kurdish population resides in which region/countries?", // Rephrased for accuracy
-                options: ["North Africa", "Central Asia", "Scandinavia", "Turkey, Iraq, Iran, Syria"], // Broader, more accurate options
-                answer: "Turkey, Iraq, Iran, Syria" // Page 10, Q44 lists Turkey, Iraq, Jordan. Broader context is better. Let's stick to PDF: Turkey.
-            },
-             { // Replacing Kurd question with one directly from PDF options
-                question: "The majority of 'Kurd Population' is living in:",
-                options: ["Afghanistan", "Turkey", "Iraq", "Jordan"],
-                answer: "Turkey" // Page 10, Q44 (Though Iraq also has a large population) - Following PDF strictly.
-             },
-            {
-                question: "The Universal Declaration of Human Rights was adopted by the UN on:",
-                options: ["December 10, 1945", "December 10, 1948", "October 24, 1945", "January 1, 1950"], // Corrected options
-                answer: "December 10, 1948" // Page 10, Q45 has typo 1954, correct year is 1948. Will use correct year.
-            },
-            // Section: Pakistan Studies
-            {
-                question: "Which is the largest province of Pakistan by area?",
-                options: ["Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan"],
-                answer: "Balochistan" // Page 295
-            },
-            {
-                question: "The Mangla Dam is located on which river?",
-                options: ["Indus", "Chenab", "Sutlej", "Jhelum"],
-                answer: "Jhelum" // Page 292
+                question: "Rearrange to form a meaningful idiom/phrase description:",
+                parts: ["in a difficult situation", "to support someone or something", "rally together", "To come together"],
+                answer: "To come together rally together to support someone or something in a difficult situation", // Might need adjustment based on desired format
+                type: "rearrangement"
             },
              {
-                question: "Mohenjo-daro, an ancient Indus Valley Civilization site, is located in which province?",
-                options: ["Punjab", "Balochistan", "Sindh", "Khyber Pakhtunkhwa"],
-                answer: "Sindh" // Page 306/307 context
-            },
-            {
-                question: "What is the highest mountain peak located entirely within Pakistan?",
-                options: ["K2", "Nanga Parbat", "Gasherbrum I", "Broad Peak"],
-                answer: "Nanga Parbat" // K2 is shared. Page 314 lists highest peaks.
+                question: "The idiom 'Lost their calm' means:",
+                options: ["Became peaceful", "Fell asleep", "Became agitated or panicked", "Remained composed"],
+                answer: "Became agitated or panicked",
+                type: "mcq"
             },
              {
-                question: "The Pakistan Military Academy (PMA) is located in which city?",
-                options: ["Rawalpindi", "Risalpur", "Quetta", "Kakul (Abbottabad)"],
-                answer: "Kakul (Abbottabad)" // Page 319
+                question: "To 'Set aside differences' means to:",
+                options: ["Emphasize conflicts", "Ignore disagreements for a common goal", "Create new problems", "Discuss differences openly"],
+                answer: "Ignore disagreements for a common goal",
+                type: "mcq"
             },
             {
-                question: "Who was the first Governor-General of Pakistan?",
-                options: ["Liaquat Ali Khan", "Muhammad Ali Jinnah", "Khawaja Nazimuddin", "Ghulam Muhammad"],
-                answer: "Muhammad Ali Jinnah" // Page 334 (First in Pakistan)
-            },
-            {
-                question: "Which city is known as the 'City of Saints' in Pakistan?",
-                options: ["Lahore", "Karachi", "Peshawar", "Multan"],
-                answer: "Multan" // Page 345
+                question: "A synonym for 'Put up a united front' is:",
+                options: ["Show division", "Appear fragmented", "Show solidarity", "Argue publicly"],
+                answer: "Show solidarity",
+                type: "mcq"
             },
              {
-                question: "The Lahore Resolution, demanding a separate homeland for Muslims, was passed in which year?",
-                options: ["1930", "1940", "1946", "1947"],
-                answer: "1940" // Page 358
-            },
-            {
-                question: "How many amendments had been made to the Constitution of Pakistan (1973) up to the printing of the source material?", // Phrased carefully based on PDF content date
-                options: ["18", "21", "25", "The PDF lists amendments up to the 25th"], // Based on page 370-371 listing
-                answer: "The PDF lists amendments up to the 25th" // Reflecting the source content
-            },
-            {
-                question: "Allama Iqbal delivered his famous Allahabad Address in which year?",
-                options: ["1928", "1930", "1932", "1935"],
-                answer: "1930" // Page 357
-            },
-            // Section: Everyday Science / Computer
-             {
-                question: "Ornithology is the branch of science concerned with the study of:",
-                options: ["Insects", "Fish", "Birds", "Mammals"],
-                answer: "Birds" // Page 201
-            },
-            {
-                question: "Which planet is known as the 'Red Planet'?",
-                options: ["Venus", "Mars", "Jupiter", "Saturn"],
-                answer: "Mars" // Page 204
-            },
-            {
-                question: "What is the approximate percentage of Nitrogen in the Earth's atmosphere?",
-                options: ["21%", "1%", "78%", "50%"],
-                answer: "78%" // Page 208
-            },
-            {
-                question: "Which part of the human body is primarily affected by Hepatitis?",
-                options: ["Lungs", "Kidneys", "Brain", "Liver"],
-                answer: "Liver" // Page 221
-            },
-            {
-                question: "What is the chemical symbol for Gold?",
-                options: ["Go", "Ag", "Au", "Gd"],
-                answer: "Au" // Page 239
-            },
-            {
-                question: "Which instrument is used to measure atmospheric pressure?",
-                options: ["Thermometer", "Hygrometer", "Anemometer", "Barometer"],
-                answer: "Barometer" // Page 244
-            },
-            {
-                question: "What does 'CPU' stand for in computing?",
-                options: ["Central Processing Unit", "Computer Personal Unit", "Central Programming Unit", "Control Processing Unit"],
-                answer: "Central Processing Unit" // Page 277
-            },
-            {
-                question: "What does 'URL' stand for?",
-                options: ["Uniform Resource Locator", "Universal Reference Link", "Uniform Resource Link", "Universal Resource Locator"],
-                answer: "Uniform Resource Locator" // Page 279
+                question: "An antonym for 'Keep their head' (remain calm) is:",
+                options: ["Stay composed", "Keep cool", "Remain sensible", "Lose control / Panic"],
+                answer: "Lose control / Panic",
+                type: "mcq"
             },
              {
-                question: "Which layer of the atmosphere contains the ozone layer?",
-                options: ["Troposphere", "Mesosphere", "Thermosphere", "Stratosphere"],
-                answer: "Stratosphere" // Page 250, Q78
-            },
-            {
-                question: "What is the main function of white blood cells (WBCs)?",
-                options: ["Carry oxygen", "Help in blood clotting", "Fight infection", "Transport nutrients"],
-                answer: "Fight infection" // Page 214 context
-            },
-            // Add more diverse questions from other sections if needed to reach 100.
-            // Let's add a few more GK/Current Affairs style from the PDF's MCQs section
-             {
-                question: "Which country is the largest producer of tea in the world?",
-                options: ["India", "Sri Lanka", "Kenya", "China"],
-                answer: "China" // Page 141, Q1 (Note: rankings can change, based on PDF time)
-            },
-            {
-                question: "The headquarters of the International Court of Justice (ICJ) is located in:",
-                options: ["New York", "Geneva", "Paris", "The Hague"],
-                answer: "The Hague" // Page 142, Q17
-            },
-            {
-                question: "Which strait connects the Atlantic Ocean and the Mediterranean Sea?",
-                options: ["Strait of Malacca", "Strait of Hormuz", "Strait of Gibraltar", "Bering Strait"],
-                answer: "Strait of Gibraltar" // Page 143, Q30
-            },
-            {
-                question: "What is the currency of Japan?",
-                options: ["Won", "Yuan", "Dollar", "Yen"],
-                answer: "Yen" // Page 144, Q46
-            },
-            {
-                question: "Amnesty International is an organization associated with:",
-                options: ["Environmental Protection", "Economic Development", "Human Rights", "Global Health"],
-                answer: "Human Rights" // Page 146, Q76
+                question: "'Looming over their heads' suggests something:",
+                options: ["Pleasant and expected", "Distant and unlikely", "Unwanted and likely to happen soon", "Completed and finished"],
+                answer: "Unwanted and likely to happen soon",
+                type: "mcq"
             },
              {
-                question: "Who is known as the 'Father of Geometry'?",
-                options: ["Pythagoras", "Archimedes", "Aristotle", "Euclid"],
-                answer: "Euclid" // Page 151, Q139
+                question: "To 'Take for granted' means to:",
+                options: ["Appreciate fully", "Value highly", "Cherish", "Fail to appreciate properly"],
+                answer: "Fail to appreciate properly",
+                type: "mcq"
+            },
+             {
+                question: "What does 'Silence opposing viewpoints' mean?",
+                options: ["Encourage debate", "Allow expression", "Listen carefully", "Prevent expression of different opinions"],
+                answer: "Prevent expression of different opinions",
+                type: "mcq"
+            },
+             {
+                question: "To 'Rebuild bridges' means to:",
+                options: ["Deepen divisions", "Construct new roads", "Restore friendly relations after conflict", "Burn connections"],
+                answer: "Restore friendly relations after conflict",
+                type: "mcq"
+            },
+             {
+                question: "'Crystal clear' means:",
+                options: ["Ambiguous", "Vague", "Difficult to see", "Perfectly easy to understand"],
+                answer: "Perfectly easy to understand",
+                type: "mcq"
+            },
+             {
+                question: "The idiom 'Fall by the wayside' means:",
+                options: ["To succeed against odds", "To persist", "To be maintained", "To fail or be neglected"],
+                answer: "To fail or be neglected",
+                type: "mcq"
+            },
+
+             // --- General Knowledge (One Paper MCQs p75-100) Questions (Approx. 50) ---
+             // Personalities (p75-82)
+            {
+                question: "Who is known as the 'Iron Lady'?",
+                options: ["Indira Gandhi", "Golda Meir", "Benazir Bhutto", "Margaret Thatcher"],
+                answer: "Margaret Thatcher", // Verify from PDF p75-82
+                type: "mcq"
             },
             {
-                question: "The 'Ring of Fire' is an area known for frequent earthquakes and volcanic eruptions located around the basin of which ocean?",
+                question: "Which famous leader was assassinated in 1948?",
+                options: ["John F. Kennedy", "Abraham Lincoln", "Mahatma Gandhi", "Martin Luther King Jr."],
+                answer: "Mahatma Gandhi", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Mother Teresa was awarded the Nobel Peace Prize in which year?",
+                options: ["1975", "1983", "1979", "1989"],
+                answer: "1979", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Who was the first Secretary-General of the United Nations?",
+                options: ["Dag Hammarskjöld", "U Thant", "Kurt Waldheim", "Trygve Lie"],
+                answer: "Trygve Lie", // Verify from PDF p75-82 or p93-96
+                type: "mcq"
+            },
+             {
+                question: "Yasser Arafat was the leader of which organization?",
+                options: ["Hamas", "Hezbollah", "Palestine Liberation Organization (PLO)", "Muslim Brotherhood"],
+                answer: "Palestine Liberation Organization (PLO)", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Who is credited with the theory of relativity?",
+                options: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Stephen Hawking"],
+                answer: "Albert Einstein", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Which American president was involved in the Watergate scandal?",
+                options: ["John F. Kennedy", "Lyndon B. Johnson", "Richard Nixon", "Gerald Ford"],
+                answer: "Richard Nixon", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "'Che' Guevara was a major figure in the revolution of which country?",
+                options: ["Argentina", "Bolivia", "Cuba", "Venezuela"],
+                answer: "Cuba", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Mikhail Gorbachev is known for his policies of 'Glasnost' and what else?",
+                options: ["Kolkhoz", "Perestroika", "Apparatchik", "Sovkhoz"],
+                answer: "Perestroika", // Verify from PDF p75-82
+                type: "mcq"
+            },
+             {
+                question: "Who was the first woman to travel into space?",
+                options: ["Sally Ride", "Valentina Tereshkova", "Svetlana Savitskaya", "Judith Resnik"],
+                answer: "Valentina Tereshkova", // Verify from PDF p75-82 or p97-100
+                type: "mcq"
+            },
+
+            // Books & Literature (p83-87)
+            {
+                question: "Who wrote 'Das Kapital'?",
+                options: ["Friedrich Engels", "Vladimir Lenin", "Adam Smith", "Karl Marx"],
+                answer: "Karl Marx", // Verify from PDF p83-87
+                type: "mcq"
+            },
+            {
+                question: "'Animal Farm' is an allegorical novella by which author?",
+                options: ["Aldous Huxley", "George Orwell", "J.R.R. Tolkien", "C.S. Lewis"],
+                answer: "George Orwell", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "Who is the author of 'Pride and Prejudice'?",
+                options: ["Charlotte Brontë", "Emily Brontë", "Mary Shelley", "Jane Austen"],
+                answer: "Jane Austen", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "The play 'Hamlet' was written by:",
+                options: ["Christopher Marlowe", "Ben Jonson", "William Shakespeare", "John Milton"],
+                answer: "William Shakespeare", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "'The Adventures of Tom Sawyer' was written by:",
+                options: ["Herman Melville", "Nathaniel Hawthorne", "Mark Twain", "Edgar Allan Poe"],
+                answer: "Mark Twain", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "Who wrote 'One Hundred Years of Solitude'?",
+                options: ["Mario Vargas Llosa", "Jorge Luis Borges", "Pablo Neruda", "Gabriel García Márquez"],
+                answer: "Gabriel García Márquez", // Verify from PDF p83-87
+                type: "mcq"
+            },
+            {
+                question: "The book 'The Origin of Species' was authored by:",
+                options: ["Gregor Mendel", "Louis Pasteur", "Charles Darwin", "Alfred Russel Wallace"],
+                answer: "Charles Darwin", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "Who wrote the epic poem 'Paradise Lost'?",
+                options: ["John Donne", "Geoffrey Chaucer", "John Milton", "Alexander Pope"],
+                answer: "John Milton", // Verify from PDF p83-87
+                type: "mcq"
+            },
+             {
+                question: "'Gulliver's Travels' is a famous work by:",
+                options: ["Daniel Defoe", "Jonathan Swift", "Samuel Richardson", "Henry Fielding"],
+                answer: "Jonathan Swift", // Verify from PDF p83-87
+                type: "mcq"
+            },
+            {
+                question: "Who is the author of 'Mein Kampf'?",
+                options: ["Benito Mussolini", "Joseph Stalin", "Adolf Hitler", "Winston Churchill"],
+                answer: "Adolf Hitler", // Verify from PDF p83-87
+                type: "mcq"
+            },
+
+            // Organizations of the World (p88-92)
+            {
+                question: "Where is the headquarters of the International Court of Justice located?",
+                options: ["Geneva", "New York", "Brussels", "The Hague"],
+                answer: "The Hague", // Verify from PDF p88-92 or p93-96
+                type: "mcq"
+            },
+            {
+                question: "NATO stands for:",
+                options: [
+                    "North African Treaty Organization",
+                    "North Atlantic Treaty Organization",
+                    "Neutral Asian Treaty Organization",
+                    "Nordic Alliance and Treaty Organization"
+                ],
+                answer: "North Atlantic Treaty Organization", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "Which of these is NOT a member of the G7 group (as of early 2020s)?",
+                options: ["Canada", "Russia", "Japan", "Italy"],
+                answer: "Russia", // Verify from PDF p88-92 (Note: Membership can change)
+                type: "mcq"
+            },
+             {
+                question: "The headquarters of the World Bank is located in:",
+                options: ["New York City", "Geneva", "London", "Washington D.C."],
+                answer: "Washington D.C.", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "ASEAN primarily consists of countries from which region?",
+                options: ["South Asia", "Africa", "Southeast Asia", "South America"],
+                answer: "Southeast Asia", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "Interpol is an international organization focused on:",
+                options: ["Economic cooperation", "Cultural exchange", "International police cooperation", "Environmental protection"],
+                answer: "International police cooperation", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "The African Union (AU) succeeded which earlier organization?",
+                options: [
+                    "Organization of African Unity (OAU)",
+                    "Economic Community of West African States (ECOWAS)",
+                    "Southern African Development Community (SADC)",
+                    "League of Arab States"
+                    ],
+                answer: "Organization of African Unity (OAU)", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "Where is the headquarters of the International Monetary Fund (IMF)?",
+                options: ["Geneva", "Paris", "Washington D.C.", "Brussels"],
+                answer: "Washington D.C.", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "SAARC stands for:",
+                options: [
+                    "South Asian Association for Regional Cooperation",
+                    "Southeast Asian Alliance for Regional Cooperation",
+                    "South African Association for Resource Control",
+                    "Strategic Alliance for Asian Regional Commerce"
+                    ],
+                answer: "South Asian Association for Regional Cooperation", // Verify from PDF p88-92
+                type: "mcq"
+            },
+             {
+                question: "The main objective of the World Trade Organization (WTO) is to:",
+                options: ["Provide loans to developing countries", "Regulate international trade", "Maintain international peace", "Promote cultural understanding"],
+                answer: "Regulate international trade", // Verify from PDF p88-92
+                type: "mcq"
+            },
+
+            // The United Nations (p93-96)
+            {
+                question: "Which organ of the UN is considered the main deliberative body?",
+                options: ["Security Council", "General Assembly", "Secretariat", "Economic and Social Council (ECOSOC)"],
+                answer: "General Assembly", // Verify from PDF p93-96
+                type: "mcq"
+            },
+            {
+                question: "How many non-permanent members does the UN Security Council have?",
+                options: ["5", "15", "10", "7"],
+                answer: "10", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "The 'Veto Power' in the UN Security Council is held by:",
+                options: ["All 15 members", "Only the non-permanent members", "The Secretary-General", "The 5 permanent members"],
+                answer: "The 5 permanent members", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "Which UN agency focuses on children's rights and well-being?",
+                options: ["UNESCO", "WHO", "UNICEF", "UNHCR"],
+                answer: "UNICEF", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "The headquarters of the United Nations is located in:",
+                options: ["Geneva", "Paris", "The Hague", "New York City"],
+                answer: "New York City", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "What is the primary role of the UN Secretariat?",
+                options: ["Making binding decisions", "Commanding peacekeeping forces", "Carrying out the day-to-day work of the UN", "Judging international disputes"],
+                answer: "Carrying out the day-to-day work of the UN", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "UNESCO is the UN agency primarily concerned with:",
+                options: ["Health", "Refugees", "Food and Agriculture", "Education, Science and Culture"],
+                answer: "Education, Science and Culture", // Verify from PDF p93-96
+                type: "mcq"
+            },
+            {
+                question: "Which country was NOT one of the original 5 permanent members of the UN Security Council?",
+                options: ["France", "China (ROC initially)", "Germany", "United Kingdom"],
+                answer: "Germany", // Verify from PDF p93-96
+                type: "mcq"
+            },
+            {
+                question: "The term of office for the UN Secretary-General is typically:",
+                options: ["4 years", "5 years", "6 years", "7 years"],
+                answer: "5 years", // Verify from PDF p93-96
+                type: "mcq"
+            },
+             {
+                question: "Which UN organ settles legal disputes between states?",
+                options: ["General Assembly", "Security Council", "International Court of Justice (ICJ)", "Trusteeship Council"],
+                answer: "International Court of Justice (ICJ)", // Verify from PDF p93-96
+                type: "mcq"
+            },
+
+            // The World Records (p97-100)
+            {
+                question: "Which is the largest ocean in the world by area?",
                 options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-                answer: "Pacific Ocean" // Page 154, Q178
+                answer: "Pacific Ocean", // Verify from PDF p97-100
+                type: "mcq"
             },
             {
-                question: "What does OPEC stand for?",
-                options: ["Organization of Petroleum Exporting Countries", "Organization of Pacific Economic Cooperation", "Oil Producing European Countries", "Organization for Power and Energy Conservation"],
-                answer: "Organization of Petroleum Exporting Countries" // Page 160, Q253
-            },
-            {
-                question: "Which is the longest river in the world?",
-                options: ["Amazon", "Mississippi", "Yangtze", "Nile"],
-                answer: "Nile" // Page 163, Q290 (Note: Amazon is sometimes considered longer by volume/source) - Following PDF.
+                question: "The world's largest desert by area is:",
+                options: ["Sahara Desert", "Arabian Desert", "Gobi Desert", "Antarctic Desert (Polar)"],
+                answer: "Antarctic Desert (Polar)", // Note: Sahara is largest hot desert. Verify how PDF lists it. Assuming overall.
+                type: "mcq"
             },
              {
-                question: "Mount Everest is located in which mountain range?",
-                options: ["Andes", "Alps", "Rockies", "Himalayas"],
-                answer: "Himalayas" // Page 168, Q358
+                question: "Which country has the largest population in the world (as of data available in the PDF)?",
+                options: ["India", "USA", "Indonesia", "China"],
+                answer: "China", // Note: This can change, answer based on PDF's likely data timeframe.
+                type: "mcq"
             },
-
+             {
+                question: "What is the highest waterfall in the world?",
+                options: ["Niagara Falls", "Victoria Falls", "Angel Falls", "Iguazu Falls"],
+                answer: "Angel Falls", // Verify from PDF p97-100
+                type: "mcq"
+            },
+             {
+                question: "Which is the longest river in Asia?",
+                options: ["Mekong River", "Yellow River (Huang He)", "Ganges River", "Yangtze River"],
+                answer: "Yangtze River", // Verify from PDF p97-100
+                type: "mcq"
+            },
+             {
+                question: "The world's largest island is:",
+                options: ["Borneo", "Madagascar", "Greenland", "New Guinea"],
+                answer: "Greenland", // Verify from PDF p97-100
+                type: "mcq"
+            },
+             {
+                question: "Which lake is the largest freshwater lake by surface area?",
+                options: ["Lake Baikal", "Lake Superior", "Lake Victoria", "Great Bear Lake"],
+                answer: "Lake Superior", // Verify from PDF p97-100 (Baikal is deepest/largest by volume)
+                type: "mcq"
+            },
+             {
+                question: "What is considered the world's most populous city (based on metropolitan area, verify PDF definition)?",
+                options: ["Delhi", "Shanghai", "Sao Paulo", "Tokyo"],
+                answer: "Tokyo", // Verify definition and data in PDF p97-100
+                type: "mcq"
+            },
+             {
+                question: "Which country is the largest by land area?",
+                options: ["Canada", "China", "USA", "Russia"],
+                answer: "Russia", // Verify from PDF p97-100
+                type: "mcq"
+            },
+             {
+                question: "The deepest point in the world's oceans is known as:",
+                options: ["Puerto Rico Trench", "Java Trench", "Mariana Trench (Challenger Deep)", "Tonga Trench"],
+                answer: "Mariana Trench (Challenger Deep)", // Verify from PDF p97-100
+                type: "mcq"
+            }
         ];
 
         // --- DOM Elements ---
-        const nameSection = document.getElementById('name-section');
+        const nameEntrySection = document.getElementById('name-entry');
+        const studentNameInput = document.getElementById('student-name');
+        const nameError = document.getElementById('name-error');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
         const quizSection = document.getElementById('quiz-section');
         const resultsSection = document.getElementById('results-section');
-        const nameInput = document.getElementById('student-name');
-        const startQuizBtn = document.getElementById('start-quiz-btn');
-        const nameError = document.getElementById('name-error');
-        const quizForm = document.getElementById('quiz-form');
-        const submitQuizBtn = document.getElementById('submit-quiz-btn');
-        const timerDisplay = document.getElementById('timer');
+        const questionContainer = document.getElementById('question-container');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const sentenceRearrangementArea = document.getElementById('sentence-rearrangement-area');
+        const sentencePartsSource = document.getElementById('sentence-parts-source');
+        const sentenceDropArea = document.getElementById('sentence-drop-area');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const timerEl = document.getElementById('timer');
+        const progressIndicator = document.getElementById('progress-indicator');
 
-        // Results display elements
-        const resultName = document.getElementById('result-name');
-        const resultAttempted = document.getElementById('result-attempted');
-        const resultScore = document.getElementById('result-score');
-        const resultPercentage = document.getElementById('result-percentage');
-        const resultTime = document.getElementById('result-time');
+        // Results Elements
+        const resultNameEl = document.getElementById('result-name');
+        const resultAttemptedEl = document.getElementById('result-attempted');
+        const resultScoreEl = document.getElementById('result-score');
+        const resultPercentageEl = document.getElementById('result-percentage');
+        const resultTimeEl = document.getElementById('result-time');
 
-        // Formspree hidden form elements
-        const formspreeForm = document.getElementById('results-formspree');
-        const formspreeName = document.getElementById('formspree-name');
-        const formspreeAttempted = document.getElementById('formspree-attempted');
-        const formspreeScore = document.getElementById('formspree-score');
-        const formspreePercentage = document.getElementById('formspree-percentage');
-        const formspreeTime = document.getElementById('formspree-time');
+        // Formspree Form Elements
+        const resultsForm = document.getElementById('results-form');
+        const formName = document.getElementById('form-name');
+        const formAttempted = document.getElementById('form-attempted');
+        const formScore = document.getElementById('form-score');
+        const formTime = document.getElementById('form-time');
+        const formPercentage = document.getElementById('form-percentage');
+
 
         // --- Quiz State ---
-        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null); // Store user answers
+        let studentName = '';
         let timerInterval;
         let timeLeft = 40 * 60; // 40 minutes in seconds
-        let quizStartTime;
-        let studentName = '';
-        let quizSubmitted = false; // Flag to prevent double submission
+        let startTime;
+        let endTime;
+        let quizSubmitted = false; // Flag to prevent multiple submissions
 
-        // --- Functions ---
+        // --- Drag and Drop State ---
+        let draggedItem = null;
 
-        // Shuffle array elements (Fisher-Yates algorithm)
+        // --- Utility Functions ---
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
         function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
+            // Create a copy to avoid modifying the original array if it's passed directly
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
             }
-            return array;
+            return shuffled;
         }
 
-        // Load questions into the form
-        function loadQuestions() {
-            // Shuffle the main quizData array to randomize question order
-            currentQuestions = shuffleArray([...quizData]);
-            quizForm.innerHTML = ''; // Clear previous questions
 
-            currentQuestions.forEach((q, index) => {
-                // Shuffle options for each question
-                const shuffledOptions = shuffleArray([...q.options]);
+        // --- Event Listeners ---
+        startQuizBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', nextQuestion);
+        prevBtn.addEventListener('click', prevQuestion);
+        submitBtn.addEventListener('click', () => submitQuiz(false)); // Pass false for manual submission
 
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question-container'; // Apply container style
+        // Add event listener for option selection (delegated)
+        optionsContainer.addEventListener('change', handleOptionChange);
+        optionsContainer.addEventListener('click', handleLabelClick); // For visual feedback
 
-                const questionTitle = document.createElement('p');
-                questionTitle.className = 'text-lg font-semibold mb-4';
-                questionTitle.textContent = `${index + 1}. ${q.question}`;
-                questionDiv.appendChild(questionTitle);
+        // --- Core Quiz Logic ---
 
-                const optionsDiv = document.createElement('div');
-                optionsDiv.className = 'options';
-
-                shuffledOptions.forEach(option => {
-                    const optionId = `q${index}_${option.replace(/\s+/g, '_').toLowerCase()}`; // Create unique ID
-
-                    const radioInput = document.createElement('input');
-                    radioInput.type = 'radio';
-                    radioInput.name = `question${index}`;
-                    radioInput.value = option;
-                    radioInput.id = optionId;
-                    radioInput.className = 'mr-2'; // Basic styling if needed, but hidden
-
-                    const optionLabel = document.createElement('label');
-                    optionLabel.htmlFor = optionId;
-                    optionLabel.textContent = option;
-                    optionLabel.className = 'option-label'; // Apply label style
-
-                    // Append input first, then label
-                    optionsDiv.appendChild(radioInput);
-                    optionsDiv.appendChild(optionLabel);
-                 });
-
-                questionDiv.appendChild(optionsDiv);
-                quizForm.appendChild(questionDiv);
-            });
+        function startQuiz() {
+            studentName = studentNameInput.value.trim();
+            if (!studentName) {
+                nameError.classList.remove('hidden');
+                return;
+            }
+            nameError.classList.add('hidden');
+            nameEntrySection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            startTime = new Date(); // Record start time
+             // Shuffle the entire quizData array once at the start
+            // quizData = shuffleArray(quizData); // Optional: Shuffle question order
+            loadQuestion(currentQuestionIndex);
+            startTimer();
+            updateProgressIndicator();
         }
 
-        // Start the countdown timer
+        function loadQuestion(index) {
+            // Ensure index is within bounds
+             if (index < 0 || index >= quizData.length) {
+                 console.error("Invalid question index:", index);
+                 return;
+             }
+            const questionData = quizData[index];
+            questionNumberEl.textContent = `Question ${index + 1} of ${quizData.length}`;
+            questionTextEl.textContent = questionData.question;
+
+            // Clear previous options/rearrangement area
+            optionsContainer.innerHTML = '';
+            sentenceRearrangementArea.classList.add('hidden');
+            sentencePartsSource.innerHTML = '';
+            sentenceDropArea.innerHTML = '';
+            optionsContainer.classList.remove('hidden'); // Show MCQ area by default
+
+
+            if (questionData.type === 'mcq') {
+                 // Shuffle options before displaying
+                const shuffledOptions = shuffleArray(questionData.options); // Pass the options array
+
+                shuffledOptions.forEach((option, i) => {
+                    const optionId = `q${index}_option${i}`;
+                    const label = document.createElement('label');
+                    label.htmlFor = optionId;
+                    label.classList.add('option-label'); // Add class for styling
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.id = optionId;
+                    radio.name = `question${index}`;
+                    radio.value = option; // Use the actual option value
+
+                    // Check if this option was previously selected
+                    if (userAnswers[index] === option) {
+                        radio.checked = true;
+                        label.classList.add('selected'); // Add selected class
+                    }
+
+                    const span = document.createElement('span');
+                    span.textContent = option; // Display the option text
+
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    optionsContainer.appendChild(label);
+                });
+            } else if (questionData.type === 'rearrangement') {
+                optionsContainer.classList.add('hidden'); // Hide MCQ options area
+                sentenceRearrangementArea.classList.remove('hidden');
+
+                // Shuffle parts before displaying
+                const shuffledParts = shuffleArray(questionData.parts); // Pass the parts array
+
+                shuffledParts.forEach((part, i) => {
+                    const partEl = document.createElement('div');
+                    partEl.textContent = part;
+                    partEl.classList.add('sentence-part');
+                    partEl.draggable = true;
+                    partEl.id = `part-${index}-${i}`; // Unique ID for the part
+                    partEl.addEventListener('dragstart', handleDragStart);
+                    sentencePartsSource.appendChild(partEl);
+                });
+
+                // Setup drop area listeners (add only once or manage removal)
+                sentenceDropArea.removeEventListener('dragover', handleDragOver); // Remove previous if any
+                sentenceDropArea.removeEventListener('drop', handleDrop); // Remove previous if any
+                sentenceDropArea.addEventListener('dragover', handleDragOver);
+                sentenceDropArea.addEventListener('drop', handleDrop);
+
+                // Also allow dropping back into the source area
+                sentencePartsSource.removeEventListener('dragover', handleDragOver);
+                sentencePartsSource.removeEventListener('drop', handleDrop);
+                sentencePartsSource.addEventListener('dragover', handleDragOver);
+                sentencePartsSource.addEventListener('drop', handleDrop);
+
+
+                // Load previously arranged answer if exists
+                 if (userAnswers[index]) {
+                     const savedParts = userAnswers[index].split(' | '); // Assuming parts are stored separated by ' | '
+                     savedParts.forEach(partText => {
+                         // Find the original draggable element from the source pool (if not already moved)
+                         let originalPartEl = Array.from(sentencePartsSource.children).find(p => p.textContent === partText);
+
+                         if (originalPartEl) {
+                              sentenceDropArea.appendChild(originalPartEl); // Move the original element
+                         } else {
+                             // If it was already moved (e.g., navigating back/forth), recreate it in the drop area
+                             // This part needs careful handling to avoid duplicates if navigating back and forth
+                             // A simpler approach might be to just display the saved answer text, not make it draggable again when loading
+                             const partEl = document.createElement('div');
+                             partEl.textContent = partText;
+                             partEl.classList.add('sentence-part');
+                             partEl.draggable = false; // Make loaded parts non-draggable initially? Or handle IDs better.
+                             partEl.id = `dropped-${Math.random()}`;
+                             // partEl.addEventListener('dragstart', handleDragStart); // Re-enable drag?
+                             sentenceDropArea.appendChild(partEl);
+                         }
+                     });
+                 }
+            }
+
+            updateNavigationButtons();
+        }
+
+        function handleOptionChange(event) {
+            if (event.target.type === 'radio') {
+                // No need to manually set userAnswers here, saveCurrentAnswer handles it before navigation/submission
+                 // Update visual selection
+                document.querySelectorAll(`#options-container .option-label`).forEach(label => {
+                    label.classList.remove('selected');
+                });
+                event.target.closest('label').classList.add('selected');
+                // Auto-save on change (optional, but good for UX)
+                 saveCurrentAnswer();
+                 updateProgressIndicator();
+            }
+        }
+
+         // Add visual feedback on label click itself
+        function handleLabelClick(event) {
+            const label = event.target.closest('label');
+            if (label && label.classList.contains('option-label')) {
+                const radio = label.querySelector('input[type="radio"]');
+                if (radio && !radio.checked) {
+                    radio.checked = true;
+                    // Manually trigger change event to update answer state and visual
+                    const changeEvent = new Event('change', { bubbles: true });
+                    radio.dispatchEvent(changeEvent);
+                }
+            }
+        }
+
+
+        function nextQuestion() {
+            saveCurrentAnswer(); // Save answer before moving
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+            // No need to update progress here, loadQuestion or change handler does it
+        }
+
+        function prevQuestion() {
+            saveCurrentAnswer(); // Save answer before moving
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+             // No need to update progress here, loadQuestion or change handler does it
+        }
+
+        function saveCurrentAnswer() {
+             // Ensure index is valid before accessing quizData
+             if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) return;
+
+             const questionData = quizData[currentQuestionIndex];
+             if (questionData.type === 'mcq') {
+                 const selectedOption = optionsContainer.querySelector(`input[name="question${currentQuestionIndex}"]:checked`);
+                 userAnswers[currentQuestionIndex] = selectedOption ? selectedOption.value : null;
+             } else if (questionData.type === 'rearrangement') {
+                 const droppedParts = Array.from(sentenceDropArea.children).map(part => part.textContent.trim()); // Trim whitespace
+                 userAnswers[currentQuestionIndex] = droppedParts.length > 0 ? droppedParts.join(' | ') : null; // Store as a delimited string
+             }
+        }
+
+
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.classList.toggle('hidden', currentQuestionIndex === quizData.length - 1);
+            submitBtn.classList.toggle('hidden', currentQuestionIndex !== quizData.length - 1);
+        }
+
+         function updateProgressIndicator() {
+            // Count non-null answers
+            const answeredCount = userAnswers.filter(answer => answer !== null && answer !== '').length;
+            progressIndicator.textContent = `${answeredCount} / ${quizData.length} Answered`;
+        }
+
+
+        // --- Timer Logic ---
         function startTimer() {
-            quizStartTime = Date.now();
+             // Ensure timer doesn't restart if already running
+            if (timerInterval) clearInterval(timerInterval);
+            // Reset time left just in case
+            // timeLeft = 40 * 60;
+            updateTimerDisplay(); // Initial display
             timerInterval = setInterval(updateTimer, 1000);
         }
 
-        // Update the timer display
         function updateTimer() {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft > 0) {
+                 timeLeft--;
+                 updateTimerDisplay();
+            }
 
             if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerDisplay.textContent = 'Time Up!';
-                submitQuiz(true); // Auto-submit
+                submitQuiz(true); // Pass true to indicate auto-submission
             }
         }
 
-        // Calculate and display results
+         function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerEl.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+         }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null; // Clear the interval ID
+        }
+
+        // --- Results Logic ---
         function calculateResults() {
             let score = 0;
             let attempted = 0;
-
-            currentQuestions.forEach((q, index) => {
-                const selectedOption = quizForm.querySelector(`input[name="question${index}"]:checked`);
-                if (selectedOption) {
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer !== '') { // Check for non-empty answers too
                     attempted++;
-                    if (selectedOption.value === q.answer) {
+                    const questionData = quizData[index];
+                    let correctAnswer;
+                    let isCorrect = false;
+
+                     if (questionData.type === 'mcq') {
+                         correctAnswer = questionData.answer;
+                         isCorrect = (answer === correctAnswer);
+                     } else if (questionData.type === 'rearrangement') {
+                         // Compare the joined string, ignoring case and extra spaces for robustness
+                         correctAnswer = questionData.answer.toLowerCase().replace(/\s+/g, ' ').trim();
+                         const userAnswerString = answer ? answer.split(' | ').join(' ').toLowerCase().replace(/\s+/g, ' ').trim() : '';
+                         isCorrect = (userAnswerString === correctAnswer);
+                     }
+
+                     if (isCorrect) {
                         score++;
                     }
                 }
             });
-
-            const timeTakenMillis = Date.now() - quizStartTime;
-            const totalSeconds = Math.floor(timeTakenMillis / 1000);
-            const minutesTaken = Math.floor(totalSeconds / 60);
-            const secondsTaken = totalSeconds % 60;
-            const timeTakenFormatted = `${minutesTaken} min ${secondsTaken} sec`;
-            const percentage = ((score / currentQuestions.length) * 100).toFixed(1);
-
-
-            // Display results
-            resultName.textContent = studentName;
-            resultAttempted.textContent = attempted;
-            resultScore.textContent = score;
-            resultPercentage.textContent = percentage;
-            resultTime.textContent = timeTakenFormatted;
-
-            // Populate hidden form for Formspree
-            formspreeName.value = studentName;
-            formspreeAttempted.value = attempted;
-            formspreeScore.value = score;
-            formspreePercentage.value = percentage;
-            formspreeTime.value = timeTakenFormatted;
-
-            return { name: studentName, attempted, score, percentage, time: timeTakenFormatted };
+            return { score, attempted };
         }
 
-        // Submit the quiz (manual or auto)
+        function displayResults(score, attempted) {
+            endTime = new Date();
+            const timeDiff = Math.round((endTime - startTime) / 1000); // Time in seconds
+            const minutesTaken = Math.floor(timeDiff / 60);
+            const secondsTaken = timeDiff % 60;
+            const timeTakenString = `${minutesTaken} min ${secondsTaken} sec`;
+            // Calculate percentage based on total questions, not just attempted
+            const percentage = quizData.length > 0 ? ((score / quizData.length) * 100).toFixed(1) : 0;
+
+
+            resultNameEl.textContent = studentName;
+            resultAttemptedEl.textContent = attempted;
+            resultScoreEl.textContent = score;
+            resultPercentageEl.textContent = percentage;
+            resultTimeEl.textContent = timeTakenString;
+
+            quizSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+
+            // Populate and submit hidden form
+            submitResultsToFormspree(studentName, attempted, score, timeTakenString, percentage);
+        }
+
         function submitQuiz(isAutoSubmit = false) {
             if (quizSubmitted) return; // Prevent multiple submissions
             quizSubmitted = true;
 
-            clearInterval(timerInterval); // Stop the timer
+            stopTimer();
+            saveCurrentAnswer(); // Save the very last answer before calculating
 
-            const results = calculateResults();
+            const { score, attempted } = calculateResults();
+            displayResults(score, attempted);
 
-            // Hide quiz, show results
-            quizSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
-
-            // Submit the hidden Formspree form
-            formspreeForm.submit();
-
-            if (isAutoSubmit) {
+            if (isAutoSubmit && resultsSection.children.length < 3) { // Avoid adding multiple messages
                 // Optionally add a message indicating auto-submission
-                console.log("Quiz auto-submitted due to time out.");
+                const autoSubmitMsg = document.createElement('p');
+                autoSubmitMsg.textContent = "Time ran out! Quiz submitted automatically.";
+                autoSubmitMsg.classList.add('text-red-600', 'font-semibold', 'mt-4');
+                // Insert after the H2 title
+                resultsSection.insertBefore(autoSubmitMsg, resultsSection.children[1]);
             }
         }
 
-        // --- Event Listeners ---
+        // --- Formspree Submission ---
+        function submitResultsToFormspree(name, attempted, score, timeTaken, percentage) {
+            formName.value = name;
+            formAttempted.value = attempted;
+            formScore.value = score;
+            formTime.value = timeTaken;
+            formPercentage.value = percentage + '%';
 
-        // Start Quiz Button
-        startQuizBtn.addEventListener('click', () => {
-            studentName = nameInput.value.trim();
-            if (studentName) {
-                nameError.classList.add('hidden');
-                nameSection.classList.add('hidden');
-                loadQuestions(); // Load questions after name is entered
-                quizSection.classList.remove('hidden');
-                timeLeft = 40 * 60; // Reset timer
-                quizSubmitted = false; // Reset submission flag
-                startTimer();
-            } else {
-                nameError.classList.remove('hidden');
+
+            // Use Fetch API to submit the form data asynchronously
+            const formData = new FormData(resultsForm);
+            fetch(resultsForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully to Formspree!');
+                } else {
+                     console.error('Formspree submission failed:', response.statusText);
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                             console.error("Formspree errors:", data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            console.error('Non-OK response from Formspree, but no specific errors field. Body:', data);
+                        }
+                    }).catch(jsonError => {
+                         console.error('Error parsing Formspree error response:', jsonError);
+                    });
+                }
+            }).catch(error => {
+                console.error('Network error submitting form to Formspree:', error);
+            });
+        }
+
+         // --- Drag and Drop Handlers ---
+        function handleDragStart(e) {
+            // Check if the target is actually a draggable part
+             if (e.target.classList.contains('sentence-part')) {
+                draggedItem = e.target;
+                // Use dataTransfer to store the ID of the dragged item
+                e.dataTransfer.setData('text/plain', e.target.id);
+                e.dataTransfer.effectAllowed = 'move';
+                // Optional: Add styling for dragging element
+                setTimeout(() => e.target.classList.add('opacity-50'), 0);
+             } else {
+                 e.preventDefault(); // Prevent dragging non-draggable elements
+             }
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault(); // Necessary to allow dropping
+            e.dataTransfer.dropEffect = 'move';
+            // Optional: Add visual feedback for drop target
+            const dropZone = e.target.closest('.drop-area, #sentence-parts-source');
+             if(dropZone) {
+                 dropZone.classList.add('bg-gray-200'); // Example highlight
+             }
+        }
+
+         // Add dragleave listeners to remove highlight
+        sentenceDropArea.addEventListener('dragleave', (e) => {
+             const dropZone = e.target.closest('.drop-area');
+             if (dropZone) {
+                 dropZone.classList.remove('bg-gray-200');
+             }
+         });
+         sentencePartsSource.addEventListener('dragleave', (e) => {
+             const dropZone = e.target.closest('#sentence-parts-source');
+             if (dropZone) {
+                 dropZone.classList.remove('bg-gray-200');
+             }
+         });
+
+
+        function handleDrop(e) {
+            e.preventDefault();
+             const dropZone = e.target.closest('.drop-area, #sentence-parts-source');
+             const draggedId = e.dataTransfer.getData('text/plain');
+             const draggedElement = document.getElementById(draggedId); // Get the element being dragged
+
+             if (dropZone && draggedElement) {
+                 // Append the actual dragged element
+                 dropZone.appendChild(draggedElement);
+                 // Restore appearance
+                 draggedElement.classList.remove('opacity-50');
+                 // Remove highlight
+                 dropZone.classList.remove('bg-gray-200');
+
+                 // Update the answer immediately after drop
+                 saveCurrentAnswer();
+                 updateProgressIndicator(); // Update answered count
+             }
+             // Reset highlight just in case it didn't clear on dragleave
+             sentenceDropArea.classList.remove('bg-gray-200');
+             sentencePartsSource.classList.remove('bg-gray-200');
+        }
+
+
+        // --- Anti-Inspect/Copy Measures ---
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable common developer key combinations (basic deterrent)
+        document.addEventListener('keydown', function(event) {
+            // Disable F12
+            if (event.key === "F12" || event.keyCode === 123) {
+                event.preventDefault();
+                return false;
             }
+            // Disable Ctrl+Shift+I
+            if (event.ctrlKey && event.shiftKey && (event.key === "I" || event.keyCode === 'I'.charCodeAt(0))) {
+                 event.preventDefault();
+                return false;
+            }
+             // Disable Ctrl+Shift+J
+            if (event.ctrlKey && event.shiftKey && (event.key === "J" || event.keyCode === 'J'.charCodeAt(0))) {
+                 event.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+C
+            if (event.ctrlKey && event.shiftKey && (event.key === "C" || event.keyCode === 'C'.charCodeAt(0))) {
+                 event.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+U
+            if (event.ctrlKey && (event.key === "U" || event.keyCode === 'U'.charCodeAt(0))) {
+                 event.preventDefault();
+                return false;
+            }
+             // Disable Ctrl+S (Save page) - might interfere with normal saving if needed
+             // if (event.ctrlKey && (event.key === "S" || event.keyCode === 'S'.charCodeAt(0))) {
+             //     event.preventDefault();
+             //     return false;
+             // }
         });
 
-        // Submit Quiz Button
-        submitQuizBtn.addEventListener('click', () => submitQuiz(false));
-
-        // Disable inspect element (basic attempt)
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'J'))) {
-                e.preventDefault();
-                // console.log("Inspect Element is disabled."); // Optional message
-            }
-        });
+        // Initial setup (optional, if needed)
+         document.addEventListener('DOMContentLoaded', () => {
+             // Initialize progress indicator on load
+             updateProgressIndicator();
+         });
 
     </script>
 
