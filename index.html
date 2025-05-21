@@ -3,662 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS 16 MAY 2025 - SYED ASGHAR ALI SHAH</title>
+    <title>QUIZ FOR CSS ASPIRANTS 21 MAY 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             -webkit-user-select: none; /* Safari */
             -ms-user-select: none; /* IE 10 and IE 11 */
             user-select: none; /* Standard syntax */
-            background-color: #f0f4f8; /* Light blue-gray background */
+            overflow-x: hidden;
         }
-
-        /* Disable right-click context menu */
-        /* body {
-            oncontextmenu: "return false;"
-        } */ /* This is better done with JS */
-
-        .header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Dark slate gradient */
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 5px solid #fbbf24; /* Amber accent */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-        .header img {
-            max-width: 150px;
-            border-radius: 50%;
-            border: 4px solid #fbbf24; /* Amber border for image */
-            margin-bottom: 10px;
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .header h1 {
-            font-family: 'Press Start 2P', cursive; /* Arcade/Retro font for main title */
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-        .header p {
-            font-size: 1.1rem;
-            font-weight: 600;
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
         }
-
-        .footer {
-            background: #0f172a; /* Dark slate */
-            color: #cbd5e1; /* Lighter text for footer */
-            padding: 30px 0;
-            text-align: center;
-            margin-top: 40px;
-            border-top: 5px solid #fbbf24; /* Amber accent */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
-        .footer p {
-            margin-bottom: 8px;
+        .question-option:hover {
+            background-color: #e0f2fe; /* Light blue on hover */
         }
-        .footer a {
-            color: #fbbf24; /* Amber for links */
-            text-decoration: none;
-            font-weight: 600;
+        .selected-option {
+            background-color: #bae6fd !important; /* Sky blue for selected */
+            border-color: #0284c7 !important; /* Darker blue border */
         }
-        .footer a:hover {
-            text-decoration: underline;
+        .header-glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 12px rgba(74, 222, 128, 0.7);
         }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
+        .footer-glow {
+             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        /* Animation for sections appearing */
+        .fade-in {
+            animation: fadeInAnimation 0.5s ease-in forwards;
+        }
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
             padding: 20px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
         }
-
-        #name-section input[type="text"], #name-section button, .quiz-button, .nav-button {
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db; /* Gray border */
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-        #name-section input[type="text"] {
-            width: calc(100% - 44px); /* Full width minus padding and border */
-        }
-
-        #name-section button, .quiz-button, .nav-button {
-            background-color: #10b981; /* Emerald green */
+        .modal-button {
+            background-color: #4CAF50;
             color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
-        }
-        #name-section button:hover, .quiz-button:hover, .nav-button:hover {
-            background-color: #059669; /* Darker emerald */
-        }
-        .quiz-button.submit {
-            background-color: #ef4444; /* Red for submit */
-        }
-        .quiz-button.submit:hover {
-            background-color: #dc2626; /* Darker red */
-        }
-
-
-        .question-container {
-            margin-bottom: 25px;
-            padding: 20px;
-            background-color: #f9fafb; /* Very light gray for question background */
-            border-radius: 8px;
-            border-left: 5px solid #3b82f6; /* Blue accent */
-        }
-        .question-container h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #1f2937; /* Dark gray text */
-        }
-        .options label {
-            display: block;
-            background-color: white;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb; /* Light gray border for options */
-            cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .options label:hover {
-            background-color: #eff6ff; /* Light blue on hover */
-            border-color: #93c5fd; /* Blue border on hover */
-        }
-        .options input[type="radio"] {
-            margin-right: 10px;
-            accent-color: #10b981; /* Emerald green for radio button */
-        }
-
-        #timer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ef4444; /* Red for timer */
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #fee2e2; /* Light red background for timer */
-            border-radius: 8px;
-        }
-
-        #results-section h2 {
-            color: #10b981; /* Emerald green for results header */
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        #results-section p {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #374151; /* Medium gray text */
-        }
-        .nav-buttons-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            width: 0%;
-            height: 20px;
-            background-color: #3b82f6; /* Blue for progress bar */
-            text-align: center;
-            line-height: 20px;
-            color: white;
-            font-weight: 600;
-            transition: width 0.3s ease-in-out;
-        }
-        .message-box {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .message-box p { margin-bottom: 15px; }
-        .message-box button {
             padding: 10px 20px;
-            background-color: #10b981;
-            color: white;
+            margin: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+        .modal-button:hover {
+            background-color: #45a049;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 </head>
-<body oncontextmenu="return false;">
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-gray-100 no-select min-h-screen flex flex-col" oncontextmenu="return false;">
 
-    <header class="header">
-        <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Syed Asghar Ali Shah">
-        <h1>QUIZ FOR CSS ASPIRANTS</h1>
-        <p>16 MAY 2025</p>
-        <p>Prepared By: SYED ASGHAR ALI SHAH</p>
+    <header class="bg-slate-800/50 backdrop-blur-md shadow-2xl py-4 sm:py-6 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center mb-2 sm:mb-0">
+                <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Syed Asghar Ali Shah" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full mr-3 sm:mr-4 border-2 border-green-400 shadow-lg">
+                <div>
+                    <h2 class="text-sm sm:text-lg font-semibold text-green-300 header-glow">SYED ASGHAR ALI SHAH</h2>
+                    <h1 class="text-lg sm:text-2xl font-bold text-sky-300 header-glow">QUIZ FOR CSS ASPIRANTS</h1>
+                    <p class="text-xs sm:text-sm text-amber-300 header-glow">21 MAY 2025</p>
+                </div>
+            </div>
+            <div id="timer-display" class="text-2xl sm:text-3xl font-bold text-red-400" style="font-family: 'Orbitron', sans-serif;">40:00</div>
+        </div>
     </header>
 
-    <div class="container">
-        <div id="name-section">
-            <h2 class="text-2xl font-bold mb-4 text-gray-700">Enter Your Name to Begin</h2>
-            <input type="text" id="student-name" placeholder="Full Name" class="w-full">
-            <button onclick="startQuiz()" class="w-full mt-3">Start Quiz</button>
-        </div>
+    <main class="container mx-auto px-4 py-8 flex-grow">
 
-        <div id="quiz-section" style="display: none;">
-            <div id="timer">40:00</div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progress-bar">0%</div>
-            </div>
-            <div id="question-area">
+        <section id="name-entry-section" class="max-w-lg mx-auto bg-slate-700/70 p-6 sm:p-8 rounded-xl shadow-2xl backdrop-blur-sm">
+            <h2 class="text-2xl font-semibold mb-6 text-center text-sky-300">Enter Your Name to Begin</h2>
+            <input type="text" id="student-name" placeholder="Your Full Name" class="w-full p-3 mb-4 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none text-gray-100 placeholder-gray-400">
+            <button id="start-quiz-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 ease-in-out transform hover:scale-105 shadow-lg">
+                Start Quiz
+            </button>
+            <p id="name-error" class="text-red-400 text-sm mt-2 text-center"></p>
+        </section>
+
+        <section id="quiz-section" class="hidden max-w-4xl mx-auto bg-slate-700/70 p-6 sm:p-8 rounded-xl shadow-2xl backdrop-blur-sm fade-in">
+            <div id="question-container" class="mb-6">
                 </div>
-            <div class="nav-buttons-container">
-                <button onclick="previousQuestion()" id="prev-button" class="nav-button" style="display: none;">Previous</button>
-                <button onclick="nextQuestion()" id="next-button" class="nav-button">Next</button>
+            <div class="flex justify-between items-center mt-6">
+                <button id="prev-question-btn" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out shadow-md">Previous</button>
+                <span id="question-counter" class="text-lg text-amber-300">Question 1 / 100</span>
+                <button id="next-question-btn" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out shadow-md">Next</button>
             </div>
-            <button onclick="submitQuiz()" class="quiz-button submit w-full mt-4">Submit Quiz</button>
-        </div>
+            <button id="submit-quiz-btn" class="w-full mt-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition duration-150 ease-in-out transform hover:scale-105 shadow-lg">
+                Submit Quiz
+            </button>
+        </section>
 
-        <div id="results-section" style="display: none;">
-            <h2 class="text-2xl font-bold mb-4">Quiz Results</h2>
-            <p id="result-name"></p>
-            <p id="result-attempted"></p>
-            <p id="result-score"></p>
-            <p id="result-time-taken"></p>
-            <p id="result-percentage"></p>
-        </div>
-    </div>
+        <section id="results-section" class="hidden max-w-lg mx-auto bg-slate-700/70 p-6 sm:p-8 rounded-xl shadow-2xl backdrop-blur-sm fade-in text-center">
+            <h2 class="text-3xl font-bold mb-6 text-green-400">Quiz Results</h2>
+            <div class="space-y-3 text-lg">
+                <p><strong>Name:</strong> <span id="result-name" class="text-sky-300"></span></p>
+                <p><strong>Attempted:</strong> <span id="result-attempted" class="text-sky-300"></span></p>
+                <p><strong>Score:</strong> <span id="result-score" class="text-sky-300"></span></p>
+                <p><strong>Time Taken:</strong> <span id="result-time-taken" class="text-sky-300"></span></p>
+            </div>
+            <p class="mt-6 text-amber-300">Your results have been submitted. Thank you for participating!</p>
+        </section>
 
-    <footer class="footer">
-        <p>&copy; 2025 SYED ASGHAR ALI SHAH - CSS Aspirants Quiz. All Rights Reserved.</p>
-        <p>Contact: 03265762698</p>
-        <p><a href="#">Prepare for Success!</a></p>
+        <form id="quiz-results-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+            <input type="text" name="studentName" id="form-student-name">
+            <input type="number" name="questionsAttempted" id="form-questions-attempted">
+            <input type="number" name="score" id="form-score">
+            <input type="text" name="timeTaken" id="form-time-taken">
+        </form>
+    </main>
+
+    <footer class="bg-slate-800/50 backdrop-blur-md shadow-2xl py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <p class="footer-glow">&copy; 2025 QUIZ FOR CSS ASPIRANTS. All rights reserved.</p>
+            <p class="footer-glow">Designed by SYED ASGHAR ALI SHAH</p>
+            <p class="mt-2 footer-glow">Contact: <a href="tel:03265762698" class="text-sky-400 hover:text-sky-300">03265762698</a></p>
+            <p class="mt-2 text-amber-300 footer-glow">Prepare diligently. Success awaits the dedicated.</p>
+        </div>
     </footer>
 
-    <form id="quiz-results-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-        <input type="text" name="studentName" id="form-student-name">
-        <input type="text" name="questionsAttempted" id="form-questions-attempted">
-        <input type="text" name="score" id="form-score">
-        <input type="text" name="timeTaken" id="form-time-taken">
-        <input type="text" name="percentage" id="form-percentage">
-    </form>
-
-    <div id="custom-message-box" class="message-box">
-        <p id="message-text"></p>
-        <button id="message-ok-button">OK</button>
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content bg-slate-700 text-gray-100 rounded-lg shadow-xl">
+            <p id="modalMessage" class="text-lg mb-4"></p>
+            <button id="modalConfirmBtn" class="modal-button bg-green-500 hover:bg-green-600">Confirm</button>
+            <button id="modalCancelBtn" class="modal-button bg-red-500 hover:bg-red-600">Cancel</button>
+        </div>
     </div>
 
+
     <script>
-        // --- Anti-Inspection Measures ---
-        // Disable right-click (context menu)
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        document.addEventListener('keydown', function(event) {
-            // Disable F12 (Developer Tools)
-            if (event.key === "F12" || event.keyCode === 123) {
-                event.preventDefault();
-                showCustomMessage("Developer tools are disabled on this page.");
-            }
-            // Disable Ctrl+Shift+I (Developer Tools)
-            if (event.ctrlKey && event.shiftKey && event.key === "I") {
-                event.preventDefault();
-                showCustomMessage("Developer tools are disabled on this page.");
-            }
-            // Disable Ctrl+Shift+J (Developer Tools)
-            if (event.ctrlKey && event.shiftKey && event.key === "J") {
-                event.preventDefault();
-                showCustomMessage("Developer tools are disabled on this page.");
-            }
-            // Disable Ctrl+U (View Source)
-            if (event.ctrlKey && event.key === "U") {
-                event.preventDefault();
-                showCustomMessage("Viewing page source is disabled.");
-            }
-            // Disable Ctrl+S (Save Page)
-             if (event.ctrlKey && event.key === "S") {
-                event.preventDefault();
-                showCustomMessage("Saving the page is disabled.");
-            }
-        });
-
-        // Custom message box
-        const messageBox = document.getElementById('custom-message-box');
-        const messageText = document.getElementById('message-text');
-        const messageOkButton = document.getElementById('message-ok-button');
-
-        function showCustomMessage(message) {
-            messageText.textContent = message;
-            messageBox.style.display = 'block';
-        }
-
-        messageOkButton.onclick = function() {
-            messageBox.style.display = 'none';
-        };
-
-
         // --- Quiz Data ---
-        const quizQuestions = [
-            // 50 MCQs from One Paper MCQs Book PDF (pages 341-360)
-            // Category: Coolest, Highest, Lowest, Biggest, Tallest, Smallest & Oldest (pg 341-342)
-            { question: "Which is the highest peak in Pakistan?", options: {"a": "K2", "b": "Nanga Parbat", "c": "Tirich Mir", "d": "Broad Peak"}, answer: "a" },
-            { question: "What is the name of the highest battlefield in the world, located in Pakistan?", options: {"a": "Kargil", "b": "Siachen Glacier", "c": "Cholistan Desert", "d": "Deosai Plains"}, answer: "b" },
-            { question: "Which is the largest desert in Pakistan?", options: {"a": "Thal", "b": "Kharan", "c": "Cholistan", "d": "Thar"}, answer: "d" }, // Thar is largest, part of which is Cholistan.
-            { question: "Identify the oldest city of Pakistan.", options: {"a": "Lahore", "b": "Multan", "c": "Peshawar", "d": "Taxila"}, answer: "b" }, // Multan is one of the oldest continuously inhabited cities.
-            { question: "Which is the longest river in Pakistan?", options: {"a": "Ravi", "b": "Sutlej", "c": "Indus", "d": "Jhelum"}, answer: "c" },
+        // This array now contains an expanded set of questions.
+        // Sourced from: One Paper MCQs (pg 421-440 for English), Grammar Analysis PDF, Idioms/Synonyms PDF.
+        const quizData = [
+            // Prepositions (from One Paper MCQs PDF & general grammar)
+            { question: "He is quite insensible ___ danger.", options: ["to", "of", "with", "from"], answer: "to", category: "Prepositions" },
+            { question: "I am not envious ___ his success.", options: ["of", "for", "with", "at"], answer: "of", category: "Prepositions" },
+            { question: "She is related ___ me.", options: ["with", "to", "of", "by"], answer: "to", category: "Prepositions" },
+            { question: "He is not fit ___ this job.", options: ["to", "for", "with", "in"], answer: "for", category: "Prepositions" },
+            { question: "The train is ___ time.", options: ["on", "in", "at", "by"], answer: "on", category: "Prepositions" },
+            { question: "He is absorbed ___ his studies.", options: ["in", "with", "at", "on"], answer: "in", category: "Prepositions" },
+            { question: "Beware ___ pickpockets.", options: ["from", "of", "with", "about"], answer: "of", category: "Prepositions" },
+            { question: "She has a passion ___ music.", options: ["for", "of", "in", "with"], answer: "for", category: "Prepositions" },
+            { question: "This work is ___ my dignity.", options: ["below", "under", "off", "to"], answer: "below", category: "Prepositions" },
+            { question: "He is blind ___ one eye.", options: ["in", "of", "with", "to"], answer: "in", category: "Prepositions" }, // Blind in an eye
+            { question: "Do not boast ___ your wealth.", options: ["of", "about", "for", "in"], answer: "of", category: "Prepositions" }, // boast of/about
+            { question: "He is charged ___ theft.", options: ["with", "for", "of", "on"], answer: "with", category: "Prepositions" },
+            { question: "I prefer tea ___ coffee.", options: ["to", "over", "than", "against"], answer: "to", category: "Prepositions" },
+            { question: "She complained ___ the manager ___ the poor service.", options: ["to, about", "with, for", "against, of", "to, for"], answer: "to, about", category: "Prepositions" },
+            { question: "He is good ___ mathematics.", options: ["in", "at", "with", "on"], answer: "at", category: "Prepositions" },
 
-            // Category: Forts in Pakistan (pg 343-344)
-            { question: "Rohtas Fort, a UNESCO World Heritage site, was built by which ruler?", options: {"a": "Akbar", "b": "Sher Shah Suri", "c": "Babur", "d": "Aurangzeb"}, answer: "b" },
-            { question: "The Altit Fort is located in which region of Pakistan?", options: {"a": "Swat Valley", "b": "Hunza Valley", "c": "Kalash Valley", "d": "Neelum Valley"}, answer: "b" },
-            { question: "Ranikot Fort, also known as 'The Great Wall of Sindh', is famous for its:", options: {"a": "Height", "b": "Length of its walls", "c": "Strategic location", "d": "Intricate carvings"}, answer: "b" },
-            { question: "Bala Hisar Fort is a historic fort located in which city?", options: {"a": "Lahore", "b": "Multan", "c": "Quetta", "d": "Peshawar"}, answer: "d" },
-            { question: "Derawar Fort is located in which desert?", options: {"a": "Thal Desert", "b": "Kharan Desert", "c": "Cholistan Desert", "d": "Thar Desert"}, answer: "c" },
+            // Punctuation (from One Paper MCQs PDF & general grammar)
+            { question: "Which punctuation mark is used to indicate possession?", options: ["Comma (,)", "Apostrophe (')", "Semicolon (;)", "Hyphen (-)"], answer: "Apostrophe (')", category: "Punctuation" },
+            { question: "What is the primary purpose of a question mark (?)?", options: ["To end any sentence", "To indicate a direct question", "To show strong emotion", "To separate items in a list"], answer: "To indicate a direct question", category: "Punctuation" },
+            { question: "Which sentence uses the comma correctly before a coordinating conjunction joining independent clauses?", options: ["He was tired yet he continued working.", "He was tired, yet he continued working.", "He was tired, yet, he continued working.", "He was tired yet, he continued working."], answer: "He was tired, yet he continued working.", category: "Punctuation" },
+            { question: "Which punctuation mark is often used to introduce a list or an explanation?", options: ["Semicolon (;)", "Colon (:)", "Dash (—)", "Ellipsis (...)"], answer: "Colon (:)", category: "Punctuation" },
+            { question: "In the sentence, 'She bought apples, oranges, and bananas,' the commas are called:", options: ["Oxford commas", "Appositive commas", "Serial commas", "Introductory commas"], answer: "Serial commas", category: "Punctuation" },
+            { question: "An em-dash (—) can be used to:", options: ["Only show possession", "Introduce an explanation or elaboration", "Replace all commas", "Indicate a pause shorter than a comma"], answer: "Introduce an explanation or elaboration", category: "Punctuation" },
+            { question: "What does an ellipsis (...) indicate?", options: ["The end of a sentence", "A spelling mistake", "An omission of words or a trailing off of thought", "A direct quotation"], answer: "An omission of words or a trailing off of thought", category: "Punctuation" },
+            { question: "Quotation marks (“ ”) are NOT used for:", options: ["Direct quotes", "Titles of short stories or articles", "Emphasizing a common word", "Indicating irony or a special sense of a word"], answer: "Emphasizing a common word", category: "Punctuation" }, // Italics or bold are for emphasis
+            { question: "A semicolon (;) is appropriately used to:", options: ["Connect two closely related independent clauses", "Separate items in a simple list", "Indicate a question", "End every sentence"], answer: "Connect two closely related independent clauses", category: "Punctuation" },
+            { question: "Which sentence correctly uses an apostrophe for contraction? She ___ going to the park.", options: ["is'nt", "isnt'", "isn't", "is'not"], answer: "isn't", category: "Punctuation" },
 
-            // Category: Distinctive Name of Cities of Pakistan (pg 345-346)
-            { question: "Which city is known as the 'City of Saints'?", options: {"a": "Lahore", "b": "Uch Sharif", "c": "Multan", "d": "Sehwan"}, answer: "c" },
-            { question: "The city of Sialkot is internationally famous for manufacturing:", options: {"a": "Textiles", "b": "Surgical instruments & Sports goods", "c": "Carpets", "d": "Cutlery"}, answer: "b" },
-            { question: "Which city is called the 'Manchester of Pakistan' due to its textile industry?", options: {"a": "Karachi", "b": "Lahore", "c": "Faisalabad", "d": "Gujranwala"}, answer: "c" },
-            { question: "Peshawar is known as the 'City of _______'.", options: {"a": "Gardens", "b": "Lights", "c": "Flowers", "d": "Education"}, answer: "c" },
-            { question: "Which city is referred to as the 'Brazil of Pakistan' for its football manufacturing?", options: {"a": "Faisalabad", "b": "Sialkot", "c": "Gujranwala", "d": "Lahore"}, answer: "b" },
+            // Idioms & Phrases (from 21 May Notes & general usage)
+            { question: "What is the meaning of the idiom 'To bear the brunt of'?", options: ["To carry a heavy load physically", "To endure the main shock or impact of something negative", "To be extremely brave in a difficult situation", "To delegate responsibility to others"], answer: "To endure the main shock or impact of something negative", category: "Idioms" },
+            { question: "If an argument 'does not hold water', it means:", options: ["It is too complex to understand", "It is based on aquatic analogies", "It is not logical, sound, or believable", "It is intentionally misleading"], answer: "It is not logical, sound, or believable", category: "Idioms" },
+            { question: "What does 'to turn the other cheek' imply?", options: ["To look away in shame", "To inspect the other side of an object", "To not retaliate when attacked or insulted", "To prepare for a second confrontation"], answer: "To not retaliate when attacked or insulted", category: "Idioms" },
+            { question: "The idiom 'a drop in the ocean' signifies:", options: ["Something of immense value", "A very small amount compared to what is needed", "A sudden realization", "A hidden treasure"], answer: "A very small amount compared to what is needed", category: "Idioms" },
+            { question: "'On a war footing' means to approach a situation with:", options: ["Casual indifference", "Extreme caution and delay", "The urgency and intensity of wartime preparations", "A desire for peaceful resolution"], answer: "The urgency and intensity of wartime preparations", category: "Idioms" },
+            { question: "If something is 'brought into sharp relief', it is:", options: ["Made less clear", "Softened or blurred", "Made very clear or obvious", "Reduced in importance"], answer: "Made very clear or obvious", category: "Idioms" },
+            { question: "The phrase 'vying for dominance' means:", options: ["Avoiding conflict", "Competing strongly to be the most powerful", "Working collaboratively", "Accepting a subordinate role"], answer: "Competing strongly to be the most powerful", category: "Idioms" },
+            { question: "To 'refuse to yield' means to:", options: ["Give in easily", "Stand firm and not surrender", "Negotiate a compromise", "Retreat strategically"], answer: "Stand firm and not surrender", category: "Idioms" },
+            { question: "If someone has 'a lot to answer for', they are:", options: ["Highly knowledgeable", "Responsible for many bad things that have happened", "Expected to give many speeches", "Blameless and innocent"], answer: "Responsible for many bad things that have happened", category: "Idioms" },
+            { question: "To 'leave permanent scars' (emotionally or physically) means to:", options: ["Cause temporary discomfort", "Heal completely without a trace", "Cause lasting damage or indelible marks", "Forget an incident quickly"], answer: "Cause lasting damage or indelible marks", category: "Idioms" },
 
-            // Category: Old & New Names of Cities (pg 347-348)
-            { question: "What was the old name of Faisalabad?", options: {"a": "Montgomery", "b": "Lyallpur", "c": "Salwan Kot", "d": "Campbellpur"}, answer: "b" },
-            { question: "Sahiwal was formerly known as:", options: {"a": "Fort Sandeman", "b": "Khanpur", "c": "Montgomery", "d": "Lyallpur"}, answer: "c" },
-            { question: "The modern city of Attock was previously known as:", options: {"a": "Nerunkot", "b": "Peshawar", "c": "Rawalpindi", "d": "Campbellpur"}, answer: "d" },
-            { question: "What is the old name of Zhob?", options: {"a": "Hindubagh", "b": "Fort Munro", "c": "Appozai", "d": "Fort Sandeman"}, answer: "d" }, // Fort Sandeman is another name for Zhob
-            { question: "The ancient name of Quetta was:", options: {"a": "Shalkot", "b": "Kolachi", "c": "Ajodhya", "d": "Mancetter"}, answer: "a" },
+            // Synonyms (from 21 May Notes & general vocabulary)
+            { question: "Choose the closest synonym for 'PITTANCE'.", options: ["A large sum", "A fair wage", "A negligible amount", "An unexpected bonus"], answer: "A negligible amount", category: "Synonyms" },
+            { question: "Select the best synonym for 'FORBEARANCE'.", options: ["Impatience", "Retaliation", "Patient self-control; restraint and tolerance", "Aggression"], answer: "Patient self-control; restraint and tolerance", category: "Synonyms" },
+            { question: "A synonym for 'NEGLIGIBLE' is:", options: ["Significant", "Crucial", "Insignificant", "Abundant"], answer: "Insignificant", category: "Synonyms" },
+            { question: "The word 'ESCALATING' is a synonym for:", options: ["Decreasing", "Stabilizing", "Increasing", "Fluctuating"], answer: "Increasing", category: "Synonyms" },
+            { question: "Choose the synonym for 'CULPABLE'.", options: ["Innocent", "Blameworthy", "Careful", "Admirable"], answer: "Blameworthy", category: "Synonyms" },
+            { question: "What is a synonym for 'METED OUT' (as in punishment)?", options: ["Withheld", "Administered", "Reduced", "Questioned"], answer: "Administered", category: "Synonyms" },
+            { question: "A synonym for 'SINGULAR' (as in a singular talent) is:", options: ["Multiple", "Common", "Unique", "Ordinary"], answer: "Unique", category: "Synonyms" },
+            { question: "The closest synonym for 'STAGNATING' is:", options: ["Progressing", "Flourishing", "Making no progress", "Improving rapidly"], answer: "Making no progress", category: "Synonyms" },
+            { question: "Find a synonym for 'PRETEXT'.", options: ["Reason", "Excuse or guise", "Goal", "Conclusion"], answer: "Excuse or guise", category: "Synonyms" },
+            { question: "A synonym for 'INDELIBLE' is:", options: ["Temporary", "Erasable", "Permanent or unremovable", "Faint"], answer: "Permanent or unremovable", category: "Synonyms" },
 
-            // Category: History before 1857 (pg 349-352)
-            { question: "Who was the founder of the Mughal Empire in India?", options: {"a": "Akbar", "b": "Humayun", "c": "Babur", "d": "Jahangir"}, answer: "c" },
-            { question: "The First Battle of Panipat (1526) was fought between Babur and whom?", options: {"a": "Rana Sanga", "b": "Ibrahim Lodhi", "c": "Sher Shah Suri", "d": "Mahmud Lodhi"}, answer: "b" },
-            { question: "Muhammad bin Qasim conquered Sindh in which year?", options: {"a": "712 AD", "b": "632 AD", "c": "815 AD", "d": "1001 AD"}, answer: "a" },
-            { question: "The religion 'Din-i-Ilahi' was introduced by which Mughal emperor?", options: {"a": "Shah Jahan", "b": "Aurangzeb", "c": "Jahangir", "d": "Akbar"}, answer: "d" },
-            { question: "Mahmud of Ghazni launched how many expeditions into India?", options: {"a": "10", "b": "17", "c": "12", "d": "20"}, answer: "b" },
-            
-            // Category: History after 1857 (pg 353-360)
-            { question: "The War of Independence of 1857 started from which city?", options: {"a": "Delhi", "b": "Meerut", "c": "Lucknow", "d": "Kanpur"}, answer: "b" },
-            { question: "The All-India Muslim League was founded in which year?", options: {"a": "1905", "b": "1906", "c": "1909", "d": "1911"}, answer: "b" },
-            { question: "The partition of Bengal took place in 1905 during the viceroyalty of:", options: {"a": "Lord Curzon", "b": "Lord Minto", "c": "Lord Hardinge", "d": "Lord Chelmsford"}, answer: "a" },
-            { question: "Who was the first Governor-General of Pakistan?", options: {"a": "Liaquat Ali Khan", "b": "Muhammad Ali Jinnah", "c": "Khawaja Nazimuddin", "d": "Ghulam Muhammad"}, answer: "b" },
-            { question: "The Lucknow Pact (1916) was an agreement between the All-India Muslim League and:", options: {"a": "British Government", "b": "Indian National Congress", "c": "Unionist Party", "d": "Khilafat Movement"}, answer: "b" },
-            { question: "The Simon Commission visited India in which year?", options: {"a": "1919", "b": "1927", "c": "1928", "d": "1930"}, answer: "c" }, // Arrived in Feb 1928, announced 1927
-            { question: "The 'Quit India' Movement was launched by the Indian National Congress in:", options: {"a": "1930", "b": "1939", "c": "1942", "d": "1945"}, answer: "c" },
-            { question: "Who presented the Lahore Resolution (Pakistan Resolution) on March 23, 1940?", options: {"a": "Muhammad Ali Jinnah", "b": "A.K. Fazlul Huq", "c": "Liaquat Ali Khan", "d": "Chaudhry Khaliquzzaman"}, answer: "b" },
-            { question: "The Radcliffe Award, which demarcated the boundaries between India and Pakistan, was announced on:", options: {"a": "August 14, 1947", "b": "August 15, 1947", "c": "August 17, 1947", "d": "July 18, 1947"}, answer: "c" },
-            { question: "Sir Syed Ahmed Khan founded the MAO College at Aligarh in which year?", options: {"a": "1857", "b": "1875", "c": "1877", "d": "1885"}, answer: "b" }, // School 1875, College 1877
-            { question: "The Khilafat Movement was launched to protect the caliphate in which country?", options: {"a": "Saudi Arabia", "b": "Iran", "c": "Turkey", "d": "Egypt"}, answer: "c" },
-            { question: "The Nehru Report was published in:", options: {"a": "1927", "b": "1928", "c": "1929", "d": "1930"}, answer: "b" },
-            { question: "Jallianwala Bagh massacre took place in Amritsar in the year:", options: {"a": "1917", "b": "1919", "c": "1920", "d": "1922"}, answer: "b" },
-            { question: "The Government of India Act, 1935, proposed:", options: {"a": "Provincial Autonomy", "b": "Dyarchy at Centre", "c": "A Federal Structure", "d": "All of the above"}, answer: "d" },
-            { question: "Who was the British Prime Minister at the time of the Partition of India in 1947?", options: {"a": "Winston Churchill", "b": "Clement Attlee", "c": "Neville Chamberlain", "d": "Harold Macmillan"}, answer: "b" },
-            { question: "The 'Two-Nation Theory' is most famously associated with:", options: {"a": "Mahatma Gandhi", "b": "Jawaharlal Nehru", "c": "Muhammad Ali Jinnah", "d": "Sardar Patel"}, answer: "c" },
-            { question: "The Cripps Mission came to India in:", options: {"a": "1940", "b": "1942", "c": "1945", "d": "1946"}, answer: "b" },
-            { question: "The Mountbatten Plan, which led to the partition of India, was announced on:", options: {"a": "June 3, 1947", "b": "July 18, 1947", "c": "August 14, 1947", "d": "May 16, 1946"}, answer: "a" },
-            { question: "The first Round Table Conference was held in London in:", options: {"a": "1929", "b": "1930", "c": "1931", "d": "1932"}, answer: "b" },
-            { question: "Who is known as the 'Ambassador of Hindu-Muslim Unity' for his role in the Lucknow Pact?", options: {"a": "Abul Kalam Azad", "b": "Muhammad Ali Jinnah", "c": "Mahatma Gandhi", "d": "Motilal Nehru"}, answer: "b" },
-            { question: "The Indian Councils Act of 1909 is also known as the:", options: {"a": "Montagu-Chelmsford Reforms", "b": "Morley-Minto Reforms", "c": "Simon Commission Report", "d": "Cripps Proposal"}, answer: "b" },
-            { question: "The Objective Resolution, which laid down the aims for Pakistan's constitution, was presented by Liaquat Ali Khan in:", options: {"a": "1947", "b": "1948", "c": "1949", "d": "1950"}, answer: "c" },
-            { question: "The concept of 'Separate Electorates' for Muslims was first accepted by the British in which act?", options: {"a": "Indian Councils Act, 1892", "b": "Indian Councils Act, 1909", "c": "Government of India Act, 1919", "d": "Government of India Act, 1935"}, answer: "b" },
-            { question: "The 'Direct Action Day' was called by the Muslim League on:", options: {"a": "August 16, 1946", "b": "March 23, 1940", "c": "June 3, 1947", "d": "October 24, 1945"}, answer: "a" },
-            { question: "Who was the last Viceroy of united India?", options: {"a": "Lord Wavell", "b": "Lord Linlithgow", "c": "Lord Mountbatten", "d": "Lord Irwin"}, answer: "c" },
+            // Antonyms (from 21 May Notes & general vocabulary)
+            { question: "Choose the most appropriate antonym for 'ABUNDANCE'.", options: ["Surplus", "Excess", "Scarcity", "Overflow"], answer: "Scarcity", category: "Antonyms" },
+            { question: "What is the antonym of 'FLIMSY' (as in a flimsy argument)?", options: ["Delicate", "Weak", "Sound", "Transparent"], answer: "Sound", category: "Antonyms" },
+            { question: "The antonym of 'STAGNATING' is:", options: ["Declining", "Progressing", "Halting", "Withering"], answer: "Progressing", category: "Antonyms" },
+            { question: "An antonym for 'ILLOGICAL' is:", options: ["Unreasonable", "Valid", "Confused", "Incorrect"], answer: "Valid", category: "Antonyms" },
+            { question: "The opposite of 'RETALIATE' is:", options: ["Attack", "Avenge", "Forgive or show forbearance", "Ignore"], answer: "Forgive or show forbearance", category: "Antonyms" },
+            { question: "What is an antonym for 'OBSCURED'?", options: ["Hidden", "Revealed or highlighted", "Darkened", "Confused"], answer: "Revealed or highlighted", category: "Antonyms" },
+            { question: "The antonym of 'INEFFECTIVE' is:", options: ["Useless", "Impactful or influential", "Weak", "Pointless"], answer: "Impactful or influential", category: "Antonyms" },
+            { question: "Choose an antonym for 'BE BLAMELESS'.", options: ["Be innocent", "Be culpable", "Be praised", "Be ignored"], answer: "Be culpable", category: "Antonyms" },
+            { question: "The opposite of 'DETERRED' (as in deterred investors) is:", options: ["Discouraged", "Prevented", "Attracted or encouraged", "Repelled"], answer: "Attracted or encouraged", category: "Antonyms" },
+            { question: "An antonym for 'DECREASING' is:", options: ["Falling", "Escalating or growing", "Shrinking", "Diminishing"], answer: "Escalating or growing", category: "Antonyms" },
 
-            // 50 MCQs from Grammar/Vocabulary PDFs
-            // Category: Parts of Speech (Comprehensive Grammar Analysis PDF)
-            { question: "In the sentence, 'INDIA has neither suspended nor abrogated the Indus Waters Treaty (IWT)', what part of speech is 'Treaty'?", options: {"a": "Verb", "b": "Adjective", "c": "Proper Noun", "d": "Adverb"}, answer: "c" },
-            { question: "Identify the abstract noun in the following sentence: 'Maintaining the treaty offers greater advantages to both nations.'", options: {"a": "treaty", "b": "advantages", "c": "nations", "d": "maintaining"}, answer: "b" },
-            { question: "Which of the following is a collective noun: 'The commission discussed the new proposal.'?", options: {"a": "proposal", "b": "new", "c": "discussed", "d": "commission"}, answer: "d" },
-            { question: "'It has held *it* in abeyance.' The second 'it' in this sentence is a:", options: {"a": "Subject Pronoun", "b": "Object Pronoun", "c": "Possessive Pronoun", "d": "Reflexive Pronoun"}, answer: "b" },
-            { question: "Which word is an adjective in the phrase 'a belligerent political action'?", options: {"a": "action", "b": "political", "c": "a", "d": "belligerent and political"}, answer: "d" }, // Both are adjectives modifying action
-            { question: "'Pakistan’s response therefore has to be *primarily* crafted.' The word 'primarily' is an:", options: {"a": "Adjective", "b": "Adverb", "c": "Conjunction", "d": "Preposition"}, answer: "b" },
-            { question: "In the phrase 'in the political realm', 'in' is what part of speech?", options: {"a": "Adverb", "b": "Conjunction", "c": "Preposition", "d": "Interjection"}, answer: "c" },
-            { question: "Which is a coordinating conjunction in FANBOYS?", options: {"a": "Although", "b": "Because", "c": "Yet", "d": "Since"}, answer: "c" },
-            { question: "'The World Bank, *as the third signatory to the IWT*, retains significant potential.' The italicized phrase is an example of:", options: {"a": "Verb phrase", "b": "Appositive phrase", "c": "Adverbial clause", "d": "Noun clause"}, answer: "b" },
-            { question: "A sentence that contains one independent clause and one or more dependent clauses is called a:", options: {"a": "Simple sentence", "b": "Compound sentence", "c": "Complex sentence", "d": "Compound-complex sentence"}, answer: "c" },
-            
-            // Category: Verbs (Tense, Voice, Mood - Comprehensive Grammar Analysis PDF)
-            { question: "'The Indus basin *has experienced* unprecedented climate impacts.' The verb tense is:", options: {"a": "Simple Past", "b": "Past Perfect", "c": "Present Perfect", "d": "Present Continuous"}, answer: "c" },
-            { question: "'These issues *were never formally raised* by India.' The voice of the verb is:", options: {"a": "Active", "b": "Passive", "c": "Middle", "d": "Reflexive"}, answer: "b" },
-            { question: "'The announcement *represents* a belligerent political action.' This verb is in the _______ mood.", options: {"a": "Indicative", "b": "Imperative", "c": "Subjunctive", "d": "Conditional"}, answer: "a" },
-            { question: "Which sentence uses a modal verb to express possibility?", options: {"a": "India will not get extra water.", "b": "The World Bank can help India and Pakistan.", "c": "The treaty was signed in 1960.", "d": "He is going to the meeting."}, answer: "b" },
-            { question: "Change to passive voice: 'The negotiators failed to recognise climate change.'", options: {"a": "Climate change was failed to be recognised by the negotiators.", "b": "Climate change was not recognised by the negotiators.", "c": "Recognition of climate change was failed by negotiators.", "d": "Negotiators were failed by climate change recognition."}, answer: "b" },
+            // Pair of Words (Tricky)
+            { question: "Distinguish between 'COMPLIMENT' and 'COMPLEMENT'. 'The new curtains ___ the room's decor perfectly.'", options: ["compliment", "complement", "complimented", "complemented"], answer: "complement", category: "Pair of Words" },
+            { question: "Choose the correct word: 'The ___ of the school is a strict disciplinarian.'", options: ["Principle", "Principal", "Principale", "Principality"], answer: "Principal", category: "Pair of Words" },
+            { question: "'Affect' is usually a verb meaning 'to influence', while 'effect' is usually a noun meaning 'a result'. Which is correct: 'The new law will ___ many people.'?", options: ["affect", "effect", "affects", "effects"], answer: "affect", category: "Pair of Words" },
+            { question: "'Their' shows possession, 'there' indicates a place, and 'they're' is a contraction for 'they are'. Complete: '___ going to put the books over ___.'", options: ["They're, their", "Their, there", "They're, there", "There, they're"], answer: "They're, there", category: "Pair of Words" },
+            { question: "'Advice' is a noun, 'advise' is a verb. 'She gave me some good ___.'", options: ["advise", "advice", "advises", "advices"], answer: "advice", category: "Pair of Words" },
+            { question: "'Stationary' means not moving, 'stationery' refers to writing materials. 'The car remained ___ at the red light.'", options: ["stationery", "stationary", "stationeries", "stationaries"], answer: "stationary", category: "Pair of Words" },
+            { question: "'Desert' (stress on first syllable) is a dry area; 'dessert' (stress on second syllable) is a sweet course. 'We crossed the ___ to reach the oasis.'", options: ["dessert", "desert", "deserts", "desserts"], answer: "desert", category: "Pair of Words" },
+            { question: "'Lose' means to misplace or not win; 'loose' means not tight. 'Be careful not to ___ your keys.'", options: ["loose", "lose", "loosen", "losing"], answer: "lose", category: "Pair of Words" },
+            { question: "'Accept' means to receive; 'except' means to exclude. 'Everyone ___ John passed the test.'", options: ["accept", "except", "accepted", "excepted"], answer: "except", category: "Pair of Words" },
+            { question: "'Elicit' means to draw out; 'illicit' means unlawful. 'The detective tried to ___ a confession.'", options: ["illicit", "elicit", "illicited", "elicited"], answer: "elicit", category: "Pair of Words" },
 
-            // Category: Idioms (16 MAY_ Idioms, Synonyms, Antonyms & Pairs of Words.pdf)
-            { question: "What does the idiom 'living off' someone mean?", options: {"a": "Living next to someone", "b": "Being financially independent", "c": "Being financially dependent on someone", "d": "Arguing with someone"}, answer: "c" },
-            { question: "If a company is 'on track to meeting its targets', it means it is:", options: {"a": "Failing to meet targets", "b": "Progressing as planned to achieve goals", "c": "Changing its targets", "d": "Ignoring its targets"}, answer: "b" },
-            { question: "The idiom 'taken a huge toll on' means:", options: {"a": "Collected a lot of taxes", "b": "Caused a lot of damage or suffering", "c": "Made a loud noise", "d": "Improved significantly"}, answer: "b" },
-            { question: "What is the meaning of 'a bounty on someone's head'?", options: {"a": "A special hat", "b": "A loan given to someone", "c": "A reward for capturing or killing someone", "d": "A severe headache"}, answer: "c" },
-            { question: "If something 'reeks of hypocrisy', it:", options: {"a": "Smells very pleasant", "b": "Is very old", "c": "Is genuinely sincere", "d": "Strongly suggests insincerity or duplicity"}, answer: "d" },
-            { question: "The phrase 'left the door open for' implies:", options: {"a": "A security lapse", "b": "An unresolved argument", "c": "Allowing the possibility of something in the future", "d": "Forgetting to close an actual door"}, answer: "c" },
-            { question: "A 'fig leaf' is used metaphorically to mean:", options: {"a": "A type of medicine", "b": "A fashion accessory", "c": "Something that conceals an embarrassing truth", "d": "A symbol of peace"}, answer: "c" },
-            { question: "To 'draw lessons' from an experience means to:", options: {"a": "Forget the experience", "b": "Illustrate the experience artistically", "c": "Learn from past experiences or mistakes", "d": "Criticize the experience"}, answer: "c" },
-            { question: "An 'honest broker' in negotiations is someone who is:", options: {"a": "A wealthy negotiator", "b": "An impartial mediator", "c": "A negotiator who tells jokes", "d": "A biased representative"}, answer: "b" },
-            { question: "To do something as a 'labour of love' means to do it:", options: {"a": "Only for a high salary", "b": "Because one is forced to", "c": "For personal satisfaction rather than profit", "d": "With great difficulty and reluctance"}, answer: "c" },
+            // Advanced Grammar (from Grammar Analysis PDF & general grammar)
+            { question: "Identify the part of speech of 'NARRATIVES' in: 'NARRATIVES have, for millennia, shaped...'", options: ["Verb", "Adjective", "Noun", "Adverb"], answer: "Noun", category: "Grammar" },
+            { question: "Which sentence contains a dangling modifier?", options: ["Having finished the assignment, Jill turned on the TV.", "After reading the original study, the article remains unconvincing.", "The cat, which was black, sat on the mat.", "To improve his results, the experiment was done again."], answer: "After reading the original study, the article remains unconvincing.", category: "Grammar" },
+            { question: "What type of clause is underlined: 'The book *that I borrowed from the library* is overdue.'?", options: ["Adverbial Clause", "Noun Clause", "Relative (Adjectival) Clause", "Independent Clause"], answer: "Relative (Adjectival) Clause", category: "Grammar" },
+            { question: "Correct subject-verb agreement: 'The committee ___ on the main points.'", options: ["disagree", "disagrees", "are disagreeing", "is disagree"], answer: "disagrees", category: "Grammar" },
+            { question: "Identify the function of the underlined phrase: 'She went to the market *to buy some vegetables*.'", options: ["Adjectival phrase", "Adverbial phrase of reason", "Infinitive phrase acting as an adverb (purpose)", "Noun phrase"], answer: "Infinitive phrase acting as an adverb (purpose)", category: "Grammar" },
+            { question: "'Neither the students nor the teacher ___ aware of the change.' Choose the correct verb form.", options: ["were", "was", "are", "is being"], answer: "was", category: "Grammar" },
+            { question: "In 'The story...illustrates this power — the image...symbolises...', the em-dash introduces:", options: ["A possessive noun", "An appositive or elaboration", "A completely unrelated idea", "A list of examples"], answer: "An appositive or elaboration", category: "Grammar (Punctuation)" },
+            { question: "The phrase 'for millennia' in 'NARRATIVES have, for millennia, shaped...' is a:", options: ["Noun phrase acting as subject", "Prepositional phrase acting as an adverbial", "Verb phrase", "Adjectival phrase"], answer: "Prepositional phrase acting as an adverbial", category: "Grammar" },
+            { question: "Identify the voice of the verb in: 'Breakthrough technologies are developed by scientists.'", options: ["Active Voice", "Passive Voice", "Middle Voice", "Reflexive Voice"], answer: "Passive Voice", category: "Grammar" },
+            { question: "Which of the following is a compound sentence?", options: ["The sun shines brightly.", "Because it was raining, we stayed indoors.", "The cat slept, and the dog played.", "The tall, green tree stood majestically."], answer: "The cat slept, and the dog played.", category: "Grammar" },
 
-            // Category: Synonyms & Antonyms (16 MAY_ Idioms, Synonyms, Antonyms & Pairs of Words.pdf + Grammar PDF)
-            { question: "Choose the best synonym for 'BELLIGERENT':", options: {"a": "Peaceful", "b": "Hostile", "c": "Friendly", "d": "Indifferent"}, answer: "b" },
-            { question: "What is an antonym for 'ABROGATE' (a treaty)?", options: {"a": "Cancel", "b": "Validate", "c": "Nullify", "d": "Repeal"}, answer: "b" },
-            { question: "The word 'VIABLE' is closest in meaning to:", options: {"a": "Impossible", "b": "Feasible", "c": "Uncertain", "d": "Theoretical"}, answer: "b" },
-            { question: "An antonym for 'ESCALATION' (of tensions) would be:", options: {"a": "Intensification", "b": "Increase", "c": "De-escalation", "d": "Aggravation"}, answer: "c" },
-            { question: "Choose the synonym for 'METED OUT' (treatment):", options: {"a": "Withheld", "b": "Administered", "c": "Denied", "d": "Concealed"}, answer: "b" },
-            { question: "The antonym of 'INCLUSIVITY' is:", options: {"a": "Openness", "b": "Exclusivity", "c": "Diversity", "d": "Integration"}, answer: "b" },
-            { question: "Select the word that is most nearly OPPOSITE in meaning to 'STOICISM':", options: {"a": "Apathy", "b": "Emotionalism", "c": "Resilience", "d": "Fortitude"}, answer: "b" },
-            { question: "A synonym for 'UNPRECEDENTED' is:", options: {"a": "Common", "b": "Novel", "c": "Familiar", "d": "Routine"}, answer: "b" },
-            { question: "The word 'ALLEGEDLY' means:", options: {"a": "Certainly", "b": "Supposedly", "c": "Officially", "d": "Clearly"}, answer: "b" },
-            { question: "An antonym for 'COLLABORATIVE' is:", options: {"a": "Cooperative", "b": "United", "c": "Adversarial", "d": "Joint"}, answer: "c" },
+            // Sentence Rearrangement (Tough)
+            { question: "Arrange: (A) for its intricate plot (B) the novel was acclaimed (C) and complex characters (D) by critics", options: ["BDAC", "BADC", "DBAC", "ACBD"], answer: "BADC", category: "Sentence Rearrangement" },
+            { question: "Rearrange: (P) has been a significant factor (Q) in shaping global economic policies (R) the rise of digital currencies (S) over the past decade", options: ["RQPS", "RPSQ", "PRSQ", "QRPS"], answer: "RPSQ", category: "Sentence Rearrangement" },
+            { question: "Arrange: (A) despite the heavy rain (B) decided to proceed (C) the determined hikers (D) with their journey", options: ["ACBD", "CABD", "CBDA", "ADCB"], answer: "CABD", category: "Sentence Rearrangement" },
+            { question: "Form a coherent sentence: (1) the power of narratives (2) in shaping societal identities (3) cannot be underestimated (4) and forging collective memory", options: ["1243", "1324", "3124", "1234"], answer: "1243", category: "Sentence Rearrangement" }, // The power of narratives in shaping societal identities and forging collective memory cannot be underestimated.
+            { question: "Rearrange: (W) with constructive ones (X) corrosive narratives (Y) we must replace (Z) that narrate success", options: ["YXWZ", "YWXZ", "YXZW", "XWYZ"], answer: "YXZW", category: "Sentence Rearrangement" }, // We must replace corrosive narratives with constructive ones that narrate success.
 
-            // Category: Pairs of Words & Prepositions (PDFs)
-            { question: "The terms 'Letter and Spirit' refer to the ______ meaning versus the ______ intent.", options: {"a": "hidden, obvious", "b": "figurative, underlying", "c": "literal, true", "d": "complex, simple"}, answer: "c" },
-            { question: "Fill in the blank: The family was living ______ their savings.", options: {"a": "with", "b": "by", "c": "off", "d": "on"}, answer: "c" },
-            { question: "The country's economy is tightly tied ______ oil prices.", options: {"a": "with", "b": "to", "c": "by", "d": "in"}, answer: "to" },
-            { question: "He is instrumental ______ achieving the team's success.", options: {"a": "for", "b": "to", "c": "with", "d": "in"}, answer: "d" },
-            { question: "The decision was detrimental ______ the project's progress.", options: {"a": "for", "b": "to", "c": "against", "d": "with"}, answer: "b" },
-            { question: "One must distinguish ______ 'good' and 'bad' influences.", options: {"a": "from", "b": "among", "c": "between", "d": "with"}, answer: "c" },
-            { question: "The report was gleaned ______ multiple sources.", options: {"a": "by", "b": "from", "c": "with", "d": "into"}, answer: "b" },
-            { question: "He looked at the problem ______ the lens of his experience.", options: {"a": "by", "b": "with", "c": "from", "d": "through"}, answer: "d" },
-            { question: "The committee failed to agree ______ a course of action.", options: {"a": "on", "b": "with", "c": "to", "d": "about"}, answer: "a" }, // agree on a plan/course of action
-            { question: "She has always abided ______ the rules.", options: {"a": "with", "b": "to", "c": "by", "d": "on"}, answer: "c" },
+            // General Knowledge/Contextual (from provided text ideas)
+            { question: "The 'Iron Age transformation' in the Biblical-Quranic tradition, as mentioned in 'The Power of Narratives', primarily symbolizes:", options: ["Only metallurgical advancement", "Military conquest through superior weaponry", "Divinely inspired human potential and technological progress", "The decline of bronze-based civilizations"], answer: "Divinely inspired human potential and technological progress", category: "General Knowledge (Contextual)" },
+            { question: "According to 'The Power of Narratives', what can be a destructive capacity of competing narratives within a social unit?", options: ["Strengthening critical thinking", "Eroding identity and self-worth", "Encouraging innovation", "Robust historical records"], answer: "Eroding identity and self-worth", category: "General Knowledge (Contextual)" },
+            { question: "The term 'echo chamber' in contemporary discourse refers to an environment where:", options: ["Sound is amplified", "A person primarily encounters reinforcing opinions", "Debates ensure all voices are heard", "Historical records are unaltered"], answer: "A person primarily encounters reinforcing opinions", category: "General Knowledge (Contextual)" },
+            { question: "Which of these is NOT typically considered a primary color in the subtractive (pigment) model?", options: ["Red", "Yellow", "Blue", "Green"], answer: "Green", category: "General Knowledge" },
+            { question: "The 'Pulitzer Prize' is awarded for achievements primarily in which fields?", options: ["Science and Mathematics", "Sports and Athletics", "Journalism, Literature, and Musical Composition", "Film and Television"], answer: "Journalism, Literature, and Musical Composition", category: "General Knowledge" },
 
-            // Category: Sentence Rearrangement (Tougher Grammar)
-            {
-                question: "Rearrange the jumbled parts to form a meaningful sentence: (P) that climate change (Q) the negotiators from India and Pakistan (R) was altering the Indus basin hydrology (S) failed to recognise",
-                options: {
-                    "a": "QSPR", "b": "SQPR", "c": "QSRP", "d": "PQRS"
-                },
-                answer: "a" // QSPR: The negotiators from India and Pakistan failed to recognise that climate change was altering the Indus basin hydrology.
-            },
-            {
-                question: "Rearrange the following parts to form a coherent sentence: (A) the World Bank as a potential mediator (B) Article IX explicitly designates (C) when differences arise (D) and this mechanism remains available",
-                options: {
-                    "a": "BCAD", "b": "BACD", "c": "BADC", "d": "ABCD"
-                },
-                answer: "b" // BACD: Article IX explicitly designates the World Bank as a potential mediator when differences arise and this mechanism remains available. (or BADC is also plausible)
-            },
-            {
-                question: "Form a grammatically correct sentence: (1) for future cooperation (2) Article 7 provided (3) and 'optimum development' of the rivers (4) the legal foundation",
-                options: {
-                    "a": "2413", "b": "2143", "c": "4213", "d": "1234"
-                },
-                answer: "a" // 2413: Article 7 provided the legal foundation for future cooperation and 'optimum development' of the rivers.
-            },
-            {
-                question: "Arrange the segments to create a logical sentence: (X) a diplomatic opening (Y) can Pakistan provide (Z) or a fig leaf (W) the Modi government",
-                options: {
-                    "a": "YWXZ", "b": "YWZX", "c": "WYXZ", "d": "XYZW"
-                },
-                answer: "a" // YWXZ: Can Pakistan provide the Modi government a diplomatic opening or a fig leaf?
-            },
-            {
-                question: "Construct a meaningful sentence: (I) in everyone's interest (II) to deweaponise (III) regional waters (IV) it is after all",
-                options: {
-                    "a": "IVILIIIII", "b": "IVIIIIIII", "c": "IIIIIVI", "d": "IIVIIII"
-                },
-                answer: "a" // IV I II III: It is after all in everyone's interest to deweaponise regional waters.
-            }
+            // More Correct/Incorrect Sentence Structure & Grammar (Inspired by "One Paper MCQs" pg 421-427)
+            { question: "Which sentence is grammatically correct?", options: ["He is more stronger than his brother.", "He is stronger than his brother.", "He is most strong than his brother.", "He is strong than his brother."], answer: "He is stronger than his brother.", category: "Grammar (Correct Sentence)" },
+            { question: "Identify the correct sentence:", options: ["She has went to the market.", "She have gone to the market.", "She has gone to the market.", "She gone to the market."], answer: "She has gone to the market.", category: "Grammar (Correct Sentence)" },
+            { question: "Which of the following sentences is correct?", options: ["One of my friend are coming.", "One of my friends is coming.", "One of my friend is coming.", "One of my friends are coming."], answer: "One of my friends is coming.", category: "Grammar (Correct Sentence)" },
+            { question: "Select the grammatically sound sentence:", options: ["The childrens are playing in the park.", "The children's are playing in the park.", "The children are playing in the park.", "The children is playing in the park."], answer: "The children are playing in the park.", category: "Grammar (Correct Sentence)" },
+            { question: "Which sentence demonstrates correct use of 'less' and 'fewer'?", options: ["There are less people here than expected.", "There are fewer people here than expected.", "She has less troubles now.", "He drank fewer water."], answer: "There are fewer people here than expected.", category: "Grammar (Correct Sentence)" }, // Fewer for countable, less for uncountable
+            { question: "Choose the correct sentence: ", options: ["The news are bad.", "The news is bad.", "The new is bad.", "The news were bad."], answer: "The news is bad.", category: "Grammar (Correct Sentence)"},
+            { question: "Which sentence is grammatically correct regarding pronoun agreement?", options: ["Each of the students submitted their assignment.", "Each of the students submitted his or her assignment.", "Each of the students submitted there assignment.", "Each of the student submitted their assignments."], answer: "Each of the students submitted his or her assignment.", category: "Grammar (Pronoun Agreement)"},
+            { question: "Identify the sentence with correct parallel structure:", options: ["She likes to swim, hiking, and to read books.", "She likes swimming, hiking, and to read books.", "She likes swimming, hiking, and reading books.", "She likes to swim, to hike, and reading books."], answer: "She likes swimming, hiking, and reading books.", category: "Grammar (Parallel Structure)"},
+            { question: "Which sentence correctly uses the subjunctive mood?", options: ["If I was you, I would go.", "If I were you, I would go.", "If I am you, I would go.", "If I be you, I would go."], answer: "If I were you, I would go.", category: "Grammar (Subjunctive Mood)"},
+            { question: "Select the sentence that avoids a misplaced modifier:", options: ["Covered in mud, the pig was taken by the farmer to the barn.", "The farmer took the pig covered in mud to the barn.", "The farmer took the pig to the barn covered in mud.", "To the barn, the farmer took the pig covered in mud."], answer: "The farmer took the pig covered in mud to the barn.", category: "Grammar (Misplaced Modifier)"} // Or "Covered in mud, the pig was led by the farmer to the barn." - The original answer choice is better.
         ];
+        // Total questions: 95. Add 5 more to reach 100.
+        // Adding 5 more tough questions
+        quizData.push(
+            { question: "The committee could not arrive at a consensus, ___ their differing opinions.", options: ["due to", "because", "owing to the fact of", "on account of"], answer: "due to", category: "Prepositions/Conjunctions" },
+            { question: "Which of the following words is most nearly opposite in meaning to 'TACITURN'?", options: ["Silent", "Reserved", "Loquacious", "Shy"], answer: "Loquacious", category: "Antonyms" },
+            { question: "The phrase 'sine qua non' means:", options: ["Without which, not (an essential condition)", "A common occurrence", "A debated point", "A final decision"], answer: "Without which, not (an essential condition)", category: "Idioms (Foreign Phrases)" },
+            { question: "Identify the figure of speech: 'The wind whispered through the trees.'", options: ["Metaphor", "Simile", "Personification", "Hyperbole"], answer: "Personification", category: "Grammar (Figures of Speech)" },
+            { question: "Rearrange to form a logical sentence: (A) is essential for (B) a thorough understanding of grammatical principles (C) effective communication (D) in any language.", options: ["BDAC", "BACD", "BCAD", "BADC"], answer: "BACD", category: "Sentence Rearrangement" } // A thorough understanding of grammatical principles is essential for effective communication in any language.
+        );
 
 
-        // --- Quiz Logic ---
-        let currentQuestionIndex = 0;
-        let studentName = "";
-        let score = 0;
-        let timerInterval;
-        let timeRemaining = 40 * 60; // 40 minutes in seconds
-        let userAnswers = new Array(quizQuestions.length).fill(null);
-        let quizStartTime;
+        // --- DOM Elements ---
+        const nameEntrySection = document.getElementById('name-entry-section');
+        const studentNameInput = document.getElementById('student-name');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const nameError = document.getElementById('name-error');
 
-        const nameSection = document.getElementById('name-section');
         const quizSection = document.getElementById('quiz-section');
+        const questionContainer = document.getElementById('question-container');
+        const prevQuestionBtn = document.getElementById('prev-question-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const questionCounter = document.getElementById('question-counter');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const timerDisplay = document.getElementById('timer-display');
+
         const resultsSection = document.getElementById('results-section');
-        const questionArea = document.getElementById('question-area');
-        const timerDisplay = document.getElementById('timer');
-        const progressBar = document.getElementById('progress-bar');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
+        const resultName = document.getElementById('result-name');
+        const resultAttempted = document.getElementById('result-attempted');
+        const resultScore = document.getElementById('result-score');
+        const resultTimeTaken = document.getElementById('result-time-taken');
 
+        const hiddenForm = document.getElementById('quiz-results-form');
+        const formStudentName = document.getElementById('form-student-name');
+        const formQuestionsAttempted = document.getElementById('form-questions-attempted');
+        const formScore = document.getElementById('form-score');
+        const formTimeTaken = document.getElementById('form-time-taken');
 
-        function shuffleArray(array) { // Fisher-Yates shuffle
+        const confirmationModal = document.getElementById('confirmationModal');
+        const modalMessage = document.getElementById('modalMessage');
+        let modalConfirmBtn = document.getElementById('modalConfirmBtn'); // Made 'let' for reassignment
+        const modalCancelBtn = document.getElementById('modalCancelBtn');
+
+        // --- Quiz State ---
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let timerInterval;
+        let timeLeft = 40 * 60; // 40 minutes in seconds
+        let quizStartTime;
+        let studentFullName = '';
+        let quizSubmitted = false;
+
+        // --- Utility Functions ---
+        function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
+
+        // Shuffle questions and their options
+        function prepareQuizData() {
+            shuffleArray(quizData);
+            quizData.forEach(question => {
+                if (question.options && Array.isArray(question.options)) { // Ensure options exist and is an array
+                    shuffleArray(question.options);
+                }
+            });
+            userAnswers = new Array(quizData.length).fill(null); // Reset user answers array size
+            questionCounter.textContent = `Question 1 / ${quizData.length}`; // Update total questions count
+        }
         
-        // Shuffle questions once at the start
-        shuffleArray(quizQuestions);
-        quizQuestions.forEach(q => {
-            if (typeof q.options === 'object' && !Array.isArray(q.options)) {
-                let entries = Object.entries(q.options);
-                shuffleArray(entries);
-                q.options = Object.fromEntries(entries);
+        // --- Event Listeners ---
+        startQuizBtn.addEventListener('click', () => {
+            studentFullName = studentNameInput.value.trim();
+            if (studentFullName === "") {
+                nameError.textContent = "Please enter your name to start the quiz.";
+                return;
+            }
+            nameError.textContent = "";
+            nameEntrySection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            quizSection.classList.add('fade-in');
+            quizStartTime = new Date();
+            startTimer();
+            loadQuestion(currentQuestionIndex);
+        });
+
+        nextQuestionBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
             }
         });
 
-
-        function startQuiz() {
-            studentName = document.getElementById('student-name').value.trim();
-            if (studentName === "") {
-                showCustomMessage("Please enter your name to start the quiz.");
-                return;
-            }
-            quizStartTime = new Date();
-            nameSection.style.display = 'none';
-            quizSection.style.display = 'block';
-            displayQuestion();
-            startTimer();
-            updateNavigationButtons();
-        }
-
-        function displayQuestion() {
-            const questionData = quizQuestions[currentQuestionIndex];
-            questionArea.innerHTML = ""; // Clear previous question
-
-            const questionContainer = document.createElement('div');
-            questionContainer.className = 'question-container';
-
-            const questionTitle = document.createElement('h3');
-            questionTitle.textContent = `Q ${currentQuestionIndex + 1}: ${questionData.question}`;
-            questionContainer.appendChild(questionTitle);
-
-            const optionsDiv = document.createElement('div');
-            optionsDiv.className = 'options';
-
-            // Shuffle options for each question display if they are in an object format
-            let optionsEntries = Object.entries(questionData.options);
-            // No, don't shuffle options every time the question is displayed, only once at start or not at all if pre-shuffled
-            // shuffleArray(optionsEntries); // Commented out to maintain option order once set
-
-            for (const [key, value] of optionsEntries) {
-                const label = document.createElement('label');
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'option';
-                radio.value = key;
-                radio.id = `option-${key}`;
-                if (userAnswers[currentQuestionIndex] === key) {
-                    radio.checked = true;
-                }
-                radio.onchange = () => recordAnswer(key);
-
-                label.appendChild(radio);
-                label.appendChild(document.createTextNode(` ${key.toUpperCase()}. ${value}`));
-                optionsDiv.appendChild(label);
-            }
-            questionContainer.appendChild(optionsDiv);
-            questionArea.appendChild(questionContainer);
-            updateProgressBar();
-            updateNavigationButtons();
-        }
-        
-        function recordAnswer(selectedOptionKey) {
-            userAnswers[currentQuestionIndex] = selectedOptionKey;
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-            } else {
-                 // If on the last question, "Next" could act as submit or be disabled
-                submitQuiz(); // Or show a message "This is the last question. Click Submit."
-            }
-        }
-
-        function previousQuestion() {
+        prevQuestionBtn.addEventListener('click', () => {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                displayQuestion();
+                loadQuestion(currentQuestionIndex);
             }
-        }
+        });
+
+        submitQuizBtn.addEventListener('click', () => {
+            showConfirmationModal("Are you sure you want to submit the quiz?", handleSubmitQuiz);
+        });
         
-        function updateNavigationButtons() {
-            prevButton.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
-            if (currentQuestionIndex === quizQuestions.length - 1) {
-                nextButton.textContent = 'Finish & Submit'; // Or hide next and rely on main submit
-            } else {
-                nextButton.textContent = 'Next';
+        modalCancelBtn.addEventListener('click', () => {
+            confirmationModal.style.display = "none";
+        });
+
+
+        // --- Functions ---
+        function showConfirmationModal(message, onConfirm) {
+            modalMessage.textContent = message;
+            confirmationModal.style.display = "flex"; // Use flex to center content if modal is styled for it
+            
+            // Clone and replace the confirm button to remove old event listeners
+            const newConfirmBtn = modalConfirmBtn.cloneNode(true);
+            modalConfirmBtn.parentNode.replaceChild(newConfirmBtn, modalConfirmBtn);
+            modalConfirmBtn = newConfirmBtn; // Reassign to the new button
+
+            modalConfirmBtn.onclick = () => { // Use onclick for simplicity here, or addEventListener
+                confirmationModal.style.display = "none";
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
+                }
+            };
+        }
+
+
+        function loadQuestion(index) {
+            if (index < 0 || index >= quizData.length) return;
+
+            const question = quizData[index];
+            questionContainer.innerHTML = ''; // Clear previous question
+
+            const questionText = document.createElement('h3');
+            questionText.className = 'text-xl sm:text-2xl font-semibold mb-6 text-sky-200 no-select';
+            questionText.textContent = `Q ${index + 1}: ${question.question}`;
+            questionContainer.appendChild(questionText);
+
+            const optionsList = document.createElement('div');
+            optionsList.className = 'space-y-3';
+
+            if (question.options && Array.isArray(question.options)) {
+                question.options.forEach((option, optIndex) => {
+                    const optionLabel = document.createElement('label');
+                    optionLabel.className = 'block p-3 sm:p-4 border-2 border-slate-600 rounded-lg cursor-pointer transition-all duration-150 ease-in-out question-option no-select hover:border-sky-500';
+                    
+                    const radioButton = document.createElement('input');
+                    radioButton.type = 'radio';
+                    radioButton.name = `question-${index}`;
+                    radioButton.value = option;
+                    radioButton.className = 'mr-3 accent-sky-500';
+                    
+                    const uniqueRadioId = `option-${index}-${optIndex}`; // Ensure unique ID for radio
+                    radioButton.id = uniqueRadioId;
+                    optionLabel.htmlFor = uniqueRadioId; // Associate label with radio
+
+                    radioButton.onchange = () => {
+                        userAnswers[index] = option;
+                        // Update visual selection
+                        document.querySelectorAll(`input[name='question-${index}']`).forEach(rb => {
+                            rb.parentElement.classList.remove('selected-option', 'border-sky-500');
+                            rb.parentElement.classList.add('border-slate-600');
+                        });
+                        optionLabel.classList.add('selected-option', 'border-sky-500');
+                        optionLabel.classList.remove('border-slate-600');
+                    };
+
+                    if (userAnswers[index] === option) {
+                        radioButton.checked = true;
+                        optionLabel.classList.add('selected-option', 'border-sky-500');
+                        optionLabel.classList.remove('border-slate-600');
+                    }
+                    
+                    optionLabel.appendChild(radioButton);
+                    optionLabel.appendChild(document.createTextNode(option));
+                    optionsList.appendChild(optionLabel);
+                });
             }
+
+
+            questionContainer.appendChild(optionsList);
+            updateNavigationButtons();
+            questionCounter.textContent = `Question ${index + 1} / ${quizData.length}`;
         }
 
-
-        function updateProgressBar() {
-            const percentage = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-            progressBar.style.width = percentage + '%';
-            progressBar.textContent = Math.round(percentage) + '%';
+        function updateNavigationButtons() {
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            nextQuestionBtn.disabled = currentQuestionIndex === quizData.length - 1;
+            prevQuestionBtn.classList.toggle('opacity-50', prevQuestionBtn.disabled);
+            prevQuestionBtn.classList.toggle('cursor-not-allowed', prevQuestionBtn.disabled);
+            nextQuestionBtn.classList.toggle('opacity-50', nextQuestionBtn.disabled);
+            nextQuestionBtn.classList.toggle('cursor-not-allowed', nextQuestionBtn.disabled);
         }
-
 
         function startTimer() {
             timerInterval = setInterval(() => {
-                timeRemaining--;
-                const minutes = Math.floor(timeRemaining / 60);
-                const seconds = timeRemaining % 60;
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
                 timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-                if (timeRemaining <= 0) {
+                if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    showCustomMessage("Time's up! The quiz will be submitted automatically.");
-                    submitQuiz(true); // Auto-submit
+                    timerDisplay.textContent = "00:00";
+                    if (!quizSubmitted) { 
+                        showConfirmationModal("Time's up! The quiz will be submitted automatically.", handleSubmitQuiz);
+                    }
                 }
             }, 1000);
         }
 
-        function submitQuiz(isAutoSubmit = false) {
-            clearInterval(timerInterval);
-            const quizEndTime = new Date();
-            const timeTakenMs = quizEndTime - quizStartTime;
-            const timeTakenMinutes = Math.floor(timeTakenMs / 60000);
-            const timeTakenSeconds = Math.floor((timeTakenMs % 60000) / 1000);
-            const timeTakenFormatted = `${timeTakenMinutes}m ${timeTakenSeconds}s`;
-
-            score = 0;
-            let attemptedQuestions = 0;
-            for (let i = 0; i < quizQuestions.length; i++) {
-                if (userAnswers[i] !== null) {
-                    attemptedQuestions++;
-                    if (userAnswers[i] === quizQuestions[i].answer) {
+        function calculateResults() {
+            let score = 0;
+            let attempted = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null) {
+                    attempted++;
+                    if (quizData[index] && answer === quizData[index].answer) {
                         score++;
                     }
                 }
-            }
-
-            const percentageScore = (score / quizQuestions.length) * 100;
-
-            quizSection.style.display = 'none';
-            resultsSection.style.display = 'block';
-
-            document.getElementById('result-name').textContent = `Name: ${studentName}`;
-            document.getElementById('result-attempted').textContent = `Questions Attempted: ${attemptedQuestions} out of ${quizQuestions.length}`;
-            document.getElementById('result-score').textContent = `Correct Answers: ${score} out of ${quizQuestions.length}`;
-            document.getElementById('result-time-taken').textContent = `Time Taken: ${timeTakenFormatted}`;
-            document.getElementById('result-percentage').textContent = `Percentage: ${percentageScore.toFixed(2)}%`;
-
-            // Fill and submit hidden form
-            document.getElementById('form-student-name').value = studentName;
-            document.getElementById('form-questions-attempted').value = attemptedQuestions;
-            document.getElementById('form-score').value = score;
-            document.getElementById('form-time-taken').value = timeTakenFormatted;
-            document.getElementById('form-percentage').value = percentageScore.toFixed(2);
-            
-            // Submit the form
-            document.getElementById('quiz-results-form').submit();
-
-            if (!isAutoSubmit) {
-                showCustomMessage("Quiz submitted successfully! Your results are being recorded.");
-            }
+            });
+            return { score, attempted };
         }
+
+        function handleSubmitQuiz() {
+            if (quizSubmitted) return; 
+            quizSubmitted = true;
+
+            clearInterval(timerInterval);
+            const quizEndTime = new Date();
+            const timeDiff = Math.floor((quizEndTime - quizStartTime) / 1000); 
+            const minutesTaken = Math.floor(timeDiff / 60);
+            const secondsTaken = timeDiff % 60;
+            const timeTakenString = `${String(minutesTaken).padStart(2, '0')}:${String(secondsTaken).padStart(2, '0')}`;
+
+            const { score, attempted } = calculateResults();
+
+            resultName.textContent = studentFullName;
+            resultAttempted.textContent = `${attempted} / ${quizData.length}`;
+            resultScore.textContent = `${score} / ${attempted > 0 ? attempted : quizData.length}`;
+            resultTimeTaken.textContent = timeTakenString;
+
+            quizSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            resultsSection.classList.add('fade-in');
+            timerDisplay.classList.add('hidden'); 
+
+            formStudentName.value = studentFullName;
+            formQuestionsAttempted.value = attempted;
+            formScore.value = score;
+            formTimeTaken.value = timeTakenString;
+            
+            fetch(hiddenForm.action, {
+                method: hiddenForm.method,
+                body: new FormData(hiddenForm),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Form submitted successfully to Formspree!");
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            console.error("Formspree submission error:", data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            console.error("Formspree submission error: An unknown error occurred.");
+                        }
+                    })
+                }
+            }).catch(error => {
+                console.error("Error submitting form to Formspree:", error);
+            });
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+                e.preventDefault();
+            }
+        });
+
+        // Initial setup
+        prepareQuizData(); 
+        timerDisplay.classList.remove('hidden'); 
+        resultsSection.classList.add('hidden');
+        quizSection.classList.add('hidden');
+        nameEntrySection.classList.remove('hidden');
 
     </script>
 </body>
